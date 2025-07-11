@@ -1,0 +1,1595 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEOSITIO - Transformamos Ideas en Realidad Digital</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/feather-icons@4.29.0/dist/feather.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0f172a;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #1e293b;
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #10b981;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo::before {
+            content: "◆";
+            color: #10b981;
+            font-size: 1.2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #10b981;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 500;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #94a3b8;
+            border: 1px solid #334155;
+        }
+
+        .btn-secondary:hover {
+            color: #10b981;
+            border-color: #10b981;
+        }
+
+        .btn-primary {
+            background: #10b981;
+            color: #0f172a;
+        }
+
+        .btn-primary:hover {
+            background: #059669;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 2rem;
+            position: relative;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 20px;
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #10b981;
+            box-shadow: 0 0 30px rgba(16, 185, 129, 0.3);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .hero .highlight {
+            color: #10b981;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-hero {
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+        }
+
+        /* Quick Contact */
+        .quick-contact {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 3rem auto;
+            max-width: 500px;
+        }
+
+        .quick-contact h3 {
+            margin-bottom: 1rem;
+            text-align: center;
+            color: #10b981;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .form-group {
+            flex: 1;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 6px;
+            color: #ffffff;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #10b981;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        }
+
+        /* About Section */
+        .about {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #10b981;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .about-card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .about-card:hover {
+            border-color: #10b981;
+            transform: translateY(-5px);
+        }
+
+        .about-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 12px;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Services */
+        .services {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #10b981;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .service-card:hover {
+            border-color: #10b981;
+            transform: translateY(-2px);
+        }
+
+        .service-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .service-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            color: #ffffff;
+        }
+
+        .service-card p {
+            color: #94a3b8;
+            margin-bottom: 1rem;
+        }
+
+        .service-features {
+            list-style: none;
+        }
+
+        .service-features li {
+            color: #64748b;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            padding-left: 1rem;
+            position: relative;
+        }
+
+        .service-features li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #10b981;
+        }
+
+        /* Technologies */
+        .technologies {
+            padding: 5rem 2rem;
+            background: #1e293b;
+        }
+
+        .tech-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .tech-item {
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .tech-item:hover {
+            border-color: #10b981;
+            transform: translateY(-2px);
+        }
+
+        .tech-item h4 {
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        /* Projects */
+        .projects {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .project-card:hover {
+            border-color: #10b981;
+            transform: translateY(-2px);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #334155, #1e293b);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-domain {
+            color: #10b981;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .project-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .project-description {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        /* Partners */
+        .partners {
+            padding: 5rem 2rem;
+            background: #1e293b;
+            text-align: center;
+        }
+
+        .partners-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .partner-card {
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .partner-card:hover {
+            border-color: #10b981;
+        }
+
+        .partner-logo {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 8px;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 2rem;
+        }
+
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #334155;
+            margin-right: 1rem;
+        }
+
+        .testimonial-info h4 {
+            margin-bottom: 0.25rem;
+            color: #ffffff;
+        }
+
+        .testimonial-info p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        .testimonial-text {
+            color: #cbd5e1;
+            font-style: italic;
+        }
+
+        /* Pricing */
+        .pricing {
+            padding: 5rem 2rem;
+            background: #1e293b;
+        }
+
+        .pricing-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .pricing-card {
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .pricing-card.featured {
+            border-color: #10b981;
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #10b981;
+            color: #0f172a;
+            padding: 0.25rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .pricing-price {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #10b981;
+        }
+
+        .pricing-period {
+            color: #94a3b8;
+            margin-bottom: 1.5rem;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-features li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #cbd5e1;
+        }
+
+        .pricing-features li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #10b981;
+        }
+
+        /* Contact Form */
+        .contact {
+            padding: 5rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-form-full {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 2rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #cbd5e1;
+        }
+
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 6px;
+            color: #ffffff;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #10b981;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        }
+
+        /* Footer */
+        .footer {
+            background: #0f172a;
+            border-top: 1px solid #334155;
+            padding: 3rem 2rem 2rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            color: #10b981;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #94a3b8;
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .footer-section a:hover {
+            color: #10b981;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #334155;
+            padding-top: 2rem;
+            text-align: center;
+            color: #64748b;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: #334155;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #94a3b8;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: #10b981;
+            color: #0f172a;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: #ffffff;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .form-row {
+                flex-direction: column;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        /* Icons */
+        .icon {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        .icon-sm {
+            width: 16px;
+            height: 16px;
+        }
+
+        .icon-lg {
+            width: 32px;
+            height: 32px;
+        }
+
+        /* WhatsApp Float Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: #25d366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+<!-- Header -->
+<header class="header">
+    <nav class="nav">
+        <a href="#" class="logo">NEOSITIO</a>
+        <ul class="nav-links">
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#tecnologias">Tecnologías</a></li>
+            <li><a href="#proyectos">Proyectos</a></li>
+            <li><a href="#precios">Precios</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+        <div class="nav-buttons">
+            <a href="#contacto" class="btn btn-secondary">Iniciar Sesión</a>
+            <a href="#contacto" class="btn btn-primary">Comenzar</a>
+        </div>
+        <button class="mobile-menu-btn">☰</button>
+    </nav>
+</header>
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-content">
+        <div class="hero-icon">
+            <svg class="icon-lg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
+        </div>
+        <h1>Transformamos ideas en <span class="highlight">realidad digital</span></h1>
+        <p>NEOSITIO te permite crear experiencias digitales extraordinarias que impulsan el crecimiento de tu negocio. Desde dominios hasta aplicaciones completas.</p>
+
+        <!-- Quick Contact Form -->
+        <div class="quick-contact">
+            <h3>Comienza tu proyecto ahora</h3>
+            <form class="contact-form" id="quickContactForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <input type="email" placeholder="tu@email.com" required id="quickEmail">
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" placeholder="+504 9999 9999" required id="quickPhone">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-hero" style="width: 100%;">
+                    Contactar por WhatsApp
+                </button>
+            </form>
+        </div>
+
+        <div class="hero-buttons">
+            <a href="#servicios" class="btn btn-primary btn-hero">Explorar Servicios</a>
+            <a href="#proyectos" class="btn btn-secondary btn-hero">Ver Proyectos</a>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section id="nosotros" class="about">
+    <h2>Sobre Nosotros</h2>
+    <p style="font-size: 1.2rem; color: #94a3b8; max-width: 800px; margin: 0 auto;">
+        Llegamos para que todo emprendedor tenga una web a nivel de las grandes compañías a un precio accesible.
+        Desde Honduras, conectamos tu negocio con el mundo digital.
+    </p>
+
+    <div class="about-content">
+        <div class="about-card">
+            <div class="about-icon">
+                <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                    <polyline points="3.27,6.96 12,12.01 20.73,6.96"/>
+                    <line x1="12" y1="22.08" x2="12" y2="12"/>
+                </svg>
+            </div>
+            <h3>Nuestra Misión</h3>
+            <p>Democratizar el acceso a tecnología de clase mundial, permitiendo que cada emprendedor compita en igualdad de condiciones con las grandes corporaciones.</p>
+        </div>
+
+        <div class="about-card">
+            <div class="about-icon">
+                <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+            </div>
+            <h3>Nuestra Visión</h3>
+            <p>Ser la empresa líder en soluciones digitales de Centroamérica, reconocida por la excelencia técnica y el compromiso con el éxito de nuestros clientes.</p>
+        </div>
+
+        <div class="about-card">
+            <div class="about-icon">
+                <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+            </div>
+            <h3>Nuestros Valores</h3>
+            <p>Innovación constante, transparencia total, calidad sin compromisos y un servicio al cliente que supera expectativas en cada proyecto.</p>
+        </div>
+    </div>
+
+    <div style="margin-top: 3rem; padding: 2rem; background: #1e293b; border-radius: 12px; border: 1px solid #334155;">
+        <h3 style="color: #10b981; margin-bottom: 1rem;">📍 Nuestra Ubicación</h3>
+        <p style="color: #cbd5e1; font-size: 1.1rem;">
+            <strong>NEOSITIO</strong><br>
+            Boulevard Morazán, Torre Morazán<br>
+            Piso 8, Oficina 20817<br>
+            Tegucigalpa, Honduras
+        </p>
+    </div>
+</section>
+
+<!-- Services Section -->
+<section id="servicios" class="services">
+    <h2 class="section-title">Servicios de Excelencia</h2>
+    <div class="services-grid">
+        <div class="service-card">
+            <div class="service-icon">
+                <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                </svg>
+            </div>
+            <h3>Dominios Premium</h3>
+            <p>Registro y gestión de dominios con extensiones .com, .hn, .org y más. Protección WHOIS incluida para máxima seguridad.</p>
+            <ul class="service-features">
+                <li>Renovación automática</li>
+                <li>DNS personalizado</li>
+                <li>Certificados SSL gratuitos</li>
+                <li>Protección de privacidad</li>
+            </ul>
+        </div>
+
+        <div class="service-card">
+            <div class="service-icon">
+                <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                    <polyline points="22,6 12,13 2,6"/>
+                </svg>
+            </div>
+            <h3>Correos Corporativos</h3>
+            <p>Cuentas de email profesionales con tu dominio. Almacenamiento ilimitado y sincronización multiplataforma.</p>
+            <ul class="service-features">
+                <li>Filtros antispam avanzados</li>
+                <li>Respaldo automático</li>
+                <li>Acceso móvil completo</li>
+                <li>Integración con calendarios</li>
+            </ul>
+        </div>
+
+        <div class="service-card">
+            <div class="service-icon">
+                <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 19l7-7 3 3-7 7-3-3z"/>
+                    <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/>
+                    <path d="M2 2l7.586 7.586"/>
+                    <circle cx="11" cy="11" r="2"/>
+                </svg>
+            </div>
+            <h3>Rediseño Web</h3>
+            <p>Modernización completa de sitios web existentes. UX/UI optimizado para conversiones y experiencia de usuario superior.</p>
+            <ul class="service-features">
+                <li>Análisis de usabilidad</li>
+                <li>Diseño responsive</li>
+                <li>Optimización SEO</li>
+                <li>Mejora de velocidad</li>
+            </ul>
+        </div>
+
+        <div class="service-card">
+            <div class="service-icon">
+                <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                    <polyline points="16,18 22,12 16,6"/>
+                    <polyline points="8,6 2,12 8,18"/>
+                </svg>
+            </div>
+            <h3>Desarrollo Full Stack</h3>
+            <p>Aplicaciones web completas con tecnologías modernas. Frontend y backend personalizados para tu negocio.</p>
+            <ul class="service-features">
+                <li>React/Next.js</li>
+                <li>Node.js/Python</li>
+                <li>Bases de datos optimizadas</li>
+                <li>APIs RESTful</li>
+            </ul>
+        </div>
+
+        <div class="service-card">
+            <div class="service-icon">
+                <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                    <line x1="8" y1="21" x2="16" y2="21"/>
+                    <line x1="12" y1="17" x2="12" y2="21"/>
+                </svg>
+            </div>
+            <h3>Hosting Premium</h3>
+            <p>Servidores de alta disponibilidad con CDN global. Uptime garantizado del 99.9% y soporte técnico 24/7.</p>
+            <ul class="service-features">
+                <li>Backups diarios automáticos</li>
+                <li>Monitoreo 24/7</li>
+                <li>CDN global incluido</li>
+                <li>Soporte técnico especializado</li>
+            </ul>
+        </div>
+
+        <div class="service-card">
+            <div class="service-icon">
+                <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                    <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+                    <line x1="12" y1="18" x2="12.01" y2="18"/>
+                </svg>
+            </div>
+            <h3>Apps Móviles</h3>
+            <p>Desarrollo de aplicaciones nativas e híbridas para iOS y Android con tecnologías de vanguardia.</p>
+            <ul class="service-features">
+                <li>React Native</li>
+                <li>Flutter</li>
+                <li>Progressive Web Apps</li>
+                <li>Integración con APIs</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- Technologies Section -->
+<section id="tecnologias" class="technologies">
+    <div class="tech-container">
+        <h2 class="section-title">Tecnologías Vanguardistas</h2>
+        <p style="text-align: center; color: #94a3b8; margin-bottom: 3rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+            Utilizamos las herramientas más avanzadas del mercado para crear soluciones robustas, escalables y orientadas al futuro digital.
+        </p>
+
+        <div class="tech-grid">
+            <div class="tech-item">
+                <h4>React</h4>
+            </div>
+            <div class="tech-item">
+                <h4>Next.js</h4>
+            </div>
+            <div class="tech-item">
+                <h4>Node.js</h4>
+            </div>
+            <div class="tech-item">
+                <h4>Python</h4>
+            </div>
+            <div class="tech-item">
+                <h4>TypeScript</h4>
+            </div>
+            <div class="tech-item">
+                <h4>MongoDB</h4>
+            </div>
+            <div class="tech-item">
+                <h4>PostgreSQL</h4>
+            </div>
+            <div class="tech-item">
+                <h4>AWS</h4>
+            </div>
+            <div class="tech-item">
+                <h4>Docker</h4>
+            </div>
+            <div class="tech-item">
+                <h4>GraphQL</h4>
+            </div>
+            <div class="tech-item">
+                <h4>Tailwind</h4>
+            </div>
+            <div class="tech-item">
+                <h4>Firebase</h4>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Projects Section -->
+<section id="proyectos" class="projects">
+    <h2 class="section-title">Nuestros Proyectos</h2>
+    <div class="projects-grid">
+        <div class="project-card">
+            <div class="project-image">
+                <svg class="icon-lg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                    <polyline points="3.27,6.96 12,12.01 20.73,6.96"/>
+                    <line x1="12" y1="22.08" x2="12" y2="12"/>
+                </svg>
+            </div>
+            <div class="project-content">
+                <div class="project-domain">techsolutions.hn</div>
+                <h3 class="project-title">TechSolutions Enterprise</h3>
+                <p class="project-description">Plataforma empresarial completa para gestión de recursos humanos con integración de nómina, control de asistencia y reportes avanzados.</p>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="project-image">
+                <svg class="icon-lg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9,22 9,12 15,12 15,22"/>
+                </svg>
+            </div>
+            <div class="project-content">
+                <div class="project-domain">inmobiliariaelite.com</div>
+                <h3 class="project-title">Inmobiliaria Elite</h3>
+                <p class="project-description">Portal inmobiliario con búsqueda avanzada, tours virtuales 360°, sistema de citas y CRM integrado para agentes.</p>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="project-image">
+                <svg class="icon-lg" viewBox="0 0 24 24" fill="currentColor">
+                    <circle cx="12" cy="12" r="3"/>
+                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                </svg>
+            </div>
+            <div class="project-content">
+                <div class="project-domain">autoservicepro.com</div>
+                <h3 class="project-title">AutoService Pro</h3>
+                <p class="project-description">Sistema de gestión para talleres automotrices con control de inventario, citas, facturación y seguimiento de servicios.</p>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="project-image">
+                <svg class="icon-lg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+            </div>
+            <div class="project-content">
+                <div class="project-domain">mediconnect.hn</div>
+                <h3 class="project-title">MediConnect</h3>
+                <p class="project-description">Plataforma de telemedicina con videoconsultas, expedientes digitales, recetas electrónicas y sistema de pagos integrado.</p>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="project-image">
+                <svg class="icon-lg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+                    <rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
+                </svg>
+            </div>
+            <div class="project-content">
+                <div class="project-domain">eduplatform.edu.hn</div>
+                <h3 class="project-title">EduPlatform</h3>
+                <p class="project-description">Sistema de gestión educativa con aulas virtuales, evaluaciones en línea, seguimiento académico y comunicación padres-escuela.</p>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="project-image">
+                <svg class="icon-lg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                </svg>
+            </div>
+            <div class="project-content">
+                <div class="project-domain">restaurantepremium.com</div>
+                <h3 class="project-title">Restaurante Premium</h3>
+                <p class="project-description">Sitio web gastronómico con reservas en línea, menú digital interactivo, sistema de pedidos y delivery integrado.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Partners Section -->
+<section class="partners">
+    <div class="partners-container">
+        <h2 class="section-title">Nuestros Partners</h2>
+        <p style="color: #94a3b8; margin-bottom: 2rem;">Colaboramos con las mejores empresas tecnológicas del mundo</p>
+
+        <div class="partners-grid">
+            <div class="partner-card">
+                <div class="partner-logo">
+                    <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    </svg>
+                </div>
+                <h4>AWS</h4>
+                <p>Amazon Web Services</p>
+            </div>
+
+            <div class="partner-card">
+                <div class="partner-logo">
+                    <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                        <circle cx="12" cy="12" r="10"/>
+                    </svg>
+                </div>
+                <h4>Google Cloud</h4>
+                <p>Google Cloud Platform</p>
+            </div>
+
+            <div class="partner-card">
+                <div class="partner-logo">
+                    <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                    </svg>
+                </div>
+                <h4>Microsoft</h4>
+                <p>Microsoft Azure</p>
+            </div>
+
+            <div class="partner-card">
+                <div class="partner-logo">
+                    <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                        <polygon points="12,2 22,8.5 22,15.5 12,22 2,15.5 2,8.5"/>
+                    </svg>
+                </div>
+                <h4>Vercel</h4>
+                <p>Frontend Cloud</p>
+            </div>
+
+            <div class="partner-card">
+                <div class="partner-logo">
+                    <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                    </svg>
+                </div>
+                <h4>Netlify</h4>
+                <p>Web Development Platform</p>
+            </div>
+
+            <div class="partner-card">
+                <div class="partner-logo">
+                    <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    </svg>
+                </div>
+                <h4>Cloudflare</h4>
+                <p>Web Performance & Security</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials">
+    <h2 class="section-title">Nuestros Fundadores</h2>
+    <div class="testimonials-grid">
+        <div class="testimonial-card">
+            <div class="testimonial-header">
+                <div class="testimonial-avatar" style="background-image: url('https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop'); background-size: cover;"></div>
+                <div class="testimonial-info">
+                    <h4>Gustavo Zelaya</h4>
+                    <p>Gerente de Ventas • NEOSITIO</p>
+                </div>
+            </div>
+            <p class="testimonial-text">
+                "Como gerente de ventas, he visto cómo nuestras soluciones transforman negocios. Cada proyecto es una oportunidad de crear valor real para nuestros clientes. La satisfacción del cliente es nuestro mayor activo y motor de innovación."
+            </p>
+        </div>
+
+        <div class="testimonial-card">
+            <div class="testimonial-header">
+                <div class="testimonial-avatar" style="background-image: url('https://images.pexels.com/photos/1040881/pexels-photo-1040881.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop'); background-size: cover;"></div>
+                <div class="testimonial-info">
+                    <h4>David Maldonado</h4>
+                    <p>Desarrollador Full Stack • NEOSITIO</p>
+                </div>
+            </div>
+            <p class="testimonial-text">
+                "La excelencia técnica es nuestro ADN. Cada línea de código que escribimos está pensada para crear experiencias excepcionales. Trabajamos con las mejores tecnologías para entregar resultados que superan expectativas."
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Pricing Section -->
+<section id="precios" class="pricing">
+    <div class="pricing-container">
+        <h2 class="section-title">Precios Transparentes</h2>
+        <p style="text-align: center; color: #94a3b8; margin-bottom: 3rem;">Planes diseñados para cada etapa de tu negocio</p>
+
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <h3>Starter</h3>
+                <div class="pricing-price">L. 12,500</div>
+                <div class="pricing-period">por proyecto</div>
+                <ul class="pricing-features">
+                    <li>Sitio web responsive</li>
+                    <li>Dominio .com incluido</li>
+                    <li>3 correos corporativos</li>
+                    <li>Hosting por 1 año</li>
+                    <li>Certificado SSL</li>
+                    <li>Soporte 24/7</li>
+                </ul>
+                <button class="btn btn-secondary" style="width: 100%;">Comenzar</button>
+            </div>
+
+            <div class="pricing-card featured">
+                <div class="pricing-badge">Más Popular</div>
+                <h3>Professional</h3>
+                <div class="pricing-price">L. 25,000</div>
+                <div class="pricing-period">por proyecto</div>
+                <ul class="pricing-features">
+                    <li>Aplicación web completa</li>
+                    <li>Dominio premium</li>
+                    <li>10 correos corporativos</li>
+                    <li>Hosting premium por 1 año</li>
+                    <li>Base de datos incluida</li>
+                    <li>SEO optimizado</li>
+                    <li>Panel de administración</li>
+                    <li>Soporte prioritario</li>
+                </ul>
+                <button class="btn btn-primary" style="width: 100%;">Comenzar</button>
+            </div>
+
+            <div class="pricing-card">
+                <h3>Enterprise</h3>
+                <div class="pricing-price">L. 50,000</div>
+                <div class="pricing-period">por proyecto</div>
+                <ul class="pricing-features">
+                    <li>Desarrollo full-stack</li>
+                    <li>Múltiples dominios</li>
+                    <li>Correos ilimitados</li>
+                    <li>Infraestructura cloud</li>
+                    <li>API personalizada</li>
+                    <li>Integración con terceros</li>
+                    <li>Aplicación móvil</li>
+                    <li>Consultoría estratégica</li>
+                    <li>Soporte dedicado</li>
+                </ul>
+                <button class="btn btn-secondary" style="width: 100%;">Comenzar</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contacto" class="contact">
+    <h2 class="section-title">Hablemos de tu Proyecto</h2>
+    <div class="contact-form-full">
+        <form id="contactForm">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="name">Nombre Completo</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+            </div>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="phone">Teléfono</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="service">Servicio de Interés</label>
+                    <select id="service" name="service" required>
+                        <option value="">Selecciona un servicio</option>
+                        <option value="web-development">Desarrollo Web</option>
+                        <option value="domain-hosting">Dominio y Hosting</option>
+                        <option value="email-corporate">Correos Corporativos</option>
+                        <option value="redesign">Rediseño Web</option>
+                        <option value="mobile-app">Aplicación Móvil</option>
+                        <option value="consulting">Consultoría</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="message">Mensaje</label>
+                <textarea id="message" name="message" placeholder="Cuéntanos sobre tu proyecto..." required></textarea>
+            </div>
+
+            <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                <button type="submit" class="btn btn-primary" style="flex: 1;">
+                    Enviar por WhatsApp
+                </button>
+                <button type="button" class="btn btn-secondary" onclick="sendViaResend()" style="flex: 1;">
+                    Enviar por Email
+                </button>
+            </div>
+        </form>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-grid">
+            <div class="footer-section">
+                <h3>NEOSITIO</h3>
+                <p>Transformamos ideas en experiencias digitales extraordinarias. Tu socio tecnológico de confianza para el éxito en el mundo digital desde Honduras.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook">
+                        <svg class="icon-sm" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="Twitter">
+                        <svg class="icon-sm" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="LinkedIn">
+                        <svg class="icon-sm" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                            <rect x="2" y="9" width="4" height="12"/>
+                            <circle cx="4" cy="4" r="2"/>
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="Instagram">
+                        <svg class="icon-sm" viewBox="0 0 24 24" fill="currentColor">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Servicios</h3>
+                <a href="#servicios">Desarrollo Web</a>
+                <a href="#servicios">Dominios Premium</a>
+                <a href="#servicios">Correos Corporativos</a>
+                <a href="#servicios">Rediseño Web</a>
+                <a href="#servicios">Aplicaciones Móviles</a>
+            </div>
+
+            <div class="footer-section">
+                <h3>Tecnologías</h3>
+                <a href="#tecnologias">React & Next.js</a>
+                <a href="#tecnologias">Node.js & Python</a>
+                <a href="#tecnologias">Bases de Datos</a>
+                <a href="#tecnologias">Cloud & DevOps</a>
+                <a href="#tecnologias">Mobile Development</a>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contacto</h3>
+                <p>📧 contacto@neositio.hn</p>
+                <p>📱 +504 9999-9999</p>
+                <p>📍 Boulevard Morazán, Torre Morazán</p>
+                <p>🏢 Piso 8, Oficina 20817</p>
+                <p>🇭🇳 Tegucigalpa, Honduras</p>
+                <p>🕒 Lun-Vie: 8:00-17:00</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 NEOSITIO. Todos los derechos reservados.</p>
+            <p style="margin-top: 0.5rem;">
+                <a href="#" style="color: #64748b; margin: 0 1rem;">Términos de Servicio</a>
+                <a href="#" style="color: #64748b; margin: 0 1rem;">Política de Privacidad</a>
+                <a href="#" style="color: #64748b; margin: 0 1rem;">Cookies</a>
+            </p>
+        </div>
+    </div>
+</footer>
+
+<!-- WhatsApp Float Button -->
+<a href="https://wa.me/50499999999" class="whatsapp-float" target="_blank" aria-label="WhatsApp">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.465 3.488"/>
+    </svg>
+</a>
+
+<script>
+    // Quick Contact Form
+    document.getElementById('quickContactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const email = document.getElementById('quickEmail').value;
+        const phone = document.getElementById('quickPhone').value;
+
+        const message = `¡Hola! Me interesa conocer más sobre los servicios de NEOSITIO.%0A%0A📧 Email: ${email}%0A📱 Teléfono: ${phone}%0A%0A¿Podrían contactarme para discutir mi proyecto?`;
+
+        const whatsappUrl = `https://wa.me/50499999999?text=${message}`;
+        window.open(whatsappUrl, '_blank');
+    });
+
+    // Main Contact Form
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const formData = new FormData(this);
+        const data = Object.fromEntries(formData);
+
+        const message = `¡Hola! Me interesa contratar servicios de NEOSITIO.%0A%0A👤 Nombre: ${data.name}%0A📧 Email: ${data.email}%0A📱 Teléfono: ${data.phone}%0A🔧 Servicio: ${data.service}%0A%0A💬 Mensaje:%0A${data.message}%0A%0A¿Podrían enviarme una cotización?`;
+
+        const whatsappUrl = `https://wa.me/50499999999?text=${message}`;
+        window.open(whatsappUrl, '_blank');
+    });
+
+    // Send via Resend function
+    function sendViaResend() {
+        const form = document.getElementById('contactForm');
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData);
+
+        // Aquí puedes integrar con Resend API
+        console.log('Enviando via Resend:', data);
+
+        // Simulación de envío exitoso
+        alert('¡Mensaje enviado exitosamente por email! Te contactaremos pronto.');
+
+        // En una implementación real, harías algo como:
+        /*
+        fetch('/api/send-email', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(result => {
+            alert('¡Mensaje enviado exitosamente!');
+            form.reset();
+        })
+        .catch(error => {
+            alert('Error al enviar el mensaje. Intenta nuevamente.');
+        });
+        */
+    }
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Mobile menu toggle
+    document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+        const navLinks = document.querySelector('.nav-links');
+        navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+    });
+
+    // Fade in animation on scroll
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('fade-in');
+            }
+        });
+    }, observerOptions);
+
+    // Observe all sections
+    document.querySelectorAll('section').forEach(section => {
+        observer.observe(section);
+    });
+
+    // Header background on scroll
+    window.addEventListener('scroll', function() {
+        const header = document.querySelector('.header');
+        if (window.scrollY > 100) {
+            header.style.background = 'rgba(15, 23, 42, 0.98)';
+        } else {
+            header.style.background = 'rgba(15, 23, 42, 0.95)';
+        }
+    });
+
+    // Pricing card click handlers
+    document.querySelectorAll('.pricing-card button').forEach(button => {
+        button.addEventListener('click', function() {
+            const card = this.closest('.pricing-card');
+            const planName = card.querySelector('h3').textContent;
+            const price = card.querySelector('.pricing-price').textContent;
+
+            const message = `¡Hola! Me interesa el plan ${planName} de ${price}.%0A%0A¿Podrían darme más información y comenzar mi proyecto?`;
+            const whatsappUrl = `https://wa.me/50499999999?text=${message}`;
+            window.open(whatsappUrl, '_blank');
+        });
+    });
+</script>
+</body>
+</html>
