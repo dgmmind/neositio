@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neositio - Transformamos Ideas en Realidad Digital</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Colores tomados de la estructura profesional */
+            --dark-blue: #0F172A;
+            --light-blue: #1E293B;
+            --accent-blue: #3B6994; 
+            --text-primary: #E2E8F0;
+            --text-secondary: #94A3B8;
+        }
+
+        body {
+            margin: 0;
+            /* Fondo degradado del sitio */
+            background: linear-gradient(to bottom, #1c2541, #0a0f1b);
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+
+        canvas {
+            width: 100% !important;
+            height: 100% !important;
+            display: block;
+            position: static !important;
+            background: transparent !important;
+            box-shadow: none !important;
+        }
+        
+        .content-wrapper {
+            position: relative;
+            z-index: 2; /* Encima del canvas */
+            width: 100%;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            padding: 20px 0;
+            background-color: rgba(15, 23, 42, 0.5);
+            backdrop-filter: blur(5px);
+            border-bottom: 1px solid var(--light-blue);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+        .logo span { color: var(--accent-blue); }
+
+        .nav-links { display: none; }
+        .nav-links a {
+            color: var(--text-secondary); text-decoration: none;
+            margin-left: 30px; transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--text-primary); }
+
+        .hero {
+            text-align: center;
+            padding: 60px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 85vh; /* Altura mínima para centrar verticalmente */
+            justify-content: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin: 20px 0;
+            max-width: 800px;
+            text-shadow: 0 0 20px rgba(0,0,0,0.7);
+        }
+        .hero h1 span { color: var(--accent-blue); }
+
+        .hero .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            text-shadow: 0 0 15px rgba(0,0,0,0.7);
+        }
+        
+        .contact-box, .secondary-buttons {
+            background-color: rgba(28, 37, 65, 0.6); /* Color de fondo con transparencia */
+            backdrop-filter: blur(5px);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid rgba(59, 105, 148, 0.3);
+        }
+
+        .contact-box { width: 100%; max-width: 460px; margin-bottom: 30px; }
+        .contact-box h3 { margin-top: 0; color: var(--accent-blue); font-size: 1rem; }
+        .input-group { display: flex; flex-direction: column; gap: 15px; margin-bottom: 20px; }
+        .input-group input {
+            width: 100%; box-sizing: border-box; padding: 12px; background-color: #0c1221;
+            border: 1px solid #334155; border-radius: 8px; color: var(--text-primary);
+        }
+        .cta-button {
+            display: block; width: 100%; padding: 15px; box-sizing: border-box;
+            background-color: var(--accent-blue); color: var(--text-primary);
+            font-weight: 600; text-align: center; text-decoration: none;
+            border-radius: 8px; transition: opacity 0.3s;
+        }
+        .cta-button:hover { opacity: 0.9; }
+
+        .secondary-buttons { padding: 10px; display: flex; gap: 20px; }
+        .btn { padding: 12px 25px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: all 0.3s; }
+        .btn-primary { background-color: var(--accent-blue); color: var(--text-primary); }
+        .btn-secondary { background-color: transparent; color: var(--text-primary); border: 1px solid var(--light-blue); }
+        .btn-primary:hover { opacity: 0.9; }
+        .btn-secondary:hover { background-color: var(--light-blue); }
+
+        .whatsapp-fab {
+            position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px;
+            background-color: #25D366; border-radius: 50%; display: flex;
+            align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 100;
+        }
+
+        .main-columns {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            min-height: 85vh;
+            gap: 40px;
+        }
+        .column {
+            flex: 1 1 0;
+            min-width: 0;
+            box-sizing: border-box;
+            padding: 32px 20px;
+            border-radius: 0;
+            background: none;
+            border: none;
+            box-shadow: none;
+        }
+        .text-column {
+            max-width: 500px;
+            z-index: 2;
+        }
+        .cubo-column {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 350px;
+            min-height: 400px;
+            z-index: 2;
+            position: relative;
+            background: none;
+            border: none;
+            box-shadow: none;
+        }
+        /* --- RESPONSIVE MEJORADO --- */
+        .cubo-hero-center {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+        #cubo-canvas-container {
+            width: 320px;
+            height: 320px;
+            max-width: 90vw;
+            max-height: 40vw;
+            min-width: 180px;
+            min-height: 180px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        @media (max-width: 900px) {
+            .cubo-hero-center {
+                margin-bottom: 24px;
+            }
+            #cubo-canvas-container {
+                width: 60vw;
+                height: 60vw;
+                max-width: 90vw;
+                max-height: 60vw;
+                min-width: 120px;
+                min-height: 120px;
+            }
+        }
+        @media (max-width: 600px) {
+            .cubo-hero-center {
+                margin-bottom: 18px;
+            }
+            #cubo-canvas-container {
+                width: 80vw;
+                height: 80vw;
+                max-width: 98vw;
+                max-height: 98vw;
+                min-width: 80px;
+                min-height: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- El canvas se insertará aquí por JS y quedará en el fondo (z-index: 1) -->
+
+    <div class="content-wrapper">
+        <header>
+            <div class="container">
+                <nav>
+                    <div class="logo">NEO<span>SITIO</span></div>
+                    <div class="nav-links">
+                        <a href="#">Servicios</a>
+                        <a href="#">Tecnologías</a>
+                        <a href="#">Proyectos</a>
+                        <a href="#">Precios</a>
+                        <a href="#">Contacto</a>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <main class="hero container">
+            <div class="cubo-hero-center">
+                <div id="cubo-canvas-container"></div>
+            </div>
+            <h1>Transformamos ideas en <br><span>realidad digital</span></h1>
+            <p class="subtitle">
+                NEOSITIO te permite crear experiencias digitales extraordinarias que impulsan el crecimiento de tu negocio. Desde dominios hasta aplicaciones completas.
+            </p>
+            <div class="contact-box">
+                <h3>Comienza tu proyecto ahora</h3>
+                <div class="input-group">
+                    <input type="email" placeholder="tu@email.com">
+                    <input type="tel" placeholder="+504 9999 9999">
+                </div>
+                <a href="#" class="cta-button">Contactar por WhatsApp</a>
+            </div>
+            <div class="secondary-buttons">
+                <a href="#" class="btn btn-primary">Explorar Servicios</a>
+                <a href="#" class="btn btn-secondary">Ver Proyectos</a>
+            </div>
+        </main>
+    </div>
+
+    <a href="#" class="whatsapp-fab" aria-label="Contactar por WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="white" viewBox="0 0 16 16"><path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-1.043.167-.57.167-1.043.114-1.141-.052-.099-.182-.148-.38-.246z"/></svg>
+    </a>
+
+    <!-- Este es el script 3D exacto del cubo que te gustó -->
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+        }
+    }
+    </script>
+    <script type="module">
+        import * as THREE from 'three';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+        import { Reflector } from 'three/addons/objects/Reflector.js';
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.set(0, 1.5, 7); // Posición ajustada para verse bien detrás del texto
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.shadowMap.enabled = true;
+        document.body.prepend(renderer.domElement);
+        
+        // Controles deshabilitados para actuar como fondo
+        const controls = new OrbitControls(camera, renderer.domElement);
+        controls.enabled = false;
+
+        const hemisphereLight = new THREE.HemisphereLight(0xADD8E6, 0x080820, 1.5);
+        scene.add(hemisphereLight);
+
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 2.5);
+        directionalLight.position.set(5, 10, 7.5);
+        directionalLight.castShadow = true;
+        directionalLight.shadow.mapSize.width = 1024;
+        directionalLight.shadow.mapSize.height = 1024;
+        scene.add(directionalLight);
+
+        const fillLight = new THREE.PointLight(0x5E86B3, 1.0, 100);
+        fillLight.position.set(-10, 5, -5);
+        scene.add(fillLight);
+
+        // Quitar el plano reflectante (Reflector), solo dejar el cubo
+        // const planeGeometry = new THREE.PlaneGeometry(30, 30);
+        // const groundMirror = new Reflector(planeGeometry, {
+        //     clipBias: 0.003,
+        //     textureWidth: window.innerWidth * window.devicePixelRatio,
+        //     textureHeight: window.innerHeight * window.devicePixelRatio,
+        //     color: 0x04152e // Color personalizado para la base
+        // });
+        // groundMirror.rotation.x = -Math.PI / 2;
+        // groundMirror.position.y = -2;
+        // scene.add(groundMirror);
+
+        const rubiksCube = new THREE.Group();
+        const cubieSize = 1;
+        const gap = 0.1;
+
+        // ILUMINACIÓN MEJORADA
+        scene.add(new THREE.AmbientLight(0xffffff, 0.7)); // Luz ambiental suave
+        hemisphereLight.intensity = 2.2;
+        directionalLight.intensity = 3.5;
+        fillLight.intensity = 1.5;
+
+        // Materiales: tonos originales de azul y azul marino
+        const materials = [
+            new THREE.MeshStandardMaterial({ color: 0x103460, metalness: 0.8, roughness: 0.2 }),
+            new THREE.MeshStandardMaterial({ color: 0x004080, metalness: 0.2, roughness: 0.7 }),
+            new THREE.MeshStandardMaterial({ color: 0x3B6994, metalness: 1.0, roughness: 0.4 })
+        ];
+
+        // Guardar referencia a los cubitos y sus posiciones
+        const cubies = [];
+        const cubieGeometry = new THREE.BoxGeometry(cubieSize, cubieSize, cubieSize);
+        for (let x = -1; x <= 1; x++) {
+            for (let y = -1; y <= 1; y++) {
+                for (let z = -1; z <= 1; z++) {
+                    if (x === 0 && y === 0 && z === 0) continue;
+                    const randomMaterial = materials[Math.floor(Math.random() * materials.length)];
+                    const cubie = new THREE.Mesh(cubieGeometry, randomMaterial.clone());
+                    cubie.position.set(x * (cubieSize + gap), y * (cubieSize + gap), z * (cubieSize + gap));
+                    cubie.castShadow = true;
+                    cubie.receiveShadow = true;
+                    cubie.userData = { x, y, z };
+                    rubiksCube.add(cubie);
+                    cubies.push(cubie);
+                }
+            }
+        }
+        
+        // Hacer el cubo grande y proporcionado
+        rubiksCube.position.y = 0;
+        rubiksCube.scale.set(1.7, 1.7, 1.7);
+        scene.add(rubiksCube);
+
+        // LUZ ANIMADA PARA EFECTO DE DESTELLO
+        const movingLight = new THREE.DirectionalLight(0xffffff, 1.8);
+        movingLight.position.set(0, 5, 5);
+        movingLight.castShadow = false;
+        scene.add(movingLight);
+
+        // Animación de giro de caras (como un cubo Rubik real)
+        let rotating = false;
+        let rotationAxis = null;
+        let rotationLayer = 0;
+        let rotationAngle = 0;
+        let rotationSpeed = Math.PI / 32;
+        let rotatingCubies = [];
+
+        function startRandomRotation() {
+            if (rotating) return;
+            // Elegir eje y capa aleatoria
+            const axes = ['x', 'y', 'z'];
+            rotationAxis = axes[Math.floor(Math.random() * axes.length)];
+            const layers = [-1, 0, 1];
+            rotationLayer = layers[Math.floor(Math.random() * layers.length)];
+            // Seleccionar los cubitos de la capa
+            rotatingCubies = cubies.filter(c => c.userData[rotationAxis] === rotationLayer);
+            rotationAngle = 0;
+            rotating = true;
+        }
+
+        function roundToStep(value, step) {
+            return Math.round(value / step) * step;
+        }
+
+        // Función para reasignar posiciones y rotaciones exactas tras cada giro
+        function fixLayerAfterRotation(axis, layer) {
+            const step = cubieSize + gap;
+            // Seleccionar los cubitos de la capa
+            const affected = cubies.filter(c => c.userData[axis] === layer);
+            affected.forEach(cubie => {
+                // Obtener la posición lógica actual
+                let { x, y, z } = cubie.userData;
+                // Rotar la posición lógica
+                let nx = x, ny = y, nz = z;
+                if (axis === 'x') {
+                    [ny, nz] = [ -nz, ny ];
+                    cubie.rotation.x = roundToStep(cubie.rotation.x, Math.PI / 2);
+                } else if (axis === 'y') {
+                    [nx, nz] = [ nz, -nx ];
+                    cubie.rotation.y = roundToStep(cubie.rotation.y, Math.PI / 2);
+                } else if (axis === 'z') {
+                    [nx, ny] = [ -ny, nx ];
+                    cubie.rotation.z = roundToStep(cubie.rotation.z, Math.PI / 2);
+                }
+                // Asignar nueva posición lógica y física
+                cubie.userData.x = nx;
+                cubie.userData.y = ny;
+                cubie.userData.z = nz;
+                cubie.position.set(nx * step, ny * step, nz * step);
+                // Redondear rotaciones
+                cubie.rotation.x = roundToStep(cubie.rotation.x, Math.PI / 2);
+                cubie.rotation.y = roundToStep(cubie.rotation.y, Math.PI / 2);
+                cubie.rotation.z = roundToStep(cubie.rotation.z, Math.PI / 2);
+            });
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            // Rotación continua del cubo
+            const t = Date.now() * 0.001;
+            rubiksCube.rotation.y = t * 0.3;
+            rubiksCube.rotation.x = Math.sin(t * 0.2) * 0.2;
+
+            // Animación de giro de caras
+            if (rotating) {
+                const delta = Math.min(rotationSpeed, Math.PI / 2 - rotationAngle);
+                rotationAngle += delta;
+                rotatingCubies.forEach(cubie => {
+                    cubie.updateMatrix();
+                    // Girar alrededor del centro de la capa
+                    const m = new THREE.Matrix4();
+                    if (rotationAxis === 'x') m.makeRotationX(delta);
+                    if (rotationAxis === 'y') m.makeRotationY(delta);
+                    if (rotationAxis === 'z') m.makeRotationZ(delta);
+                    cubie.applyMatrix4(m);
+                });
+                if (rotationAngle >= Math.PI / 2 - 0.0001) {
+                    rotating = false;
+                    // Reasignar posiciones y rotaciones exactas para evitar deformación
+                    fixLayerAfterRotation(rotationAxis, rotationLayer);
+                    setTimeout(startRandomRotation, 700 + Math.random() * 1000);
+                }
+            } else {
+                // Esperar un poco antes de iniciar el siguiente giro
+                if (Math.random() < 0.01) startRandomRotation();
+            }
+
+            renderer.render(scene, camera);
+        }
+
+        // Cambiar el canvas al contenedor específico
+        const canvasContainer = document.getElementById('cubo-canvas-container');
+        renderer.setClearColor(0x000000, 0); // Fondo transparente
+        renderer.setSize(canvasContainer.offsetWidth, canvasContainer.offsetHeight, false);
+        canvasContainer.appendChild(renderer.domElement);
+
+        // Ajustar tamaño responsivo y mantener el cubo centrado y grande
+        function resizeCuboCanvas() {
+            const width = canvasContainer.offsetWidth;
+            const height = canvasContainer.offsetHeight;
+            renderer.setSize(width, height, false);
+            camera.aspect = width / height;
+            camera.updateProjectionMatrix();
+            // Escalado para que el cubo siempre esté centrado y bien proporcionado
+            let scale = 1.7;
+            if (width < 150) {
+                scale = 0.7;
+            } else if (width < 300) {
+                scale = 1.1;
+            } else if (width < 500) {
+                scale = 1.4;
+            } else {
+                scale = 1.7;
+            }
+            rubiksCube.scale.set(scale, scale, scale);
+        }
+        window.addEventListener('resize', resizeCuboCanvas);
+        resizeCuboCanvas();
+
+        animate();
+    </script>
+</body>
+</html>
+</html>
