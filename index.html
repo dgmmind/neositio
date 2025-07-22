@@ -50,6 +50,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 0 2rem;
+            min-height: 56px;
         }
 
         .logo {
@@ -60,6 +61,10 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            white-space: nowrap;
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .logo::before {
@@ -98,8 +103,11 @@
             font-size: 0.9rem;
             transition: all 0.3s;
             text-decoration: none;
-            display: inline-block;
+            display: flex;
             font-weight: 500;
+            align-items: center;
+            min-height: 48px; /* Altura mínima uniforme */
+            box-sizing: border-box;
         }
 
         .btn-secondary {
@@ -135,36 +143,27 @@
             padding: 0 2rem;
             position: relative;
             background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            width: 100%;
+            box-sizing: border-box;
+            padding-top: 72px; /* Espacio para header fijo en desktop */
         }
 
         .hero-content {
             max-width: 800px;
-        }
-
-        .hero-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, var(--blue-main), var(--blue-bright));
-            border-radius: 20px;
-            margin: 0 auto 2rem;
+            width: 100%;
+            margin: 0 auto;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            border: 1px solid var(--blue-main);
-            box-shadow: 0 0 30px rgba(59, 105, 148, 0.18);
-        }
-
-        .hero-icon i[data-feather] {
-            color: #fff !important;
-            width: 40px;
-            height: 40px;
         }
 
         .hero h1 {
-            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-size: clamp(2rem, 6vw, 4.5rem);
             font-weight: 600;
             margin-bottom: 1.5rem;
             line-height: 1.1;
+            word-break: break-word;
         }
 
         .hero .highlight {
@@ -172,24 +171,12 @@
         }
 
         .hero p {
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
             color: var(--text-secondary) !important;
             margin-bottom: 2rem;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .btn-hero {
-            padding: 0.75rem 1.5rem;
-            font-size: 1rem;
         }
 
         /* Quick Contact */
@@ -760,11 +747,6 @@
                 flex-direction: column;
             }
 
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
             .testimonials-grid {
                 grid-template-columns: 1fr;
             }
@@ -832,6 +814,11 @@
             width: 32px;
             height: 32px;
         }
+        @media (max-width: 1200px) {
+            .hero-content {
+                max-width: 95vw;
+            }
+        }
         @media (max-width: 900px) {
             .hero {
                 flex-direction: column;
@@ -840,99 +827,630 @@
                 text-align: center;
                 min-height: unset;
                 padding: 0 2vw 32px 2vw;
+                padding-top: 60px; /* Espacio para header fijo en tablet */
             }
-            .hero-columns {
-                flex-direction: column;
-                gap: 24px;
+            .hero-content {
                 max-width: 98vw;
-            }
-            .hero-text-col, .hero-cubo-col {
-                max-width: 100vw;
-                align-items: center;
-                text-align: center;
-                justify-content: center;
-            }
-            .cubo-hero-center {
-                margin-bottom: 0;
-                min-height: 180px;
-            }
-            #cubo-canvas-container {
-                width: 90vw;
-                height: 60vw;
-                max-width: 98vw;
-                max-height: 60vw;
-                min-width: 120px;
-                min-height: 120px;
+                padding: 0;
             }
         }
         @media (max-width: 600px) {
-            .cubo-hero-center {
-                min-height: 100px;
+            .hero {
+                padding: 0 1vw 24px 1vw;
+                padding-top: 48px; /* Espacio para header fijo en móvil */
             }
-            #cubo-canvas-container {
-                width: 98vw;
-                height: 60vw;
-                max-width: 98vw;
-                max-height: 80vw;
-                min-width: 60px;
-                min-height: 60px;
+            .hero-content {
+                max-width: 100vw;
+                padding: 0;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .hero p {
+                font-size: 1rem;
             }
         }
-    </style>
+        @media (max-width: 900px) {
+            .nav {
+                padding: 0 1rem;
+            }
+            .logo {
+                font-size: 1.1rem;
+                max-width: 60vw;
+            }
+            .nav-links {
+                display: none;
+            }
+            .nav-buttons {
+                display: none;
+            }
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+        @media (max-width: 600px) {
+            .header {
+                padding: 0.5rem 0;
+            }
+            .nav {
+                padding: 0 0.5rem;
+                min-height: 44px;
+            }
+            .logo {
+                font-size: 1rem;
+                max-width: 50vw;
+            }
+            .mobile-menu-btn {
+                font-size: 2rem;
+            }
+        }
+    </style
 </head>
 <body>
-<!-- Header -->
-<header class="header">
-    <nav class="nav">
-        <a href="#" class="logo">NEOSITIO</a>
-        <ul class="nav-links">
-            <li><a href="#servicios">Servicios</a></li>
-            <li><a href="#tecnologias">Tecnologías</a></li>
-            <li><a href="#proyectos">Proyectos</a></li>
-            <li><a href="#precios">Precios</a></li>
-            <li><a href="#contacto">Contacto</a></li>
+    <style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: linear-gradient(135deg, #1a1f36 0%, #2d3561 100%);
+    color: white;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Navigation Styles */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(26, 31, 54, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.logo-icon {
+    color: #4f9cf9;
+    font-size: 1.5rem;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-link {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    color: #4f9cf9;
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+.btn-secondary {
+    background: transparent;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.btn-secondary:hover {
+    border-color: #4f9cf9;
+    color: #4f9cf9;
+}
+
+.btn-primary {
+    background: #4f9cf9;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    font-weight: 500;
+}
+
+.btn-primary:hover {
+    background: #3b82f6;
+}
+
+/* Hamburger Menu */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 4px;
+}
+
+.bar {
+    width: 25px;
+    height: 3px;
+    background: white;
+    transition: 0.3s;
+    border-radius: 2px;
+}
+
+.hamburger.active .bar:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.hamburger.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active .bar:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* Sidebar */
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1998;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.sidebar-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 300px;
+    height: 100%;
+    background: #1a1f36;
+    z-index: 1999;
+    transition: right 0.3s ease;
+    padding: 2rem;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar.active {
+    right: 0;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.sidebar-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.sidebar-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar-menu {
+    list-style: none;
+    margin-bottom: 2rem;
+}
+
+.sidebar-menu li {
+    margin-bottom: 1rem;
+}
+
+.sidebar-link {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-size: 1.1rem;
+    display: block;
+    padding: 0.5rem 0;
+    transition: color 0.3s ease;
+}
+
+.sidebar-link:hover {
+    color: #4f9cf9;
+}
+
+.sidebar-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Main Content */
+.main-content {
+    margin-top: 80px;
+    min-height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+}
+
+.hero {
+    width: 100%;
+    padding: 4rem 0;
+}
+
+.hero-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    text-align: center;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+}
+
+.hero-highlight {
+    color: #4f9cf9;
+}
+
+.hero-description {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 600px;
+    margin: 0 auto 3rem;
+    line-height: 1.6;
+}
+
+/* Contact Form */
+.contact-form {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    width: 300px;
+    margin: 0 auto;
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+}
+.contact-form form {
+}
+.form-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.form-row {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.form-input {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    padding: 0.75rem;
+    color: white;
+    font-size: 1rem;
+}
+
+.form-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #4f9cf9;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.btn-whatsapp {
+    width: 100%;
+    background: #4f9cf9;
+    color: white;
+    border: none;
+    padding: 0.75rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn-whatsapp:hover {
+    background: #3b82f6;
+}
+
+.chat-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 25px rgba(79, 156, 249, 0.4);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-menu,
+    .nav-buttons {
+        display: none;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-container {
+        padding: 0 1rem;
+    }
+
+    .hero-container {
+        padding: 0 1rem;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .hero-description {
+        font-size: 1.1rem;
+    }
+
+  
+
+    .form-row {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .chat-button {
+        bottom: 1rem;
+        right: 1rem;
+        width: 50px;
+        height: 50px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .hero-description {
+        font-size: 1rem;
+    }
+
+    .sidebar {
+        width: 280px;
+        right: -280px;
+    }
+}
+
+@media (min-width: 1400px) {
+    .hero-title {
+        font-size: 4rem;
+    }
+
+    .hero-description {
+        font-size: 1.3rem;
+    }
+}
+</style>
+   <!-- Navigation -->
+   <nav class="navbar">
+    <div class="nav-container">
+        <!-- Logo -->
+        <div class="nav-logo">
+            <span class="logo-icon">◆</span>
+            <span class="logo-text">NEOSITIO</span>
+        </div>
+
+        <!-- Desktop Menu -->
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="#servicios" class="nav-link">Servicios</a>
+            </li>
+            <li class="nav-item">
+                <a href="#tecnologias" class="nav-link">Tecnologías</a>
+            </li>
+            <li class="nav-item">
+                <a href="#proyectos" class="nav-link">Proyectos</a>
+            </li>
+            <li class="nav-item">
+                <a href="#precios" class="nav-link">Precios</a>
+            </li>
+            <li class="nav-item">
+                <a href="#contacto" class="nav-link">Contacto</a>
+            </li>
         </ul>
+
+        <!-- Desktop Buttons -->
         <div class="nav-buttons">
-            <a href="#contacto" class="btn btn-secondary">Iniciar Sesión</a>
-            <a href="#contacto" class="btn btn-primary">Comenzar</a>
-        </div>
-        <button class="mobile-menu-btn">☰</button>
-    </nav>
-</header>
-
-<!-- Hero Section -->
-<section class="hero">
-    <div class="hero-content">
-        <div class="hero-icon">
-            <i data-feather="layers"></i>
-        </div>
-        <h1>Transformamos ideas en <span class="highlight">realidad digital</span></h1>
-        <p>NEOSITIO te permite crear experiencias digitales extraordinarias que impulsan el crecimiento de tu negocio. Desde dominios hasta aplicaciones completas.</p>
-
-        <!-- Quick Contact Form -->
-        <div class="quick-contact">
-            <h3>Comienza tu proyecto ahora</h3>
-            <form class="contact-form" id="quickContactForm">
-                <div class="form-row">
-                    <div class="form-group">
-                        <input type="email" placeholder="tu@email.com" required id="quickEmail">
-                    </div>
-                    <div class="form-group">
-                        <input type="tel" placeholder="+504 9999 9999" required id="quickPhone">
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-primary btn-hero" style="width: 100%;">
-                    Contactar por WhatsApp
-                </button>
-            </form>
+            <button class="btn-secondary">Iniciar Sesión</button>
+            <button class="btn-primary">Comenzar</button>
         </div>
 
-        <div class="hero-buttons">
-            <a href="#servicios" class="btn btn-primary btn-hero">Explorar Servicios</a>
-            <a href="#proyectos" class="btn btn-secondary btn-hero">Ver Proyectos</a>
+        <!-- Mobile Hamburger -->
+        <div class="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
         </div>
     </div>
-</section>
+</nav>
+
+<!-- Mobile Sidebar -->
+<div class="sidebar-overlay"></div>
+<div class="sidebar">
+    <div class="sidebar-header">
+        <div class="sidebar-logo">
+            <span class="logo-icon">◆</span>
+            <span class="logo-text">NEOSITIO</span>
+        </div>
+        <button class="sidebar-close">&times;</button>
+    </div>
+    <ul class="sidebar-menu">
+        <li><a href="#servicios" class="sidebar-link">Servicios</a></li>
+        <li><a href="#tecnologias" class="sidebar-link">Tecnologías</a></li>
+        <li><a href="#proyectos" class="sidebar-link">Proyectos</a></li>
+        <li><a href="#precios" class="sidebar-link">Precios</a></li>
+        <li><a href="#contacto" class="sidebar-link">Contacto</a></li>
+    </ul>
+    <div class="sidebar-buttons">
+        <button class="btn-secondary">Iniciar Sesión</button>
+        <button class="btn-primary">Comenzar</button>
+    </div>
+</div>
+
+<!-- Main Content -->
+<main class="main-content">
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <h1 class="hero-title">
+                Transformamos ideas en
+                <span class="hero-highlight">realidad digital</span>
+            </h1>
+            <p class="hero-description">
+                NEOSITIO te permite crear experiencias digitales extraordinarias que
+                impulsan el crecimiento de tu negocio. Desde dominios hasta
+                aplicaciones completas.
+            </p>
+
+            <!-- Contact Form -->
+            <div class="contact-form">
+                <h3 class="form-title">Comienza tu proyecto ahora</h3>
+                <form class="form">
+                    <div class="form-row">
+                        <input type="email" placeholder="tu@email.com" class="form-input" required>
+                        <input type="tel" placeholder="+504 9999 9999" class="form-input" required>
+                    </div>
+                    <button type="submit" class="btn-whatsapp">Contactar por WhatsApp</button>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    // Elements
+    const hamburger = document.querySelector('.hamburger');
+    const sidebar = document.querySelector('.sidebar');
+    const sidebarOverlay = document.querySelector('.sidebar-overlay');
+    const sidebarClose = document.querySelector('.sidebar-close');
+    const sidebarLinks = document.querySelectorAll('.sidebar-link');
+    const chatButton = document.querySelector('.chat-button');
+    const contactForm = document.querySelector('.form');
+
+    // Toggle sidebar
+    function toggleSidebar() {
+        hamburger.classList.toggle('active');
+        sidebar.classList.toggle('active');
+        sidebarOverlay.classList.toggle('active');
+        document.body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : '';
+    }
+
+    // Close sidebar
+    function closeSidebar() {
+        hamburger.classList.remove('active');
+        sidebar.classList.remove('active');
+        sidebarOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    // Event listeners
+    hamburger.addEventListener('click', toggleSidebar);
+    sidebarClose.addEventListener('click', closeSidebar);
+    sidebarOverlay.addEventListener('click', closeSidebar);
+
+    // Close sidebar when clicking on links
+    sidebarLinks.forEach(link => {
+        link.addEventListener('click', closeSidebar);
+    });
+
+
+    // Close sidebar on window resize
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768) {
+            closeSidebar();
+        }
+    });
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Add scroll effect to navbar
+    window.addEventListener('scroll', function() {
+        const navbar = document.querySelector('.navbar');
+        if (window.scrollY > 50) {
+            navbar.style.background = 'rgba(26, 31, 54, 0.98)';
+        } else {
+            navbar.style.background = 'rgba(26, 31, 54, 0.95)';
+        }
+    });
+});
+</script>
+
+
+
+
 
 <!-- About Section -->
 <section id="nosotros" class="about">
@@ -1463,63 +1981,7 @@
 
 
 <script>
-    // Quick Contact Form
-    document.getElementById('quickContactForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        const email = document.getElementById('quickEmail').value;
-        const phone = document.getElementById('quickPhone').value;
-
-        const message = `¡Hola! Me interesa conocer más sobre los servicios de NEOSITIO.%0A%0A📧 Email: ${email}%0A📱 Teléfono: ${phone}%0A%0A¿Podrían contactarme para discutir mi proyecto?`;
-
-        const whatsappUrl = `https://wa.me/50499999999?text=${message}`;
-        window.open(whatsappUrl, '_blank');
-    });
-
-    // Main Contact Form
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        const formData = new FormData(this);
-        const data = Object.fromEntries(formData);
-
-        const message = `¡Hola! Me interesa contratar servicios de NEOSITIO.%0A%0A👤 Nombre: ${data.name}%0A📧 Email: ${data.email}%0A📱 Teléfono: ${data.phone}%0A🔧 Servicio: ${data.service}%0A%0A💬 Mensaje:%0A${data.message}%0A%0A¿Podrían enviarme una cotización?`;
-
-        const whatsappUrl = `https://wa.me/50499999999?text=${message}`;
-        window.open(whatsappUrl, '_blank');
-    });
-
-    // Send via Resend function
-    function sendViaResend() {
-        const form = document.getElementById('contactForm');
-        const formData = new FormData(form);
-        const data = Object.fromEntries(formData);
-
-        // Aquí puedes integrar con Resend API
-        console.log('Enviando via Resend:', data);
-
-        // Simulación de envío exitoso
-        alert('¡Mensaje enviado exitosamente por email! Te contactaremos pronto.');
-
-        // En una implementación real, harías algo como:
-        /*
-        fetch('/api/send-email', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
-        })
-        .then(response => response.json())
-        .then(result => {
-            alert('¡Mensaje enviado exitosamente!');
-            form.reset();
-        })
-        .catch(error => {
-            alert('Error al enviar el mensaje. Intenta nuevamente.');
-        });
-        */
-    }
+   
 
     // Smooth scrolling for navigation links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1535,11 +1997,7 @@
         });
     });
 
-    // Mobile menu toggle
-    document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-        const navLinks = document.querySelector('.nav-links');
-        navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-    });
+
 
     // Fade in animation on scroll
     const observerOptions = {
@@ -1560,80 +2018,10 @@
         observer.observe(section);
     });
 
-    // Header background on scroll
-    window.addEventListener('scroll', function() {
-        const header = document.querySelector('.header');
-        if (window.scrollY > 100) {
-            header.style.background = 'rgba(15, 23, 42, 0.98)';
-        } else {
-            header.style.background = 'rgba(15, 23, 42, 0.95)';
-        }
-    });
 
-    // Pricing card click handlers
-    document.querySelectorAll('.pricing-card button').forEach(button => {
-        button.addEventListener('click', function() {
-            const card = this.closest('.pricing-card');
-            const planName = card.querySelector('h3').textContent;
-            const price = card.querySelector('.pricing-price').textContent;
 
-            const message = `¡Hola! Me interesa el plan ${planName} de ${price}.%0A%0A¿Podrían darme más información y comenzar mi proyecto?`;
-            const whatsappUrl = `https://wa.me/50499999999?text=${message}`;
-            window.open(whatsappUrl, '_blank');
-        });
-    });
 </script>
 
-<script>
-// ... existing code ...
-// Fondo de partículas animadas en el hero/header
-(function(){
-    const canvas = document.getElementById('particles-bg');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    let w, h, particles;
-    function resize() {
-        w = canvas.width = canvas.offsetWidth;
-        h = canvas.height = canvas.offsetHeight;
-    }
-    function randomBlue() {
-        const blues = ['#3B82F6','#3b6994','#004080','#2563EB','#60A5FA'];
-        return blues[Math.floor(Math.random()*blues.length)];
-    }
-    function createParticles() {
-        particles = [];
-        for(let i=0;i<36;i++){
-            particles.push({
-                x: Math.random()*w,
-                y: Math.random()*h,
-                r: 2+Math.random()*3,
-                dx: (Math.random()-0.5)*0.3,
-                dy: (Math.random()-0.5)*0.3,
-                color: randomBlue()
-            });
-        }
-    }
-    function draw() {
-        ctx.clearRect(0,0,w,h);
-        for(const p of particles){
-            ctx.beginPath();
-            ctx.arc(p.x,p.y,p.r,0,2*Math.PI);
-            ctx.fillStyle=p.color;
-            ctx.globalAlpha=0.5;
-            ctx.fill();
-            ctx.globalAlpha=1;
-            p.x+=p.dx;
-            p.y+=p.dy;
-            if(p.x<0||p.x>w) p.dx*=-1;
-            if(p.y<0||p.y>h) p.dy*=-1;
-        }
-        requestAnimationFrame(draw);
-    }
-    window.addEventListener('resize',()=>{if(canvas){resize();createParticles();}});
-    if(canvas){resize();createParticles();draw();}
-})();
-// ... existing code ...
-</script>
 
 <script>
 feather.replace();
