@@ -1,0 +1,2058 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Completo</title>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+        /* Reset y Variables CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Colores Light Theme */
+            --primary-color: #6366f1;
+            --secondary-color: #8b5cf6;
+            --background-color: #f8fafc;
+            --surface-color: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --border-color: #e2e8f0;
+            --hover-color: rgba(99, 102, 241, 0.1);
+            --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            
+            /* Layout */
+            --navbar-height: 64px;
+            --sidebar-width: 280px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="dark"] {
+            /* Colores Dark Theme */
+            --background-color: #0f172a;
+            --surface-color: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --border-color: #334155;
+            --hover-color: rgba(99, 102, 241, 0.2);
+            --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: var(--transition);
+        }
+
+        /* Overlay para móvil */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: var(--sidebar-width);
+            right: 0;
+            height: var(--navbar-height);
+            background-color: var(--surface-color);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 1.5rem;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .navbar.mobile {
+            left: 0;
+        }
+
+        .navbar-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            transition: var(--transition);
+            color: var(--text-primary);
+        }
+
+        .menu-toggle:hover {
+            background-color: var(--hover-color);
+        }
+
+        .navbar-center {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            max-width: 500px;
+            margin: 0 2rem;
+        }
+
+        .search-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .search-container i {
+            position: absolute;
+            left: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+            width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.75rem 0.75rem 0.75rem 2.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            background-color: var(--background-color);
+            color: var(--text-primary);
+            font-size: 0.875rem;
+            transition: var(--transition);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .search-input::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .navbar-right {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-icon {
+            position: relative;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            transition: var(--transition);
+            color: var(--text-primary);
+        }
+
+        .nav-icon:hover {
+            background-color: var(--hover-color);
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: 0.25rem;
+            right: 0.25rem;
+            background-color: #ef4444;
+            color: white;
+            font-size: 0.75rem;
+            padding: 0.125rem 0.375rem;
+            border-radius: 9999px;
+            min-width: 1.25rem;
+            text-align: center;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            transition: var(--transition);
+            color: var(--text-primary);
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--hover-color);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: var(--sidebar-width);
+            height: 100vh;
+            background: var(--surface-color);
+            border-right: 1px solid var(--border-color);
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .sidebar.mobile-hidden {
+            transform: translateX(-100%);
+        }
+
+        .sidebar-header {
+            padding: 1.5rem 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .sidebar-search {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .sidebar-nav {
+            flex: 1;
+            padding: 1rem 0;
+            overflow-y: auto;
+        }
+
+        .nav-section {
+            margin-bottom: 2rem;
+        }
+
+        .nav-section-title {
+            padding: 0 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-list {
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-bottom: 0.25rem;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 1rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            border: none;
+            background: none;
+            width: 100%;
+            cursor: pointer;
+            transition: var(--transition);
+            border-radius: 0;
+        }
+
+        .nav-link:hover {
+            background-color: var(--hover-color);
+            color: var(--primary-color);
+        }
+
+        .nav-link.active,
+        .nav-item.active .nav-link {
+            background-color: var(--hover-color);
+            color: var(--primary-color);
+            border-right: 3px solid var(--primary-color);
+        }
+
+        .nav-link-content {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .nav-link i {
+            width: 20px;
+            height: 20px;
+        }
+
+        .dropdown-icon {
+            width: 16px;
+            height: 16px;
+            transition: var(--transition);
+        }
+
+        .dropdown-toggle.active .dropdown-icon {
+            transform: rotate(180deg);
+        }
+
+        .nav-submenu {
+            list-style: none;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+
+        [data-theme="dark"] .nav-submenu {
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+
+        .nav-submenu.active {
+            max-height: 300px;
+        }
+
+        .nav-subitem {
+            margin-bottom: 0.125rem;
+        }
+
+        .nav-sublink {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.5rem 1rem 0.5rem 3rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .nav-sublink:hover {
+            background-color: var(--hover-color);
+            color: var(--primary-color);
+        }
+
+        .nav-sublink i {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Sidebar Footer */
+        .sidebar-footer {
+            padding: 1rem;
+            border-top: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .settings-toggle {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            border-radius: 0.5rem;
+            transition: var(--transition);
+            color: var(--text-primary);
+        }
+
+        .settings-toggle:hover {
+            background-color: var(--hover-color);
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .user-avatar {
+            width: 2rem;
+            height: 2rem;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .user-details {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .user-name {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .user-role {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .settings-icon {
+            width: 16px;
+            height: 16px;
+            color: var(--text-secondary);
+        }
+
+        .settings-panel {
+            position: absolute;
+            bottom: 100%;
+            left: 1rem;
+            right: 1rem;
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            box-shadow: var(--shadow-lg);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: var(--transition);
+        }
+
+        .settings-panel.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .settings-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--text-primary);
+        }
+
+        .settings-item:hover {
+            background-color: var(--hover-color);
+        }
+
+        .settings-item:first-child {
+            border-radius: 0.5rem 0.5rem 0 0;
+        }
+
+        .settings-item:last-child {
+            border-radius: 0 0 0.5rem 0.5rem;
+        }
+
+        .settings-item i {
+            width: 16px;
+            height: 16px;
+            color: var(--text-secondary);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            margin-top: var(--navbar-height);
+            min-height: calc(100vh - var(--navbar-height));
+            transition: var(--transition);
+        }
+
+        .main-content.mobile {
+            margin-left: 0;
+        }
+
+        .content-container {
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .content-header {
+            margin-bottom: 2rem;
+        }
+
+        .content-header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .content-header p {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+        }
+
+        .tab {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: var(--transition);
+            border-bottom: 2px solid transparent;
+        }
+
+        .tab:hover {
+            color: var(--text-primary);
+        }
+
+        .tab.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Cards Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.5rem 1.5rem 0;
+        }
+
+        .card-header h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .card-header i {
+            width: 20px;
+            height: 20px;
+            color: var(--primary-color);
+        }
+
+        .card-content {
+            padding: 1rem 1.5rem 1.5rem;
+        }
+
+        .card-content p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Botones */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #5856eb;
+        }
+
+        .btn-secondary {
+            background-color: var(--surface-color);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--hover-color);
+        }
+
+        .btn-danger {
+            background-color: #ef4444;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #dc2626;
+        }
+
+        .btn-success {
+            background-color: #10b981;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background-color: #059669;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Formularios */
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            background-color: var(--surface-color);
+            color: var(--text-primary);
+            font-size: 0.875rem;
+            transition: var(--transition);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .form-input::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            background-color: var(--surface-color);
+            color: var(--text-primary);
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .form-select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .form-textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            background-color: var(--surface-color);
+            color: var(--text-primary);
+            font-size: 0.875rem;
+            resize: vertical;
+            min-height: 100px;
+            transition: var(--transition);
+        }
+
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .form-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-checkbox input {
+            width: 1rem;
+            height: 1rem;
+            accent-color: var(--primary-color);
+        }
+
+        /* Tablas */
+        .table-container {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table th,
+        .table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .table th {
+            background-color: var(--background-color);
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.875rem;
+        }
+
+        .table td {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .table tbody tr:hover {
+            background-color: var(--hover-color);
+        }
+
+        .table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .status-active {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: #059669;
+        }
+
+        .status-inactive {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: #dc2626;
+        }
+
+        .status-pending {
+            background-color: rgba(245, 158, 11, 0.1);
+            color: #d97706;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .content-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .navbar {
+                left: 0;
+            }
+
+            .navbar.mobile {
+                left: 0;
+            }
+
+            .navbar-center {
+                margin: 0 1rem;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .content-container {
+                padding: 1rem;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .content-header h1 {
+                font-size: 1.5rem;
+            }
+
+            .content-header p {
+                font-size: 1rem;
+            }
+
+            .btn-group {
+                flex-wrap: wrap;
+            }
+
+            .table-container {
+                overflow-x: auto;
+            }
+
+            .table {
+                min-width: 600px;
+            }
+
+            .tabs {
+                overflow-x: auto;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+            }
+
+            .tabs::-webkit-scrollbar {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 0 0.5rem;
+            }
+
+            .navbar-center {
+                margin: 0 0.5rem;
+            }
+
+            .search-input {
+                font-size: 16px; /* Previene zoom en iOS */
+            }
+
+            .sidebar {
+                width: 100%;
+                max-width: 320px;
+            }
+
+            .content-container {
+                padding: 0.5rem;
+            }
+
+            .card-header,
+            .card-content {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .btn-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                justify-content: center;
+            }
+        }
+
+        /* Animaciones */
+        @keyframes slideIn {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .sidebar.active {
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .settings-panel.active {
+            animation: fadeIn 0.2s ease-out;
+        }
+
+        /* Scrollbar personalizado */
+        .sidebar-nav::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .sidebar-nav::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .sidebar-nav::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 2px;
+        }
+
+        .sidebar-nav::-webkit-scrollbar-thumb:hover {
+            background: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+    <!-- Overlay para móvil -->
+    <div class="overlay" id="overlay"></div>
+    
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <i data-feather="layers"></i>
+                <span>Dashboard</span>
+            </div>
+        </div>
+
+        <div class="sidebar-search">
+            <div class="search-container">
+                <i data-feather="search"></i>
+                <input type="text" placeholder="Buscar..." class="search-input">
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <!-- Categoría General -->
+            <div class="nav-section">
+                <div class="nav-section-title">General</div>
+                <ul class="nav-list">
+                    <li class="nav-item active">
+                        <a href="#" class="nav-link" data-tab="dashboard">
+                            <div class="nav-link-content">
+                                <i data-feather="home"></i>
+                                <span>Dashboard</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-tab="analytics">
+                            <div class="nav-link-content">
+                                <i data-feather="bar-chart-2"></i>
+                                <span>Analytics</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-tab="reports">
+                            <div class="nav-link-content">
+                                <i data-feather="file-text"></i>
+                                <span>Reports</span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Categoría Admin -->
+            <div class="nav-section">
+                <div class="nav-section-title">Admin</div>
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <button class="nav-link dropdown-toggle" data-target="users-submenu">
+                            <div class="nav-link-content">
+                                <i data-feather="users"></i>
+                                <span>Users</span>
+                            </div>
+                            <i data-feather="chevron-down" class="dropdown-icon"></i>
+                        </button>
+                        <ul class="nav-submenu" id="users-submenu">
+                            <li class="nav-subitem">
+                                <a href="#" class="nav-sublink" data-tab="users">
+                                    <i data-feather="user"></i>
+                                    <span>All Users</span>
+                                </a>
+                            </li>
+                            <li class="nav-subitem">
+                                <a href="#" class="nav-sublink" data-tab="roles">
+                                    <i data-feather="shield"></i>
+                                    <span>Roles</span>
+                                </a>
+                            </li>
+                            <li class="nav-subitem">
+                                <a href="#" class="nav-sublink" data-tab="permissions">
+                                    <i data-feather="key"></i>
+                                    <span>Permissions</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-tab="settings">
+                            <div class="nav-link-content">
+                                <i data-feather="settings"></i>
+                                <span>Settings</span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Categoría Content -->
+            <div class="nav-section">
+                <div class="nav-section-title">Content</div>
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-tab="posts">
+                            <div class="nav-link-content">
+                                <i data-feather="edit"></i>
+                                <span>Posts</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-tab="media">
+                            <div class="nav-link-content">
+                                <i data-feather="image"></i>
+                                <span>Media</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-tab="comments">
+                            <div class="nav-link-content">
+                                <i data-feather="message-circle"></i>
+                                <span>Comments</span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Categoría E-commerce -->
+            <div class="nav-section">
+                <div class="nav-section-title">E-commerce</div>
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-tab="products">
+                            <div class="nav-link-content">
+                                <i data-feather="package"></i>
+                                <span>Products</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-tab="orders">
+                            <div class="nav-link-content">
+                                <i data-feather="shopping-cart"></i>
+                                <span>Orders</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-tab="customers">
+                            <div class="nav-link-content">
+                                <i data-feather="user-check"></i>
+                                <span>Customers</span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Settings en la parte inferior -->
+        <div class="sidebar-footer">
+            <button class="settings-toggle" id="settingsToggle">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i data-feather="user"></i>
+                    </div>
+                    <div class="user-details">
+                        <span class="user-name">John Doe</span>
+                        <span class="user-role">Administrator</span>
+                    </div>
+                </div>
+                <i data-feather="settings" class="settings-icon"></i>
+            </button>
+            
+            <!-- Panel de configuración -->
+            <div class="settings-panel" id="settingsPanel">
+                <div class="settings-item">
+                    <i data-feather="user"></i>
+                    <span>Perfil</span>
+                </div>
+                <div class="settings-item">
+                    <i data-feather="settings"></i>
+                    <span>Configuración</span>
+                </div>
+                <div class="settings-item">
+                    <i data-feather="help-circle"></i>
+                    <span>Ayuda</span>
+                </div>
+                <div class="settings-item">
+                    <i data-feather="log-out"></i>
+                    <span>Cerrar Sesión</span>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="navbar-left">
+            <button class="menu-toggle" id="menuToggle">
+                <i data-feather="menu"></i>
+            </button>
+        </div>
+        
+        <div class="navbar-center">
+            <div class="search-container">
+                <i data-feather="search"></i>
+                <input type="text" placeholder="Buscar..." class="search-input">
+            </div>
+        </div>
+        
+        <div class="navbar-right">
+            <button class="theme-toggle" id="themeToggle">
+                <i data-feather="sun" id="themeIcon"></i>
+            </button>
+            <button class="nav-icon">
+                <i data-feather="bell"></i>
+                <span class="notification-badge">3</span>
+            </button>
+            <button class="nav-icon">
+                <i data-feather="settings"></i>
+            </button>
+            <button class="nav-icon">
+                <i data-feather="user"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Contenido Principal -->
+    <main class="main-content" id="mainContent">
+        <div class="content-container">
+            <!-- Dashboard Tab -->
+            <div class="tab-content active" id="dashboard">
+                <header class="content-header">
+                    <h1>Dashboard</h1>
+                    <p>Bienvenido a tu panel de control</p>
+                </header>
+                
+                <div class="content-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Usuarios Totales</h3>
+                            <i data-feather="users"></i>
+                        </div>
+                        <div class="card-content">
+                            <p style="font-size: 2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.5rem;">1,234</p>
+                            <p>+12% desde el mes pasado</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Ventas</h3>
+                            <i data-feather="trending-up"></i>
+                        </div>
+                        <div class="card-content">
+                            <p style="font-size: 2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.5rem;">$45,678</p>
+                            <p>+8% desde el mes pasado</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Pedidos</h3>
+                            <i data-feather="shopping-cart"></i>
+                        </div>
+                        <div class="card-content">
+                            <p style="font-size: 2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.5rem;">567</p>
+                            <p>+15% desde el mes pasado</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Conversión</h3>
+                            <i data-feather="target"></i>
+                        </div>
+                        <div class="card-content">
+                            <p style="font-size: 2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.5rem;">3.2%</p>
+                            <p>+0.5% desde el mes pasado</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn btn-primary">
+                        <i data-feather="plus"></i>
+                        Nuevo Usuario
+                    </button>
+                    <button class="btn btn-secondary">
+                        <i data-feather="download"></i>
+                        Exportar
+                    </button>
+                    <button class="btn btn-success">
+                        <i data-feather="check"></i>
+                        Aprobar
+                    </button>
+                    <button class="btn btn-danger">
+                        <i data-feather="trash-2"></i>
+                        Eliminar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Users Tab -->
+            <div class="tab-content" id="users">
+                <header class="content-header">
+                    <h1>Gestión de Usuarios</h1>
+                    <p>Administra todos los usuarios del sistema</p>
+                </header>
+
+                <div class="btn-group">
+                    <button class="btn btn-primary">
+                        <i data-feather="user-plus"></i>
+                        Agregar Usuario
+                    </button>
+                    <button class="btn btn-secondary">
+                        <i data-feather="filter"></i>
+                        Filtrar
+                    </button>
+                    <button class="btn btn-secondary">
+                        <i data-feather="download"></i>
+                        Exportar CSV
+                    </button>
+                </div>
+
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Usuario</th>
+                                <th>Email</th>
+                                <th>Rol</th>
+                                <th>Estado</th>
+                                <th>Último Acceso</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                        <div style="width: 2rem; height: 2rem; background: var(--primary-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem;">JD</div>
+                                        <span>John Doe</span>
+                                    </div>
+                                </td>
+                                <td>john@example.com</td>
+                                <td>Administrator</td>
+                                <td><span class="status-badge status-active">Activo</span></td>
+                                <td>Hace 2 horas</td>
+                                <td>
+                                    <div style="display: flex; gap: 0.5rem;">
+                                        <button class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">
+                                            <i data-feather="edit-2" style="width: 14px; height: 14px;"></i>
+                                        </button>
+                                        <button class="btn btn-danger" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">
+                                            <i data-feather="trash-2" style="width: 14px; height: 14px;"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                        <div style="width: 2rem; height: 2rem; background: var(--secondary-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem;">JS</div>
+                                        <span>Jane Smith</span>
+                                    </div>
+                                </td>
+                                <td>jane@example.com</td>
+                                <td>Editor</td>
+                                <td><span class="status-badge status-active">Activo</span></td>
+                                <td>Hace 1 día</td>
+                                <td>
+                                    <div style="display: flex; gap: 0.5rem;">
+                                        <button class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">
+                                            <i data-feather="edit-2" style="width: 14px; height: 14px;"></i>
+                                        </button>
+                                        <button class="btn btn-danger" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">
+                                            <i data-feather="trash-2" style="width: 14px; height: 14px;"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                        <div style="width: 2rem; height: 2rem; background: #10b981; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem;">MB</div>
+                                        <span>Mike Brown</span>
+                                    </div>
+                                </td>
+                                <td>mike@example.com</td>
+                                <td>User</td>
+                                <td><span class="status-badge status-pending">Pendiente</span></td>
+                                <td>Hace 3 días</td>
+                                <td>
+                                    <div style="display: flex; gap: 0.5rem;">
+                                        <button class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">
+                                            <i data-feather="edit-2" style="width: 14px; height: 14px;"></i>
+                                        </button>
+                                        <button class="btn btn-danger" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">
+                                            <i data-feather="trash-2" style="width: 14px; height: 14px;"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                        <div style="width: 2rem; height: 2rem; background: #ef4444; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem;">SW</div>
+                                        <span>Sarah Wilson</span>
+                                    </div>
+                                </td>
+                                <td>sarah@example.com</td>
+                                <td>User</td>
+                                <td><span class="status-badge status-inactive">Inactivo</span></td>
+                                <td>Hace 1 semana</td>
+                                <td>
+                                    <div style="display: flex; gap: 0.5rem;">
+                                        <button class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">
+                                            <i data-feather="edit-2" style="width: 14px; height: 14px;"></i>
+                                        </button>
+                                        <button class="btn btn-danger" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">
+                                            <i data-feather="trash-2" style="width: 14px; height: 14px;"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Settings Tab -->
+            <div class="tab-content" id="settings">
+                <header class="content-header">
+                    <h1>Configuración</h1>
+                    <p>Ajusta las configuraciones del sistema</p>
+                </header>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Configuración General</h3>
+                            <i data-feather="settings"></i>
+                        </div>
+                        <div class="card-content">
+                            <form>
+                                <div class="form-group">
+                                    <label class="form-label">Nombre del Sitio</label>
+                                    <input type="text" class="form-input" value="Mi Dashboard" placeholder="Ingresa el nombre del sitio">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Descripción</label>
+                                    <textarea class="form-textarea" placeholder="Descripción del sitio">Un dashboard moderno y minimalista</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Idioma</label>
+                                    <select class="form-select">
+                                        <option value="es">Español</option>
+                                        <option value="en">English</option>
+                                        <option value="fr">Français</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-checkbox">
+                                        <input type="checkbox" id="notifications" checked>
+                                        <label for="notifications">Habilitar notificaciones</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-checkbox">
+                                        <input type="checkbox" id="analytics">
+                                        <label for="analytics">Habilitar analytics</label>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">
+                                    <i data-feather="save"></i>
+                                    Guardar Cambios
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Configuración de Usuario</h3>
+                            <i data-feather="user"></i>
+                        </div>
+                        <div class="card-content">
+                            <form>
+                                <div class="form-group">
+                                    <label class="form-label">Nombre Completo</label>
+                                    <input type="text" class="form-input" value="John Doe" placeholder="Tu nombre completo">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Email</label>
+                                    <input type="email" class="form-input" value="john@example.com" placeholder="tu@email.com">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Rol</label>
+                                    <select class="form-select">
+                                        <option value="admin">Administrator</option>
+                                        <option value="editor">Editor</option>
+                                        <option value="user">User</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Nueva Contraseña</label>
+                                    <input type="password" class="form-input" placeholder="Dejar en blanco para mantener actual">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Confirmar Contraseña</label>
+                                    <input type="password" class="form-input" placeholder="Confirmar nueva contraseña">
+                                </div>
+                                <button type="submit" class="btn btn-primary">
+                                    <i data-feather="save"></i>
+                                    Actualizar Perfil
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analytics Tab -->
+            <div class="tab-content" id="analytics">
+                <header class="content-header">
+                    <h1>Analytics</h1>
+                    <p>Estadísticas y métricas del sistema</p>
+                </header>
+                
+                <div class="content-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Visitantes Únicos</h3>
+                            <i data-feather="eye"></i>
+                        </div>
+                        <div class="card-content">
+                            <p style="font-size: 2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.5rem;">8,432</p>
+                            <p>+18% desde la semana pasada</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Páginas Vistas</h3>
+                            <i data-feather="file-text"></i>
+                        </div>
+                        <div class="card-content">
+                            <p style="font-size: 2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.5rem;">24,567</p>
+                            <p>+22% desde la semana pasada</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Tiempo Promedio</h3>
+                            <i data-feather="clock"></i>
+                        </div>
+                        <div class="card-content">
+                            <p style="font-size: 2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.5rem;">3:24</p>
+                            <p>+5% desde la semana pasada</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Tasa de Rebote</h3>
+                            <i data-feather="trending-down"></i>
+                        </div>
+                        <div class="card-content">
+                            <p style="font-size: 2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.5rem;">42%</p>
+                            <p>-3% desde la semana pasada</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Products Tab -->
+            </div>
+
+            <div class="tab-content" id="products">
+                <header class="content-header">
+                    <h1>Productos</h1>
+                    <p>Gestiona tu catálogo de productos</p>
+                </header>
+
+                <div class="btn-group">
+                    <button class="btn btn-primary">
+                        <i data-feather="plus"></i>
+                        Nuevo Producto
+                    </button>
+                    <button class="btn btn-secondary">
+                        <i data-feather="upload"></i>
+                        Importar
+                    </button>
+                    <button class="btn btn-secondary">
+                        <i data-feather="download"></i>
+                        Exportar
+                    </button>
+                </div>
+
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>SKU</th>
+                                <th>Categoría</th>
+                                <th>Precio</th>
+                                <th>Stock</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                        <div style="width: 2rem; height: 2rem; background: var(--background-color); border: 1px solid var(--border-color); border-radius: 0.25rem; display: flex; align-items: center; justify-content: center;">
+                                            <i data-feather="package" style="width: 16px; height: 16px; color: var(--text-secondary);"></i>
+                                        </div>
+                                        <span>Laptop Gaming</span>
+                                    </div>
+                                </td>
+                                <td>LPT-001</td>
+                                <td>Electrónicos</td>
+                                <td>$1,299.99</td>
+                                <td>15</td>
+                                <td><span class="status-badge status-active">Activo</span></td>
+                                <td>
+                                    <div style="display: flex; gap: 0.5rem;">
+                                        <button class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">
+                                            <i data-feather="edit-2" style="width: 14px; height: 14px;"></i>
+                                        </button>
+                                        <button class="btn btn-danger" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">
+                                            <i data-feather="trash-2" style="width: 14px; height: 14px;"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                        <div style="width: 2rem; height: 2rem; background: var(--background-color); border: 1px solid var(--border-color); border-radius: 0.25rem; display: flex; align-items: center; justify-content: center;">
+                                            <i data-feather="smartphone" style="width: 16px; height: 16px; color: var(--text-secondary);"></i>
+                                        </div>
+                                        <span>iPhone 15 Pro</span>
+                                    </div>
+                                </td>
+                                <td>IPH-015</td>
+                                <td>Móviles</td>
+                                <td>$999.99</td>
+                                <td>8</td>
+                                <td><span class="status-badge status-active">Activo</span></td>
+                                <td>
+                                    <div style="display: flex; gap: 0.5rem;">
+                                        <button class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">
+                                            <i data-feather="edit-2" style="width: 14px; height: 14px;"></i>
+                                        </button>
+                                        <button class="btn btn-danger" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">
+                                            <i data-feather="trash-2" style="width: 14px; height: 14px;"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                        <div style="width: 2rem; height: 2rem; background: var(--background-color); border: 1px solid var(--border-color); border-radius: 0.25rem; display: flex; align-items: center; justify-content: center;">
+                                            <i data-feather="headphones" style="width: 16px; height: 16px; color: var(--text-secondary);"></i>
+                                        </div>
+                                        <span>Auriculares Bluetooth</span>
+                                    </div>
+                                </td>
+                                <td>AUR-003</td>
+                                <td>Audio</td>
+                                <td>$199.99</td>
+                                <td>0</td>
+                                <td><span class="status-badge status-inactive">Sin Stock</span></td>
+                                <td>
+                                    <div style="display: flex; gap: 0.5rem;">
+                                        <button class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">
+                                            <i data-feather="edit-2" style="width: 14px; height: 14px;"></i>
+                                        </button>
+                                        <button class="btn btn-danger" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">
+                                            <i data-feather="trash-2" style="width: 14px; height: 14px;"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Otros tabs similares para roles, permissions, etc. -->
+            <div class="tab-content" id="roles">
+                <header class="content-header">
+                    <h1>Roles</h1>
+                    <p>Gestiona los roles del sistema</p>
+                </header>
+                <div class="card">
+                    <div class="card-content">
+                        <p>Contenido de roles en desarrollo...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="permissions">
+                <header class="content-header">
+                    <h1>Permisos</h1>
+                    <p>Configura los permisos del sistema</p>
+                </header>
+                <div class="card">
+                    <div class="card-content">
+                        <p>Contenido de permisos en desarrollo...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="reports">
+                <header class="content-header">
+                    <h1>Reportes</h1>
+                    <p>Genera y visualiza reportes</p>
+                </header>
+                <div class="card">
+                    <div class="card-content">
+                        <p>Contenido de reportes en desarrollo...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="posts">
+                <header class="content-header">
+                    <h1>Posts</h1>
+                    <p>Gestiona el contenido del blog</p>
+                </header>
+                <div class="card">
+                    <div class="card-content">
+                        <p>Contenido de posts en desarrollo...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="media">
+                <header class="content-header">
+                    <h1>Media</h1>
+                    <p>Gestiona archivos multimedia</p>
+                </header>
+                <div class="card">
+                    <div class="card-content">
+                        <p>Contenido de media en desarrollo...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="comments">
+                <header class="content-header">
+                    <h1>Comentarios</h1>
+                    <p>Modera los comentarios</p>
+                </header>
+                <div class="card">
+                    <div class="card-content">
+                        <p>Contenido de comentarios en desarrollo...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="orders">
+                <header class="content-header">
+                    <h1>Pedidos</h1>
+                    <p>Gestiona los pedidos de clientes</p>
+                </header>
+                <div class="card">
+                    <div class="card-content">
+                        <p>Contenido de pedidos en desarrollo...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="customers">
+                <header class="content-header">
+                    <h1>Clientes</h1>
+                    <p>Administra la base de clientes</p>
+                </header>
+                <div class="card">
+                    <div class="card-content">
+                        <p>Contenido de clientes en desarrollo...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Inicializar Feather Icons
+        document.addEventListener("DOMContentLoaded", () => {
+            feather.replace()
+            initializeDashboard()
+        })
+
+        function initializeDashboard() {
+            // Elementos del DOM
+            const menuToggle = document.getElementById("menuToggle")
+            const sidebar = document.getElementById("sidebar")
+            const navbar = document.getElementById("navbar")
+            const mainContent = document.getElementById("mainContent")
+            const overlay = document.getElementById("overlay")
+            const settingsToggle = document.getElementById("settingsToggle")
+            const settingsPanel = document.getElementById("settingsPanel")
+            const themeToggle = document.getElementById("themeToggle")
+            const themeIcon = document.getElementById("themeIcon")
+            const dropdownToggles = document.querySelectorAll(".dropdown-toggle")
+
+            // Detectar si es móvil
+            function isMobile() {
+                return window.innerWidth <= 768
+            }
+
+            // Actualizar layout según el tamaño de pantalla
+            function updateLayout() {
+                if (isMobile()) {
+                    sidebar.classList.add("mobile-hidden")
+                    navbar.classList.add("mobile")
+                    mainContent.classList.add("mobile")
+                    menuToggle.style.display = "block"
+                } else {
+                    sidebar.classList.remove("mobile-hidden", "active")
+                    navbar.classList.remove("mobile")
+                    mainContent.classList.remove("mobile")
+                    overlay.classList.remove("active")
+                    menuToggle.style.display = "none"
+                    document.body.style.overflow = ""
+                }
+            }
+
+            // Inicializar layout
+            updateLayout()
+
+            // Toggle del sidebar en móvil
+            menuToggle.addEventListener("click", () => {
+                toggleSidebar()
+            })
+
+            // Cerrar sidebar al hacer clic en overlay
+            overlay.addEventListener("click", () => {
+                closeSidebar()
+            })
+
+            // Cerrar sidebar al presionar Escape
+            document.addEventListener("keydown", (e) => {
+                if (e.key === "Escape") {
+                    closeSidebar()
+                    closeSettingsPanel()
+                }
+            })
+
+            // Toggle del panel de configuración
+            settingsToggle.addEventListener("click", (e) => {
+                e.stopPropagation()
+                toggleSettingsPanel()
+            })
+
+            // Cerrar panel de configuración al hacer clic fuera
+            document.addEventListener("click", (e) => {
+                if (!settingsPanel.contains(e.target) && !settingsToggle.contains(e.target)) {
+                    closeSettingsPanel()
+                }
+            })
+
+            // Toggle de tema
+            themeToggle.addEventListener("click", () => {
+                toggleTheme()
+            })
+
+            // Manejar dropdowns del menú
+            dropdownToggles.forEach((toggle) => {
+                toggle.addEventListener("click", function (e) {
+                    e.preventDefault()
+                    toggleDropdown(this)
+                })
+            })
+
+            // Manejar navegación por tabs
+            const navLinks = document.querySelectorAll(".nav-link[data-tab], .nav-sublink[data-tab]")
+            navLinks.forEach((link) => {
+                link.addEventListener("click", function (e) {
+                    e.preventDefault()
+                    const tabId = this.getAttribute("data-tab")
+                    if (tabId) {
+                        showTab(tabId)
+                        
+                        // Actualizar navegación activa
+                        document.querySelectorAll(".nav-item").forEach((item) => {
+                            item.classList.remove("active")
+                        })
+                        document.querySelectorAll(".nav-sublink").forEach((sublink) => {
+                            sublink.classList.remove("active")
+                        })
+
+                        if (this.classList.contains("nav-sublink")) {
+                            this.classList.add("active")
+                        } else {
+                            this.closest(".nav-item").classList.add("active")
+                        }
+
+                        // Cerrar sidebar en móvil después de seleccionar
+                        if (isMobile()) {
+                            closeSidebar()
+                        }
+                    }
+                })
+            })
+
+            // Responsive: actualizar layout al cambiar tamaño de ventana
+            window.addEventListener("resize", () => {
+                updateLayout()
+            })
+
+            // Cargar tema guardado
+            loadTheme()
+        }
+
+        // Funciones del sidebar
+        function toggleSidebar() {
+            const sidebar = document.getElementById("sidebar")
+            const overlay = document.getElementById("overlay")
+
+            if (sidebar.classList.contains("active")) {
+                closeSidebar()
+            } else {
+                openSidebar()
+            }
+        }
+
+        function openSidebar() {
+            const sidebar = document.getElementById("sidebar")
+            const overlay = document.getElementById("overlay")
+
+            sidebar.classList.add("active")
+            sidebar.classList.remove("mobile-hidden")
+            overlay.classList.add("active")
+            document.body.style.overflow = "hidden"
+        }
+
+        function closeSidebar() {
+            const sidebar = document.getElementById("sidebar")
+            const overlay = document.getElementById("overlay")
+
+            sidebar.classList.remove("active")
+            if (window.innerWidth <= 768) {
+                sidebar.classList.add("mobile-hidden")
+            }
+            overlay.classList.remove("active")
+            document.body.style.overflow = ""
+        }
+
+        // Funciones del panel de configuración
+        function toggleSettingsPanel() {
+            const settingsPanel = document.getElementById("settingsPanel")
+
+            if (settingsPanel.classList.contains("active")) {
+                closeSettingsPanel()
+            } else {
+                openSettingsPanel()
+            }
+        }
+
+        function openSettingsPanel() {
+            const settingsPanel = document.getElementById("settingsPanel")
+            settingsPanel.classList.add("active")
+        }
+
+        function closeSettingsPanel() {
+            const settingsPanel = document.getElementById("settingsPanel")
+            settingsPanel.classList.remove("active")
+        }
+
+        // Funciones de dropdown
+        function toggleDropdown(toggleElement) {
+            const targetId = toggleElement.getAttribute("data-target")
+            const submenu = document.getElementById(targetId)
+            const isActive = submenu.classList.contains("active")
+
+            // Cerrar todos los dropdowns
+            document.querySelectorAll(".nav-submenu").forEach((menu) => {
+                menu.classList.remove("active")
+            })
+
+            document.querySelectorAll(".dropdown-toggle").forEach((toggle) => {
+                toggle.classList.remove("active")
+            })
+
+            // Abrir el dropdown seleccionado si no estaba activo
+            if (!isActive) {
+                submenu.classList.add("active")
+                toggleElement.classList.add("active")
+            }
+        }
+
+        // Funciones de tema
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute("data-theme")
+            const newTheme = currentTheme === "dark" ? "light" : "dark"
+            
+            document.documentElement.setAttribute("data-theme", newTheme)
+            updateThemeIcon(newTheme)
+            saveTheme(newTheme)
+        }
+
+        function updateThemeIcon(theme) {
+            const themeIcon = document.getElementById("themeIcon")
+            if (theme === "dark") {
+                themeIcon.setAttribute("data-feather", "moon")
+            } else {
+                themeIcon.setAttribute("data-feather", "sun")
+            }
+            feather.replace()
+        }
+
+        function saveTheme(theme) {
+            localStorage.setItem("dashboard-theme", theme)
+        }
+
+        function loadTheme() {
+            const savedTheme = localStorage.getItem("dashboard-theme") || "light"
+            document.documentElement.setAttribute("data-theme", savedTheme)
+            updateThemeIcon(savedTheme)
+        }
+
+        // Funciones de navegación por tabs
+        function showTab(tabId) {
+            // Ocultar todos los contenidos de tabs
+            document.querySelectorAll(".tab-content").forEach((content) => {
+                content.classList.remove("active")
+            })
+
+            // Mostrar el tab seleccionado
+            const targetTab = document.getElementById(tabId)
+            if (targetTab) {
+                targetTab.classList.add("active")
+            }
+        }
+
+        // Funciones de utilidad
+        function debounce(func, wait) {
+            let timeout
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout)
+                    func(...args)
+                }
+                clearTimeout(timeout)
+                timeout = setTimeout(later, wait)
+            }
+        }
+
+        // Manejar búsqueda
+        const searchInputs = document.querySelectorAll(".search-input")
+        searchInputs.forEach((input) => {
+            input.addEventListener(
+                "input",
+                debounce((e) => {
+                    const query = e.target.value.toLowerCase()
+                    console.log("Buscando:", query)
+                    // Aquí puedes implementar la lógica de búsqueda
+                }, 300),
+            )
+        })
+
+        // Manejar notificaciones
+        const notificationButtons = document.querySelectorAll(".nav-icon")
+        notificationButtons.forEach((button) => {
+            if (button.querySelector('[data-feather="bell"]')) {
+                button.addEventListener("click", () => {
+                    console.log("Mostrar notificaciones")
+                    // Aquí puedes implementar la lógica de notificaciones
+                })
+            }
+        })
+
+        // Manejar formularios
+        const forms = document.querySelectorAll("form")
+        forms.forEach((form) => {
+            form.addEventListener("submit", (e) => {
+                e.preventDefault()
+                console.log("Formulario enviado")
+                // Aquí puedes implementar la lógica de envío de formularios
+            })
+        })
+    </script>
+</body>
+</html>

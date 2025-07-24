@@ -1,625 +1,711 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEOSITIO - Transformamos ideas en realidad digital</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<style>
-    * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    background: linear-gradient(135deg, #1a1f36 0%, #2d3561 100%);
-    color: white;
-    min-height: 100vh;
-    overflow-x: hidden;
-}
-
-/* Navigation Styles */
-.navbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background: rgba(26, 31, 54, 0.95);
-    backdrop-filter: blur(10px);
-    z-index: 1000;
-    padding: 1rem 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.nav-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.nav-logo {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 1.25rem;
-    font-weight: bold;
-}
-
-.logo-icon {
-    color: #4f9cf9;
-    font-size: 1.5rem;
-}
-
-.nav-menu {
-    display: flex;
-    list-style: none;
-    gap: 2rem;
-}
-
-.nav-link {
-    color: rgba(255, 255, 255, 0.8);
-    text-decoration: none;
-    transition: color 0.3s ease;
-    font-weight: 500;
-}
-
-.nav-link:hover {
-    color: #4f9cf9;
-}
-
-.nav-buttons {
-    display: flex;
-    gap: 1rem;
-}
-
-.btn-secondary {
-    background: transparent;
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-weight: 500;
-}
-
-.btn-secondary:hover {
-    border-color: #4f9cf9;
-    color: #4f9cf9;
-}
-
-.btn-primary {
-    background: #4f9cf9;
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-    font-weight: 500;
-}
-
-.btn-primary:hover {
-    background: #3b82f6;
-}
-
-/* Hamburger Menu */
-.hamburger {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-    gap: 4px;
-}
-
-.bar {
-    width: 25px;
-    height: 3px;
-    background: white;
-    transition: 0.3s;
-    border-radius: 2px;
-}
-
-.hamburger.active .bar:nth-child(1) {
-    transform: rotate(-45deg) translate(-5px, 6px);
-}
-
-.hamburger.active .bar:nth-child(2) {
-    opacity: 0;
-}
-
-.hamburger.active .bar:nth-child(3) {
-    transform: rotate(45deg) translate(-5px, -6px);
-}
-
-/* Sidebar */
-.sidebar-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 1998;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-}
-
-.sidebar-overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-.sidebar {
-    position: fixed;
-    top: 0;
-    right: -300px;
-    width: 300px;
-    height: 100%;
-    background: #1a1f36;
-    z-index: 1999;
-    transition: right 0.3s ease;
-    padding: 2rem;
-    border-left: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.sidebar.active {
-    right: 0;
-}
-
-.sidebar-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
-}
-
-.sidebar-logo {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 1.25rem;
-    font-weight: bold;
-}
-
-.sidebar-close {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 2rem;
-    cursor: pointer;
-    padding: 0;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.sidebar-menu {
-    list-style: none;
-    margin-bottom: 2rem;
-}
-
-.sidebar-menu li {
-    margin-bottom: 1rem;
-}
-
-.sidebar-link {
-    color: rgba(255, 255, 255, 0.8);
-    text-decoration: none;
-    font-size: 1.1rem;
-    display: block;
-    padding: 0.5rem 0;
-    transition: color 0.3s ease;
-}
-
-.sidebar-link:hover {
-    color: #4f9cf9;
-}
-
-.sidebar-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-/* Main Content */
-.main-content {
-    margin-top: 80px;
-    min-height: calc(100vh - 80px);
-    display: flex;
-    align-items: center;
-}
-
-.hero {
-    width: 100%;
-    padding: 4rem 0;
-}
-
-.hero-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-    text-align: center;
-}
-
-.hero-title {
-    font-size: 3.5rem;
-    font-weight: 700;
-    line-height: 1.2;
-    margin-bottom: 1.5rem;
-}
-
-.hero-highlight {
-    color: #4f9cf9;
-}
-
-.hero-description {
-    font-size: 1.2rem;
-    color: rgba(255, 255, 255, 0.8);
-    max-width: 600px;
-    margin: 0 auto 3rem;
-    line-height: 1.6;
-}
-
-/* Contact Form */
-.contact-form {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    padding: 2rem;
-    max-width: 500px;
-    margin: 0 auto;
-    backdrop-filter: blur(10px);
-}
-
-.form-title {
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-    color: rgba(255, 255, 255, 0.9);
-}
-
-.form-row {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 1rem;
-}
-
-.form-input {
-    flex: 1;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 6px;
-    padding: 0.75rem;
-    color: white;
-    font-size: 1rem;
-}
-
-.form-input::placeholder {
-    color: rgba(255, 255, 255, 0.5);
-}
-
-.form-input:focus {
-    outline: none;
-    border-color: #4f9cf9;
-    background: rgba(255, 255, 255, 0.15);
-}
-
-.btn-whatsapp {
-    width: 100%;
-    background: #4f9cf9;
-    color: white;
-    border: none;
-    padding: 0.75rem;
-    border-radius: 6px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-.btn-whatsapp:hover {
-    background: #3b82f6;
-}
-
-/* Chat Button */
-.chat-button {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    width: 60px;
-    height: 60px;
-    background: #4f9cf9;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 4px 20px rgba(79, 156, 249, 0.3);
-    transition: all 0.3s ease;
-    z-index: 100;
-}
-
-.chat-button:hover {
-    transform: scale(1.1);
-    box-shadow: 0 6px 25px rgba(79, 156, 249, 0.4);
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .nav-menu,
-    .nav-buttons {
-        display: none;
-    }
-
-    .hamburger {
-        display: flex;
-    }
-
-    .nav-container {
-        padding: 0 1rem;
-    }
-
-    .hero-container {
-        padding: 0 1rem;
-    }
-
-    .hero-title {
-        font-size: 2.5rem;
-    }
-
-    .hero-description {
-        font-size: 1.1rem;
-    }
-
-    .contact-form {
-        padding: 1.5rem;
-        margin: 0 1rem;
-    }
-
-    .form-row {
-        flex-direction: column;
-        gap: 0.75rem;
-    }
-
-    .chat-button {
-        bottom: 1rem;
-        right: 1rem;
-        width: 50px;
-        height: 50px;
-    }
-}
-
-@media (max-width: 480px) {
-    .hero-title {
-        font-size: 2rem;
-    }
-
-    .hero-description {
-        font-size: 1rem;
-    }
-
-    .contact-form {
-        padding: 1rem;
-    }
-
-    .sidebar {
-        width: 280px;
-        right: -280px;
-    }
-}
-
-@media (min-width: 1400px) {
-    .hero-title {
-        font-size: 4rem;
-    }
-
-    .hero-description {
-        font-size: 1.3rem;
-    }
-}
-</style>
-<body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <!-- Logo -->
-            <div class="nav-logo">
-                <span class="logo-icon">◆</span>
-                <span class="logo-text">NEOSITIO</span>
-            </div>
-
-            <!-- Desktop Menu -->
-            <ul class="nav-menu">
-                <li class="nav-item">
-                    <a href="#servicios" class="nav-link">Servicios</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#tecnologias" class="nav-link">Tecnologías</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#proyectos" class="nav-link">Proyectos</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#precios" class="nav-link">Precios</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#contacto" class="nav-link">Contacto</a>
-                </li>
-            </ul>
-
-            <!-- Desktop Buttons -->
-            <div class="nav-buttons">
-                <button class="btn-secondary">Iniciar Sesión</button>
-                <button class="btn-primary">Comenzar</button>
-            </div>
-
-            <!-- Mobile Hamburger -->
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Mobile Sidebar -->
-    <div class="sidebar-overlay"></div>
-    <div class="sidebar">
-        <div class="sidebar-header">
-            <div class="sidebar-logo">
-                <span class="logo-icon">◆</span>
-                <span class="logo-text">NEOSITIO</span>
-            </div>
-            <button class="sidebar-close">&times;</button>
-        </div>
-        <ul class="sidebar-menu">
-            <li><a href="#servicios" class="sidebar-link">Servicios</a></li>
-            <li><a href="#tecnologias" class="sidebar-link">Tecnologías</a></li>
-            <li><a href="#proyectos" class="sidebar-link">Proyectos</a></li>
-            <li><a href="#precios" class="sidebar-link">Precios</a></li>
-            <li><a href="#contacto" class="sidebar-link">Contacto</a></li>
-        </ul>
-        <div class="sidebar-buttons">
-            <button class="btn-secondary">Iniciar Sesión</button>
-            <button class="btn-primary">Comenzar</button>
-        </div>
-    </div>
-
-    <!-- Main Content -->
-    <main class="main-content">
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="hero-container">
-                <h1 class="hero-title">
-                    Transformamos ideas en
-                    <span class="hero-highlight">realidad digital</span>
-                </h1>
-                <p class="hero-description">
-                    NEOSITIO te permite crear experiencias digitales extraordinarias que
-                    impulsan el crecimiento de tu negocio. Desde dominios hasta
-                    aplicaciones completas.
-                </p>
-
-                <!-- Contact Form -->
-                <div class="contact-form">
-                    <h3 class="form-title">Comienza tu proyecto ahora</h3>
-                    <form class="form">
-                        <div class="form-row">
-                            <input type="email" placeholder="tu@email.com" class="form-input" required>
-                            <input type="tel" placeholder="+504 9999 9999" class="form-input" required>
-                        </div>
-                        <button type="submit" class="btn-whatsapp">Contactar por WhatsApp</button>
-                    </form>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Chat Button -->
-    <div class="chat-button">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2C6.48 2 2 6.48 2 12C2 13.54 2.36 15.01 3.01 16.31L2 22L7.69 20.99C8.99 21.64 10.46 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" fill="currentColor"/>
-        </svg>
-    </div>
-
-    <script src="script.js"></script>
-</body>
-</html>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-    // Elements
-    const hamburger = document.querySelector('.hamburger');
-    const sidebar = document.querySelector('.sidebar');
-    const sidebarOverlay = document.querySelector('.sidebar-overlay');
-    const sidebarClose = document.querySelector('.sidebar-close');
-    const sidebarLinks = document.querySelectorAll('.sidebar-link');
-    const chatButton = document.querySelector('.chat-button');
-    const contactForm = document.querySelector('.form');
-
-    // Toggle sidebar
-    function toggleSidebar() {
-        hamburger.classList.toggle('active');
-        sidebar.classList.toggle('active');
-        sidebarOverlay.classList.toggle('active');
-        document.body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : '';
-    }
-
-    // Close sidebar
-    function closeSidebar() {
-        hamburger.classList.remove('active');
-        sidebar.classList.remove('active');
-        sidebarOverlay.classList.remove('active');
-        document.body.style.overflow = '';
-    }
-
-    // Event listeners
-    hamburger.addEventListener('click', toggleSidebar);
-    sidebarClose.addEventListener('click', closeSidebar);
-    sidebarOverlay.addEventListener('click', closeSidebar);
-
-    // Close sidebar when clicking on links
-    sidebarLinks.forEach(link => {
-        link.addEventListener('click', closeSidebar);
-    });
-
-    // Handle form submission
-    contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const email = e.target.querySelector('input[type="email"]').value;
-        const phone = e.target.querySelector('input[type="tel"]').value;
-        
-        // Create WhatsApp message
-        const message = `Hola! Me interesa conocer más sobre sus servicios. Mi email es: ${email} y mi teléfono: ${phone}`;
-        const whatsappUrl = `https://wa.me/50499999999?text=${encodeURIComponent(message)}`;
-        
-        // Open WhatsApp
-        window.open(whatsappUrl, '_blank');
-    });
-
-    // Chat button functionality
-    chatButton.addEventListener('click', function() {
-        const message = 'Hola! Me gustaría obtener más información sobre sus servicios.';
-        const whatsappUrl = `https://wa.me/50499999999?text=${encodeURIComponent(message)}`;
-        window.open(whatsappUrl, '_blank');
-    });
-
-    // Close sidebar on window resize
-    window.addEventListener('resize', function() {
-        if (window.innerWidth > 768) {
-            closeSidebar();
+    <title>Advanced Notification System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-    });
 
-    // Smooth scrolling for navigation links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        /* Notification Container - Centered bottom */
+        .notification-container {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            pointer-events: none;
+            width: 400px;
+            height: 300px;
+        }
+
+        /* Individual Notification */
+        .notification {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%) translateY(100%) scale(1);
+            background: #1a1a1a;
+            border: 1px solid #333;
+            color: white;
+            padding: 16px 20px;
+            border-radius: 12px;
+            box-shadow: 
+                0 8px 25px rgba(0, 0, 0, 0.5),
+                0 4px 10px rgba(0, 0, 0, 0.3);
+            width: 400px;
+            pointer-events: auto;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            opacity: 0;
+        }
+
+        /* Notification Types */
+        .notification.success {
+            background: #16a34a;
+            border-color: #15803d;
+        }
+
+        .notification.error {
+            background: #dc2626;
+            border-color: #b91c1c;
+        }
+
+        .notification.warning {
+            background: #d97706;
+            border-color: #b45309;
+        }
+
+        .notification.info {
+            background: #2563eb;
+            border-color: #1d4ed8;
+        }
+
+        /* Visible state - front notification */
+        .notification.show {
+            transform: translateX(-50%) translateY(0) scale(1);
+            opacity: 1;
+            z-index: 100;
+        }
+
+        /* Stacked notifications */
+        .notification.stacked-1 {
+            transform: translateX(-50%) translateY(-12px) scale(0.95);
+            opacity: 0.8;
+            z-index: 99;
+        }
+
+        .notification.stacked-2 {
+            transform: translateX(-50%) translateY(-24px) scale(0.9);
+            opacity: 0.6;
+            z-index: 98;
+        }
+
+        .notification.stacked-3 {
+            transform: translateX(-50%) translateY(-36px) scale(0.85);
+            opacity: 0.4;
+            z-index: 97;
+        }
+
+        .notification.stacked-4 {
+            transform: translateX(-50%) translateY(-48px) scale(0.8);
+            opacity: 0.2;
+            z-index: 96;
+        }
+
+        /* Exit animation */
+        .notification.exiting {
+            transform: translateX(-50%) translateY(100%) scale(0.9);
+            opacity: 0;
+        }
+
+        /* Notification Header */
+        .notification-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        .notification-icon {
+            font-size: 20px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .notification-icon.svg-icon {
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .notification-icon.svg-icon svg {
+            width: 12px;
+            height: 12px;
+            fill: white;
+        }
+
+        .notification-content {
+            flex: 1;
+        }
+
+        .notification-title {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            line-height: 1.3;
+        }
+
+        .notification-description {
+            font-size: 13px;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+
+        .notification-close {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 4px;
+            opacity: 0.6;
+            transition: opacity 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .notification-close:hover {
+            opacity: 1;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .notification-close svg {
+            width: 14px;
+            height: 14px;
+            fill: white;
+        }
+
+        /* Confirmation Buttons */
+        .notification-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+            justify-content: flex-end;
+        }
+
+        .notification-button {
+            padding: 6px 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .notification-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .notification-button.primary {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .notification-button.primary:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Progress Bar */
+        .notification-progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.3);
+            transform-origin: left;
+            border-radius: 0 0 12px 12px;
+        }
+
+        .notification-progress.animate {
+            animation: progress var(--duration) linear forwards;
+        }
+
+        @keyframes progress {
+            from { transform: scaleX(1); }
+            to { transform: scaleX(0); }
+        }
+
+        /* Demo content */
+        .demo-content {
+            text-align: center;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #ffffff, #a0a0a0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            opacity: 0.6;
+            margin-bottom: 40px;
+            line-height: 1.5;
+        }
+
+        .demo-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .demo-button {
+            padding: 12px 20px;
+            border: 1px solid #333;
+            border-radius: 8px;
+            background: #1a1a1a;
+            color: white;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+        }
+
+        .demo-button:hover {
+            background: #2a2a2a;
+            border-color: #555;
+            transform: translateY(-1px);
+        }
+
+        .demo-button-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .demo-button-desc {
+            font-size: 12px;
+            opacity: 0.7;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .notification-container {
+                left: 16px;
+                right: 16px;
+                width: auto;
+                transform: none;
+            }
+
+            .notification {
+                width: 100%;
+                left: 0;
+                transform: translateY(100%) scale(1);
+            }
+
+            .notification.show {
+                transform: translateY(0) scale(1);
+            }
+
+            .notification.stacked-1 {
+                transform: translateY(-12px) scale(0.95);
+            }
+
+            .notification.stacked-2 {
+                transform: translateY(-24px) scale(0.9);
+            }
+
+            .notification.stacked-3 {
+                transform: translateY(-36px) scale(0.85);
+            }
+
+            .notification.stacked-4 {
+                transform: translateY(-48px) scale(0.8);
+            }
+
+            .notification.exiting {
+                transform: translateY(100%) scale(0.9);
+            }
+
+            .demo-buttons {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Notification Container -->
+    <div class="notification-container" id="notificationContainer"></div>
+
+    <!-- Demo Content -->
+    <div class="demo-content">
+        <h1 class="title">Sistema de Notificaciones Avanzado</h1>
+        <p class="subtitle">
+            Sistema completo con títulos, descripciones, iconos personalizables, confirmaciones y más
+        </p>
+        
+        <div class="demo-buttons">
+            <button class="demo-button" onclick="showSimpleNotification()">
+                <div class="demo-button-title">Notificación Simple</div>
+                <div class="demo-button-desc">Solo título básico</div>
+            </button>
+
+            <button class="demo-button" onclick="showCompleteNotification()">
+                <div class="demo-button-title">Notificación Completa</div>
+                <div class="demo-button-desc">Con título y descripción</div>
+            </button>
+
+            <button class="demo-button" onclick="showLogoutConfirm()">
+                <div class="demo-button-title">Confirmación</div>
+                <div class="demo-button-desc">Con botones de acción</div>
+            </button>
+
+            <button class="demo-button" onclick="showErrorNotification()">
+                <div class="demo-button-title">Error</div>
+                <div class="demo-button-desc">Notificación de error</div>
+            </button>
+
+            <button class="demo-button" onclick="showWarningNotification()">
+                <div class="demo-button-title">Advertencia</div>
+                <div class="demo-button-desc">Notificación de advertencia</div>
+            </button>
+
+            <button class="demo-button" onclick="showPersistentNotification()">
+                <div class="demo-button-title">Persistente</div>
+                <div class="demo-button-desc">No se cierra automáticamente</div>
+            </button>
+
+            <button class="demo-button" onclick="showMultipleNotifications()">
+                <div class="demo-button-title">Múltiples</div>
+                <div class="demo-button-desc">Varias notificaciones</div>
+            </button>
+
+            <button class="demo-button" onclick="clearAllNotifications()">
+                <div class="demo-button-title">Limpiar Todo</div>
+                <div class="demo-button-desc">Cerrar todas las notificaciones</div>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        class AdvancedNotificationSystem {
+            constructor() {
+                this.container = document.getElementById('notificationContainer');
+                this.notifications = [];
+                this.maxNotifications = 5;
+            }
+
+            show(options) {
+                const config = {
+                    type: 'info',
+                    titulo: '',
+                    descripcion: '',
+                    icono: null,
+                    tiempo: 4000,
+                    confirmacion: null,
+                    ...options
+                };
+
+                // Remove oldest notification if we have too many
+                if (this.notifications.length >= this.maxNotifications) {
+                    this.remove(this.notifications[this.notifications.length - 1]);
+                }
+
+                const notification = this.createNotification(config);
+                
+                // Add to container
+                this.container.appendChild(notification);
+                
+                // Add to beginning of array (newest first)
+                this.notifications.unshift(notification);
+
+                // Update all notification positions
+                this.updatePositions();
+
+                // Show animation
+                requestAnimationFrame(() => {
+                    setTimeout(() => {
+                        notification.classList.remove('entering');
+                        notification.classList.add('show');
+                    }, 50);
+                });
+
+                // Auto remove (if tiempo > 0)
+                if (config.tiempo > 0) {
+                    const timer = setTimeout(() => {
+                        this.remove(notification);
+                    }, config.tiempo);
+                    notification.timer = timer;
+                }
+
+                return notification;
+            }
+
+            createNotification(config) {
+                const notification = document.createElement('div');
+                notification.className = `notification ${config.type} entering`;
+                
+                // Create icon
+                let iconHtml = '';
+                if (config.icono) {
+                    if (config.icono.includes('<svg') || config.icono.includes('viewBox')) {
+                        iconHtml = `<div class="notification-icon svg-icon">${config.icono}</div>`;
+                    } else {
+                        iconHtml = `<div class="notification-icon">${config.icono}</div>`;
+                    }
+                } else {
+                    // Default icons based on type
+                    const defaultIcons = {
+                        success: '<div class="notification-icon svg-icon"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>',
+                        error: '<div class="notification-icon svg-icon"><svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></div>',
+                        warning: '<div class="notification-icon svg-icon"><svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg></div>',
+                        info: '<div class="notification-icon svg-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg></div>'
+                    };
+                    iconHtml = defaultIcons[config.type] || defaultIcons.info;
+                }
+
+                // Create content
+                let contentHtml = '';
+                if (config.titulo) {
+                    contentHtml += `<div class="notification-title">${config.titulo}</div>`;
+                }
+                if (config.descripcion) {
+                    contentHtml += `<div class="notification-description">${config.descripcion}</div>`;
+                }
+
+                // Create actions
+                let actionsHtml = '';
+                if (config.confirmacion) {
+                    actionsHtml = `
+                        <div class="notification-actions">
+                            <button class="notification-button" onclick="this.closest('.notification').notificationSystem.handleCancel(this.closest('.notification'))">${config.confirmacion.textoNo || 'Cancelar'}</button>
+                            <button class="notification-button primary" onclick="this.closest('.notification').notificationSystem.handleConfirm(this.closest('.notification'))">${config.confirmacion.textoSi || 'Confirmar'}</button>
+                        </div>
+                    `;
+                }
+
+                notification.innerHTML = `
+                    <div class="notification-header">
+                        ${iconHtml}
+                        <div class="notification-content">
+                            ${contentHtml}
+                        </div>
+                        <button class="notification-close" onclick="this.closest('.notification').notificationSystem.remove(this.closest('.notification'))">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    ${actionsHtml}
+                    ${config.tiempo > 0 ? `<div class="notification-progress animate" style="--duration: ${config.tiempo}ms"></div>` : ''}
+                `;
+
+                // Store config and system reference
+                notification.config = config;
+                notification.notificationSystem = this;
+
+                return notification;
+            }
+
+            handleConfirm(notification) {
+                if (notification.config.confirmacion && notification.config.confirmacion.onConfirm) {
+                    notification.config.confirmacion.onConfirm();
+                }
+                this.remove(notification);
+            }
+
+            handleCancel(notification) {
+                if (notification.config.confirmacion && notification.config.confirmacion.onCancel) {
+                    notification.config.confirmacion.onCancel();
+                }
+                this.remove(notification);
+            }
+
+            updatePositions() {
+                this.notifications.forEach((notification, index) => {
+                    notification.classList.remove('show', 'stacked-1', 'stacked-2', 'stacked-3', 'stacked-4');
+                    
+                    if (index === 0) {
+                        notification.classList.add('show');
+                    } else if (index === 1) {
+                        notification.classList.add('stacked-1');
+                    } else if (index === 2) {
+                        notification.classList.add('stacked-2');
+                    } else if (index === 3) {
+                        notification.classList.add('stacked-3');
+                    } else {
+                        notification.classList.add('stacked-4');
+                    }
                 });
             }
-        });
-    });
 
-    // Add scroll effect to navbar
-    window.addEventListener('scroll', function() {
-        const navbar = document.querySelector('.navbar');
-        if (window.scrollY > 50) {
-            navbar.style.background = 'rgba(26, 31, 54, 0.98)';
-        } else {
-            navbar.style.background = 'rgba(26, 31, 54, 0.95)';
+            remove(notification) {
+                if (!notification || !notification.parentElement) return;
+
+                if (notification.timer) {
+                    clearTimeout(notification.timer);
+                }
+
+                const index = this.notifications.indexOf(notification);
+                if (index > -1) {
+                    this.notifications.splice(index, 1);
+                }
+
+                notification.classList.remove('show', 'stacked-1', 'stacked-2', 'stacked-3', 'stacked-4');
+                notification.classList.add('exiting');
+
+                this.updatePositions();
+
+                setTimeout(() => {
+                    if (notification.parentElement) {
+                        notification.parentElement.removeChild(notification);
+                    }
+                }, 400);
+            }
+
+            clear() {
+                [...this.notifications].forEach(notification => {
+                    this.remove(notification);
+                });
+            }
         }
-    });
-});
-</script>
+
+        // Initialize the notification system
+        const notificationSystem = new AdvancedNotificationSystem();
+
+        // Global function
+        function showNotify(options) {
+            return notificationSystem.show(options);
+        }
+
+        // Demo functions
+        function showSimpleNotification() {
+            showNotify({
+                type: 'success',
+                titulo: 'Message copied to clipboard',
+                tiempo: 3000
+            });
+        }
+
+        function showCompleteNotification() {
+            showNotify({
+                type: 'success',
+                titulo: 'Operación completada',
+                descripcion: 'Los datos se han guardado correctamente en la base de datos.',
+                icono: '✅',
+                tiempo: 4000
+            });
+        }
+
+        function showLogoutConfirm() {
+            showNotify({
+                type: 'info',
+                titulo: '¿Cerrar sesión?',
+                descripcion: 'Se cerrará tu sesión actual.',
+                tiempo: 0,
+                icono: '🚪',
+                confirmacion: {
+                    textoSi: 'Cerrar sesión',
+                    textoNo: 'Cancelar',
+                    onConfirm: async () => {
+                        console.log('Cerrando sesión...');
+                        // Simular logout
+                        await new Promise(resolve => setTimeout(resolve, 500));
+                        showNotify({
+                            type: 'info',
+                            titulo: 'Sesión cerrada',
+                            descripcion: 'Has cerrado sesión correctamente.',
+                            tiempo: 2000
+                        });
+                    }
+                }
+            });
+        }
+
+        function showErrorNotification() {
+            showNotify({
+                type: 'error',
+                titulo: 'Error de conexión',
+                descripcion: 'No se pudo conectar con el servidor. Inténtalo de nuevo.',
+                icono: '❌',
+                tiempo: 5000
+            });
+        }
+
+        function showWarningNotification() {
+            showNotify({
+                type: 'warning',
+                titulo: 'Advertencia',
+                descripcion: 'Tu sesión expirará en 5 minutos.',
+                icono: '⚠️',
+                tiempo: 6000
+            });
+        }
+
+        function showPersistentNotification() {
+            showNotify({
+                type: 'info',
+                titulo: 'Notificación persistente',
+                descripcion: 'Esta notificación no se cierra automáticamente.',
+                icono: '📌',
+                tiempo: 0
+            });
+        }
+
+        function showMultipleNotifications() {
+            const notifications = [
+                { type: 'success', titulo: 'Archivo subido', descripcion: 'documento.pdf', icono: '📄' },
+                { type: 'info', titulo: 'Nuevo mensaje', descripcion: 'Tienes 3 mensajes sin leer', icono: '💬' },
+                { type: 'warning', titulo: 'Espacio limitado', descripcion: 'Quedan 2GB disponibles', icono: '💾' }
+            ];
+            
+            notifications.forEach((notif, index) => {
+                setTimeout(() => {
+                    showNotify({ ...notif, tiempo: 4000 });
+                }, index * 300);
+            });
+        }
+
+        function clearAllNotifications() {
+            notificationSystem.clear();
+        }
+
+        // Copy detection
+        document.addEventListener('copy', () => {
+            setTimeout(() => {
+                showNotify({
+                    type: 'success',
+                    titulo: 'Message copied to clipboard',
+                    tiempo: 2000
+                });
+            }, 100);
+        });
+
+        // Welcome notification
+        setTimeout(() => {
+            showNotify({
+                type: 'info',
+                titulo: '¡Bienvenido!',
+                descripcion: 'Sistema de notificaciones avanzado listo para usar.',
+                icono: '👋',
+                tiempo: 4000
+            });
+        }, 1000);
+    </script>
+</body>
+</html>

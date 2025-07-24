@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Notification System - Sliding Animation</title>
+    <style>
+        /* ==========================================================================
+           VARIABLES CSS CON PREFIJO PERSONALIZABLE
+           ========================================================================== */
+        :root {
+            /* Colores base */
+            --dgm-bg-primary: #0a0a0a;
+            --dgm-bg-secondary: #1a1a1a;
+            --dgm-text-primary: #ffffff;
+            --dgm-text-secondary: #a0a0a0;
+            --dgm-border: #333333;
+            
+            /* Colores de notificación */
+            --dgm-success: #16a34a;
+            --dgm-success-border: #15803d;
+            --dgm-danger: #dc2626;
+            --dgm-danger-border: #b91c1c;
+            --dgm-info: #2563eb;
+            --dgm-info-border: #1d4ed8;
+            
+            /* Espaciado y tamaños */
+            --dgm-border-radius: 8px;
+            --dgm-shadow: 0 8px 25px rgba(0, 0, 0, 0.5), 0 4px 10px rgba(0, 0, 0, 0.3);
+            --dgm-transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            --dgm-notification-height: 80px; /* Altura aproximada para cálculos */
+        }
+
+        /* Tema claro */
+        [data-theme="light"] {
+            --dgm-bg-primary: #ffffff;
+            --dgm-bg-secondary: #f8f9fa;
+            --dgm-text-primary: #1a1a1a;
+            --dgm-text-secondary: #6b7280;
+            --dgm-border: #e5e7eb;
+            --dgm-shadow: 0 8px 25px rgba(0, 0, 0, 0.1), 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Estilos base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--dgm-bg-primary);
+            color: var(--dgm-text-primary);
+            min-height: 100vh;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* ==========================================================================
+           CONTENEDOR DE NOTIFICACIONES
+           ========================================================================== */
+        .dgm-notification-container {
+            position: fixed;
+            z-index: 1000;
+            pointer-events: none;
+            width: 400px;
+            height: 400px; /* Más altura para las animaciones */
+        }
+
+        /* Posición bottom (centrado) */
+        .dgm-notification-container.dgm-position-bottom {
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Posición top (centrado) */
+        .dgm-notification-container.dgm-position-top {
+            top: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* ==========================================================================
+           NOTIFICACIONES INDIVIDUALES - SISTEMA DE DESLIZAMIENTO
+           ========================================================================== */
+        .dgm-notification {
+            position: absolute;
+            width: 400px;
+            background: var(--dgm-bg-secondary);
+            border: 1px solid var(--dgm-border);
+            color: var(--dgm-text-primary);
+            padding: 16px 20px;
+            border-radius: var(--dgm-border-radius);
+            box-shadow: var(--dgm-shadow);
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            pointer-events: auto;
+            cursor: pointer;
+            transition: var(--dgm-transition);
+            opacity: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* POSICIONES PARA BOTTOM - Sistema de deslizamiento hacia arriba */
+        .dgm-position-bottom .dgm-notification {
+            bottom: 0;
+        }
+
+        /* Posición 0 - Nueva notificación (empieza desde abajo, invisible) */
+        .dgm-position-bottom .dgm-notification.dgm-position-0 {
+            transform: translateX(-50%) translateY(100px) scale(0.9);
+            opacity: 0;
+            z-index: 100;
+        }
+
+        /* Posición 1 - Frontal (donde debe llegar la nueva) */
+        .dgm-position-bottom .dgm-notification.dgm-position-1 {
+            transform: translateX(-50%) translateY(0px) scale(1);
+            opacity: 1;
+            z-index: 100;
+        }
+
+        /* Posición 2 - Primera en el stack */
+        .dgm-position-bottom .dgm-notification.dgm-position-2 {
+            transform: translateX(-50%) translateY(-12px) scale(0.95);
+            opacity: 0.8;
+            z-index: 99;
+        }
+
+        /* Posición 3 - Segunda en el stack */
+        .dgm-position-bottom .dgm-notification.dgm-position-3 {
+            transform: translateX(-50%) translateY(-24px) scale(0.9);
+            opacity: 0.6;
+            z-index: 98;
+        }
+
+        /* Posición 4 - Tercera en el stack */
+        .dgm-position-bottom .dgm-notification.dgm-position-4 {
+            transform: translateX(-50%) translateY(-36px) scale(0.85);
+            opacity: 0.4;
+            z-index: 97;
+        }
+
+        /* Posición 5 - Cuarta en el stack */
+        .dgm-position-bottom .dgm-notification.dgm-position-5 {
+            transform: translateX(-50%) translateY(-48px) scale(0.8);
+            opacity: 0.2;
+            z-index: 96;
+        }
+
+        /* Posición 6 - Saliendo (se va hacia arriba) */
+        .dgm-position-bottom .dgm-notification.dgm-position-6 {
+            transform: translateX(-50%) translateY(-100px) scale(0.7);
+            opacity: 0;
+            z-index: 95;
+        }
+
+        /* POSICIONES PARA TOP - Sistema de deslizamiento hacia abajo */
+        .dgm-position-top .dgm-notification {
+            top: 0;
+        }
+
+        .dgm-position-top .dgm-notification.dgm-position-0 {
+            transform: translateX(-50%) translateY(-100px) scale(0.9);
+            opacity: 0;
+            z-index: 100;
+        }
+
+        .dgm-position-top .dgm-notification.dgm-position-1 {
+            transform: translateX(-50%) translateY(0px) scale(1);
+            opacity: 1;
+            z-index: 100;
+        }
+
+        .dgm-position-top .dgm-notification.dgm-position-2 {
+            transform: translateX(-50%) translateY(12px) scale(0.95);
+            opacity: 0.8;
+            z-index: 99;
+        }
+
+        .dgm-position-top .dgm-notification.dgm-position-3 {
+            transform: translateX(-50%) translateY(24px) scale(0.9);
+            opacity: 0.6;
+            z-index: 98;
+        }
+
+        .dgm-position-top .dgm-notification.dgm-position-4 {
+            transform: translateX(-50%) translateY(36px) scale(0.85);
+            opacity: 0.4;
+            z-index: 97;
+        }
+
+        .dgm-position-top .dgm-notification.dgm-position-5 {
+            transform: translateX(-50%) translateY(48px) scale(0.8);
+            opacity: 0.2;
+            z-index: 96;
+        }
+
+        .dgm-position-top .dgm-notification.dgm-position-6 {
+            transform: translateX(-50%) translateY(100px) scale(0.7);
+            opacity: 0;
+            z-index: 95;
+        }
+
+        /* ==========================================================================
+           TIPOS DE NOTIFICACIÓN
+           ========================================================================== */
+        .dgm-notification.dgm-success {
+            background: var(--dgm-success);
+            border-color: var(--dgm-success-border);
+            color: white;
+        }
+
+        .dgm-notification.dgm-danger {
+            background: var(--dgm-danger);
+            border-color: var(--dgm-danger-border);
+            color: white;
+        }
+
+        .dgm-notification.dgm-info {
+            background: var(--dgm-info);
+            border-color: var(--dgm-info-border);
+            color: white;
+        }
+
+        /* ==========================================================================
+           ELEMENTOS INTERNOS
+           ========================================================================== */
+        .dgm-notification-icon {
+            font-size: 18px;
+            flex-shrink: 0;
+            margin-top: 2px;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+        }
+
+        .dgm-notification-content {
+            flex: 1;
+        }
+
+        .dgm-notification-title {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            line-height: 1.3;
+        }
+
+        .dgm-notification-description {
+            font-size: 13px;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+
+        .dgm-notification-close {
+            background: none;
+            border: none;
+            color: currentColor;
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 4px;
+            opacity: 0.6;
+            transition: opacity 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 18px;
+            width: 24px;
+            height: 24px;
+        }
+
+        .dgm-notification-close:hover {
+            opacity: 1;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* ==========================================================================
+           ACCIONES DE CONFIRMACIÓN
+           ========================================================================== */
+        .dgm-notification-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+            justify-content: flex-end;
+        }
+
+        .dgm-notification-action {
+            padding: 6px 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            color: currentColor;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .dgm-notification-action:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .dgm-notification-action.dgm-danger {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .dgm-notification-action.dgm-danger:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* ==========================================================================
+           BARRA DE PROGRESO
+           ========================================================================== */
+        .dgm-notification-progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.3);
+            transform-origin: left;
+            border-radius: 0 0 var(--dgm-border-radius) var(--dgm-border-radius);
+            width: 100%;
+        }
+
+        /* ==========================================================================
+           DEMO STYLES
+           ========================================================================== */
+        .demo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 30px;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .demo-header {
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .demo-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, var(--dgm-text-primary), var(--dgm-text-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .demo-controls, .demo-grid {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .demo-section {
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .demo-button {
+            padding: 12px 20px;
+            border: 1px solid var(--dgm-border);
+            border-radius: var(--dgm-border-radius);
+            background: var(--dgm-bg-secondary);
+            color: var(--dgm-text-primary);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .demo-button:hover {
+            background: var(--dgm-border);
+            transform: translateY(-1px);
+        }
+
+        .demo-code {
+            background: var(--dgm-bg-secondary);
+            border: 1px solid var(--dgm-border);
+            border-radius: var(--dgm-border-radius);
+            padding: 20px;
+            margin-top: 16px;
+            text-align: left;
+        }
+
+        .demo-code pre {
+            color: var(--dgm-text-secondary);
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 13px;
+            line-height: 1.5;
+            overflow-x: auto;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .dgm-notification-container {
+                left: 16px;
+                right: 16px;
+                width: auto;
+                transform: none;
+            }
+
+            .dgm-notification {
+                width: 100%;
+                left: 0;
+                transform: translateX(0);
+            }
+
+            .dgm-position-bottom .dgm-notification.dgm-position-0 {
+                transform: translateX(0) translateY(100px) scale(0.9);
+            }
+
+            .dgm-position-bottom .dgm-notification.dgm-position-1 {
+                transform: translateX(0) translateY(0px) scale(1);
+            }
+
+            .dgm-position-bottom .dgm-notification.dgm-position-2 {
+                transform: translateX(0) translateY(-12px) scale(0.95);
+            }
+
+            .dgm-position-bottom .dgm-notification.dgm-position-3 {
+                transform: translateX(0) translateY(-24px) scale(0.9);
+            }
+
+            .dgm-position-bottom .dgm-notification.dgm-position-4 {
+                transform: translateX(0) translateY(-36px) scale(0.85);
+            }
+
+            .dgm-position-bottom .dgm-notification.dgm-position-5 {
+                transform: translateX(0) translateY(-48px) scale(0.8);
+            }
+
+            .dgm-position-bottom .dgm-notification.dgm-position-6 {
+                transform: translateX(0) translateY(-100px) scale(0.7);
+            }
+
+            .demo-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .demo-button {
+                width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-header">
+            <h1 class="demo-title">Sliding Notification System</h1>
+            <p style="color: var(--dgm-text-secondary); font-size: 1.1rem;">
+                Sistema con animación de deslizamiento continuo desde abajo hacia arriba
+            </p>
+        </div>
+
+        <div class="demo-controls">
+            <button class="demo-button" onclick="toggleTheme()">🌙 Cambiar Tema</button>
+            <button class="demo-button" onclick="togglePosition()">📍 Cambiar Posición</button>
+            <button class="demo-button" onclick="clearAll()">🗑️ Limpiar Todo</button>
+        </div>
+
+        <div class="demo-section">
+            <h3 style="margin-bottom: 16px;">🎯 Notificaciones Básicas</h3>
+            <div class="demo-grid">
+                <button class="demo-button" onclick="showSuccess()">✅ Success</button>
+                <button class="demo-button" onclick="showDanger()">❌ Danger</button>
+                <button class="demo-button" onclick="showInfo()">ℹ️ Info</button>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3 style="margin-bottom: 16px;">📝 Confirmaciones</h3>
+            <div class="demo-grid">
+                <button class="demo-button" onclick="showDeleteConfirm()">🗑️ Confirmar Eliminación</button>
+                <button class="demo-button" onclick="showSaveConfirm()">💾 Confirmar Guardado</button>
+                <button class="demo-button" onclick="showLogoutConfirm()">🚪 Confirmar Logout</button>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3 style="margin-bottom: 16px;">🔄 Demos de Deslizamiento</h3>
+            <div class="demo-grid">
+                <button class="demo-button" onclick="showSlidingDemo()">🎬 Demo Deslizamiento</button>
+                <button class="demo-button" onclick="showRapidDemo()">⚡ Demo Rápido</button>
+                <button class="demo-button" onclick="showCopyDemo()">📋 Simular Copiado</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /**
+         * ==========================================================================
+         * SIMPLE NOTIFICATION SYSTEM - CON DESLIZAMIENTO CONTINUO
+         * ==========================================================================
+         */
+        class SimpleNotificationSystem {
+            // Variables privadas
+            #container = null;
+            #notifications = [];
+            #currentTheme = 'dark';
+            #currentPosition = 'bottom';
+            #notificationId = 0;
+            #prefix = 'dgm';
+            #maxNotifications = 5;
+
+            constructor(options = {}) {
+                if (options.prefix) {
+                    this.#prefix = options.prefix;
+                    this.#updateCSSPrefix();
+                }
+                this.#init();
+                this.#detectSystemTheme();
+            }
+
+            #init() {
+                this.#createContainer();
+                this.#setupEventListeners();
+            }
+
+            #createContainer() {
+                if (!this.#container) {
+                    this.#container = document.createElement('div');
+                    this.#container.className = `${this.#prefix}-notification-container ${this.#prefix}-position-${this.#currentPosition}`;
+                    document.body.appendChild(this.#container);
+                }
+            }
+
+            #setupEventListeners() {
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+                    if (this.#currentTheme === 'auto') {
+                        this.#applyTheme(e.matches ? 'dark' : 'light');
+                    }
+                });
+            }
+
+            #detectSystemTheme() {
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                this.setTheme(prefersDark ? 'dark' : 'light');
+            }
+
+            #applyTheme(theme) {
+                document.documentElement.setAttribute('data-theme', theme);
+            }
+
+            #updateCSSPrefix() {
+                console.log(`Prefijo CSS configurado: ${this.#prefix}`);
+            }
+
+            #generateId() {
+                return `${this.#prefix}-notification-${++this.#notificationId}-${Date.now()}`;
+            }
+
+            #getDefaultIcon(type) {
+                const icons = {
+                    success: '✓',
+                    danger: '✕',
+                    info: 'i'
+                };
+                return icons[type] || icons.info;
+            }
+
+            /**
+             * Actualiza las posiciones con animación de deslizamiento
+             * @private
+             */
+            #updateSlidingPositions() {
+                this.#notifications.forEach((notificationData, index) => {
+                    const { element } = notificationData;
+                    
+                    // Remover todas las clases de posición
+                    for (let i = 0; i <= 6; i++) {
+                        element.classList.remove(`${this.#prefix}-position-${i}`);
+                    }
+                    
+                    // Aplicar nueva posición (index + 1 porque position-0 es para entrada)
+                    const position = Math.min(index + 1, 6);
+                    element.classList.add(`${this.#prefix}-position-${position}`);
+                });
+            }
+
+            #createNotificationElement(options) {
+                const notification = document.createElement('div');
+                notification.className = `${this.#prefix}-notification ${this.#prefix}-${options.type}`;
+                notification.id = options.id;
+
+                // Crear ícono
+                const icon = document.createElement('div');
+                icon.className = `${this.#prefix}-notification-icon`;
+                icon.textContent = options.icono || this.#getDefaultIcon(options.type);
+
+                // Crear contenido
+                const content = document.createElement('div');
+                content.className = `${this.#prefix}-notification-content`;
+
+                const title = document.createElement('div');
+                title.className = `${this.#prefix}-notification-title`;
+                title.textContent = options.titulo;
+                content.appendChild(title);
+
+                if (options.descripcion) {
+                    const description = document.createElement('div');
+                    description.className = `${this.#prefix}-notification-description`;
+                    description.textContent = options.descripcion;
+                    content.appendChild(description);
+                }
+
+                // Crear acciones si es confirmación
+                if (options.confirmacion) {
+                    const actions = this.#createConfirmationActions(options);
+                    content.appendChild(actions);
+                }
+
+                // Crear botón cerrar
+                const closeButton = document.createElement('button');
+                closeButton.className = `${this.#prefix}-notification-close`;
+                closeButton.innerHTML = '×';
+                closeButton.onclick = () => this.remove(options.id);
+
+                // Ensamblar elementos
+                notification.appendChild(icon);
+                notification.appendChild(content);
+                notification.appendChild(closeButton);
+
+                // Agregar barra de progreso si tiene tiempo
+                if (options.tiempo > 0) {
+                    const progress = this.#createProgressBar(options);
+                    notification.appendChild(progress);
+                }
+
+                return notification;
+            }
+
+            #createConfirmationActions(options) {
+                const actions = document.createElement('div');
+                actions.className = `${this.#prefix}-notification-actions`;
+
+                const confirmButton = document.createElement('button');
+                confirmButton.className = `${this.#prefix}-notification-action ${this.#prefix}-danger`;
+                confirmButton.textContent = options.confirmacion.textoSi || 'Confirmar';
+                confirmButton.onclick = async () => {
+                    if (options.confirmacion.onConfirm) {
+                        try {
+                            await options.confirmacion.onConfirm();
+                        } catch (error) {
+                            console.error('Error en confirmación:', error);
+                        }
+                    }
+                    this.remove(options.id);
+                };
+
+                const cancelButton = document.createElement('button');
+                cancelButton.className = `${this.#prefix}-notification-action`;
+                cancelButton.textContent = options.confirmacion.textoNo || 'Cancelar';
+                cancelButton.onclick = () => {
+                    if (options.confirmacion.onCancel) {
+                        options.confirmacion.onCancel();
+                    }
+                    this.remove(options.id);
+                };
+
+                actions.appendChild(confirmButton);
+                actions.appendChild(cancelButton);
+                return actions;
+            }
+
+            #createProgressBar(options) {
+                const progress = document.createElement('div');
+                progress.className = `${this.#prefix}-notification-progress`;
+                progress.style.transform = 'scaleX(1)';
+                progress.style.transitionDuration = `${options.tiempo}ms`;
+
+                setTimeout(() => {
+                    progress.style.transform = 'scaleX(0)';
+                }, 10);
+
+                return progress;
+            }
+
+            /**
+             * Muestra una notificación con deslizamiento
+             * @public
+             */
+            show(options = {}) {
+                const defaultOptions = {
+                    type: 'info',
+                    titulo: 'Notificación',
+                    descripcion: null,
+                    tiempo: 5000,
+                    icono: null,
+                    theme: this.#currentTheme,
+                    confirmacion: null
+                };
+
+                const finalOptions = { ...defaultOptions, ...options };
+                finalOptions.id = this.#generateId();
+
+                if (!['success', 'danger', 'info'].includes(finalOptions.type)) {
+                    console.warn(`Tipo no válido: ${finalOptions.type}. Usando 'info'.`);
+                    finalOptions.type = 'info';
+                }
+
+                // Remover notificación más antigua si excede el límite
+                if (this.#notifications.length >= this.#maxNotifications) {
+                    this.remove(this.#notifications[this.#notifications.length - 1].options.id);
+                }
+
+                if (finalOptions.theme !== this.#currentTheme) {
+                    this.setTheme(finalOptions.theme);
+                }
+
+                // Crear elemento
+                const element = this.#createNotificationElement(finalOptions);
+
+                // Agregar al contenedor
+                this.#container.appendChild(element);
+
+                // Agregar al inicio del array (más reciente primero)
+                this.#notifications.unshift({
+                    element,
+                    timeout: null,
+                    options: finalOptions
+                });
+
+                // PASO 1: Establecer posición inicial (position-0 = invisible desde abajo)
+                element.classList.add(`${this.#prefix}-position-0`);
+
+                // PASO 2: Actualizar todas las posiciones (esto mueve las existentes hacia arriba)
+                this.#updateSlidingPositions();
+
+                // PASO 3: Después de un frame, mover la nueva notificación a position-1 (visible)
+                requestAnimationFrame(() => {
+                    setTimeout(() => {
+                        element.classList.remove(`${this.#prefix}-position-0`);
+                        element.classList.add(`${this.#prefix}-position-1`);
+                    }, 50);
+                });
+
+                // Auto-cerrar si tiene tiempo
+                let timeout = null;
+                if (finalOptions.tiempo > 0 && !finalOptions.confirmacion) {
+                    timeout = setTimeout(() => {
+                        this.remove(finalOptions.id);
+                    }, finalOptions.tiempo);
+                    
+                    const notificationData = this.#notifications.find(n => n.options.id === finalOptions.id);
+                    if (notificationData) {
+                        notificationData.timeout = timeout;
+                    }
+                }
+
+                return finalOptions.id;
+            }
+
+            /**
+             * Cierra una notificación con deslizamiento hacia arriba
+             * @public
+             */
+            remove(id) {
+                const index = this.#notifications.findIndex(n => n.options.id === id);
+                if (index === -1) return;
+
+                const notificationData = this.#notifications[index];
+                const { element, timeout } = notificationData;
+
+                if (timeout) clearTimeout(timeout);
+
+                // Remover del array
+                this.#notifications.splice(index, 1);
+
+                // Mover la notificación a position-6 (salida hacia arriba)
+                for (let i = 0; i <= 6; i++) {
+                    element.classList.remove(`${this.#prefix}-position-${i}`);
+                }
+                element.classList.add(`${this.#prefix}-position-6`);
+
+                // Actualizar posiciones de las notificaciones restantes (se deslizan hacia abajo)
+                this.#updateSlidingPositions();
+
+                // Remover del DOM después de la animación
+                setTimeout(() => {
+                    if (element.parentNode) {
+                        element.parentNode.removeChild(element);
+                    }
+                }, 500);
+            }
+
+            removeAll() {
+                const ids = this.#notifications.map(n => n.options.id);
+                ids.forEach(id => this.remove(id));
+            }
+
+            setTheme(theme) {
+                const validThemes = ['light', 'dark', 'auto'];
+                if (!validThemes.includes(theme)) {
+                    console.warn(`Tema no válido: ${theme}`);
+                    return;
+                }
+
+                this.#currentTheme = theme;
+                if (theme === 'auto') {
+                    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                    this.#applyTheme(prefersDark ? 'dark' : 'light');
+                } else {
+                    this.#applyTheme(theme);
+                }
+            }
+
+            setPosition(position) {
+                if (!['top', 'bottom'].includes(position)) {
+                    console.warn(`Posición no válida: ${position}`);
+                    return;
+                }
+
+                this.#currentPosition = position;
+                if (this.#container) {
+                    this.#container.className = `${this.#prefix}-notification-container ${this.#prefix}-position-${position}`;
+                }
+            }
+
+            toggleTheme() {
+                const newTheme = this.#currentTheme === 'light' ? 'dark' : 'light';
+                this.setTheme(newTheme);
+            }
+
+            togglePosition() {
+                const newPosition = this.#currentPosition === 'top' ? 'bottom' : 'top';
+                this.setPosition(newPosition);
+            }
+
+            getStats() {
+                return {
+                    active: this.#notifications.length,
+                    theme: this.#currentTheme,
+                    position: this.#currentPosition,
+                    prefix: this.#prefix
+                };
+            }
+        }
+
+        // ==========================================================================
+        // INSTANCIA GLOBAL Y FUNCIONES
+        // ==========================================================================
+
+        const notificationSystem = new SimpleNotificationSystem({
+            prefix: 'dgm'
+        });
+
+        function showNotify(options) {
+            return notificationSystem.show(options);
+        }
+
+        // ==========================================================================
+        // FUNCIONES DEMO
+        // ==========================================================================
+
+        function toggleTheme() {
+            notificationSystem.toggleTheme();
+        }
+
+        function togglePosition() {
+            notificationSystem.togglePosition();
+            showNotify({
+                type: 'info',
+                titulo: 'Posición cambiada',
+                descripcion: `Ahora aparecen ${notificationSystem.getStats().position === 'top' ? 'arriba' : 'abajo'}`,
+                tiempo: 3000
+            });
+        }
+
+        function clearAll() {
+            notificationSystem.removeAll();
+        }
+
+        function showSuccess() {
+            showNotify({
+                type: 'success',
+                titulo: '¡Operación exitosa!',
+                descripcion: 'La acción se completó correctamente.',
+                tiempo: 4000,
+                icono: '✅'
+            });
+        }
+
+        function showDanger() {
+            showNotify({
+                type: 'danger',
+                titulo: 'Error crítico',
+                descripcion: 'Algo salió mal en el proceso.',
+                tiempo: 6000,
+                icono: '❌'
+            });
+        }
+
+        function showInfo() {
+            showNotify({
+                type: 'info',
+                titulo: 'Información importante',
+                descripcion: 'Hay una actualización disponible.',
+                tiempo: 5000,
+                icono: 'ℹ️'
+            });
+        }
+
+        function showDeleteConfirm() {
+            showNotify({
+                type: 'danger',
+                titulo: '¿Eliminar elemento?',
+                descripcion: 'Esta acción no se puede deshacer.',
+                tiempo: 0,
+                icono: '🗑️',
+                confirmacion: {
+                    textoSi: 'Sí, eliminar',
+                    textoNo: 'Cancelar',
+                    onConfirm: async () => {
+                        console.log('Ejecutando eliminación...');
+                        await new Promise(resolve => setTimeout(resolve, 1000));
+                        showNotify({
+                            type: 'success',
+                            titulo: 'Elemento eliminado',
+                            descripcion: 'El elemento se eliminó correctamente.',
+                            tiempo: 3000
+                        });
+                    },
+                    onCancel: () => {
+                        console.log('Eliminación cancelada');
+                    }
+                }
+            });
+        }
+
+        function showSaveConfirm() {
+            showNotify({
+                type: 'info',
+                titulo: '¿Guardar cambios?',
+                descripcion: 'Se guardarán todos los cambios realizados.',
+                tiempo: 0,
+                icono: '💾',
+                confirmacion: {
+                    textoSi: 'Guardar',
+                    textoNo: 'Descartar',
+                    onConfirm: async () => {
+                        console.log('Guardando...');
+                        await new Promise(resolve => setTimeout(resolve, 800));
+                        showNotify({
+                            type: 'success',
+                            titulo: 'Cambios guardados',
+                            descripcion: 'Todos los cambios se guardaron exitosamente.',
+                            tiempo: 3000
+                        });
+                    }
+                }
+            });
+        }
+
+        function showLogoutConfirm() {
+            showNotify({
+                type: 'info',
+                titulo: '¿Cerrar sesión?',
+                descripcion: 'Se cerrará tu sesión actual.',
+                tiempo: 0,
+                icono: '🚪',
+                confirmacion: {
+                    textoSi: 'Cerrar sesión',
+                    textoNo: 'Cancelar',
+                    onConfirm: async () => {
+                        console.log('Cerrando sesión...');
+                        await new Promise(resolve => setTimeout(resolve, 500));
+                        showNotify({
+                            type: 'info',
+                            titulo: 'Sesión cerrada',
+                            descripcion: 'Has cerrado sesión correctamente.',
+                            tiempo: 2000
+                        });
+                    }
+                }
+            });
+        }
+
+        function showSlidingDemo() {
+            const messages = [
+                { titulo: 'Primera notificación', descripcion: 'Aparece desde abajo', icono: '1️⃣' },
+                { titulo: 'Segunda notificación', descripcion: 'Empuja la primera hacia arriba', icono: '2️⃣' },
+                { titulo: 'Tercera notificación', descripcion: 'Todas se deslizan hacia arriba', icono: '3️⃣' },
+                { titulo: 'Cuarta notificación', descripcion: 'Efecto de deslizamiento continuo', icono: '4️⃣' },
+                { titulo: 'Quinta notificación', descripcion: 'La primera desaparece por arriba', icono: '5️⃣' }
+            ];
+            
+            messages.forEach((msg, index) => {
+                setTimeout(() => {
+                    showNotify({
+                        type: 'success',
+                        titulo: msg.titulo,
+                        descripcion: msg.descripcion,
+                        icono: msg.icono,
+                        tiempo: 8000
+                    });
+                }, index * 800);
+            });
+        }
+
+        function showRapidDemo() {
+            const messages = [
+                'Message copied to clipboard',
+                'Code copied successfully',
+                'Link copied to clipboard',
+                'Text copied to clipboard',
+                'Content copied successfully'
+            ];
+            
+            messages.forEach((message, index) => {
+                setTimeout(() => {
+                    showNotify({
+                        type: 'success',
+                        titulo: message,
+                        tiempo: 4000
+                    });
+                }, index * 300);
+            });
+        }
+
+        function showCopyDemo() {
+            showNotify({
+                type: 'success',
+                titulo: 'Message copied to clipboard',
+                tiempo: 3000000
+            });
+        }
+
+        // Hacer disponible globalmente
+        window.SimpleNotificationSystem = SimpleNotificationSystem;
+        window.showNotify = showNotify;
+
+        // Notificación de bienvenida
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                showNotify({
+                    type: 'success',
+                    titulo: '¡Sistema de Deslizamiento Listo!',
+                    descripcion: 'Todas las notificaciones se deslizan suavemente desde abajo hacia arriba.',
+                    tiempo: 5000,
+                    icono: '🎬'
+                });
+            }, 1000);
+        });
+
+        // Detectar copiado
+        document.addEventListener('copy', () => {
+            setTimeout(() => {
+                showNotify({
+                    type: 'success',
+                    titulo: 'Message copied to clipboard',
+                    tiempo: 2000
+                });
+            }, 100000);
+        });
+    </script>
+</body>
+</html>

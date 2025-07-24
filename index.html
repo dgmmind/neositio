@@ -4,2027 +4,1915 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NEOSITIO - Transformamos Ideas en Realidad Digital</title>
+ 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/feather-icons@4.29.0/dist/feather.min.css">
-      <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+
     <style>
-        :root {
-            --dark-blue: #0F172A;
-            --light-blue: #1E293B;
-            --accent-blue: #3B6994;
-            --blue-main: #2563EB;
-            --blue-bright: #60A5FA;
-            --text-primary: #E2E8F0;
-            --text-secondary: #94A3B8;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--dark-blue);
-            color: var(--text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* Header */
-        .header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: var(--light-blue);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid #1e293b;
-            z-index: 1000;
-            padding: 1rem 0;
-        }
-
-        .nav {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 2rem;
-            min-height: 56px;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--accent-blue);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            white-space: nowrap;
-            min-width: 0;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .logo::before {
-            content: "◆";
-            color: var(--accent-blue);
-            font-size: 1.2rem;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: color 0.3s;
-            font-weight: 500;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent-blue);
-        }
-
-        .nav-buttons {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .btn {
-            padding: 0.5rem 1rem;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: all 0.3s;
-            text-decoration: none;
-            display: flex;
-            font-weight: 500;
-            align-items: center;
-            min-height: 48px; /* Altura mínima uniforme */
-            box-sizing: border-box;
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--blue-main) !important;
-            border: 1px solid var(--blue-main);
-        }
-
-        .btn-secondary:hover {
-            background: var(--blue-main) !important;
-            color: var(--text-primary) !important;
-        }
-
-        .btn-primary, .cta-button {
-            background: var(--blue-main) !important;
-            color: var(--text-primary) !important;
-            border: none;
-            box-shadow: 0 2px 8px 0 rgba(59, 105, 148, 0.08);
-        }
-
-        .btn-primary:hover, .cta-button:hover {
-            background: var(--blue-bright) !important;
-            color: var(--dark-blue) !important;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 0 2rem;
-            position: relative;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            width: 100%;
-            box-sizing: border-box;
-            padding-top: 72px; /* Espacio para header fijo en desktop */
-        }
-
-        .hero-content {
-            max-width: 800px;
-            width: 100%;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .hero h1 {
-            font-size: clamp(2rem, 6vw, 4.5rem);
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            line-height: 1.1;
-            word-break: break-word;
-        }
-
-        .hero .highlight {
-            color: var(--blue-bright) !important;
-        }
-
-        .hero p {
-            font-size: clamp(1rem, 2.5vw, 1.2rem);
-            color: var(--text-secondary) !important;
-            margin-bottom: 2rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* Quick Contact */
-        .quick-contact {
-            background: var(--light-blue);
-            border: 1px solid #334155;
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 3rem auto;
-            max-width: 500px;
-        }
-
-        .quick-contact h3 {
-            margin-bottom: 1rem;
-            text-align: center;
-            color: var(--accent-blue);
-        }
-
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .form-row {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .form-group {
-            flex: 1;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 0.75rem;
-            background: var(--dark-blue);
-            border: 1px solid var(--light-blue);
-            border-radius: 6px;
-            color: var(--text-primary);
-            font-size: 1rem;
-        }
-
-        .form-group input:focus {
-            outline: none;
-            border-color: var(--accent-blue);
-            box-shadow: 0 0 0 2px rgba(59, 105, 148, 0.2);
-        }
-
-        /* About Section */
-        .about {
-            padding: 5rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .about h2 {
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            color: var(--accent-blue);
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
-            margin-top: 3rem;
-        }
-
-        .about-card {
-            background: var(--light-blue);
-            border: 1px solid #334155;
-            border-radius: 12px;
-            padding: 2rem;
-            transition: all 0.3s;
-        }
-
-        .about-card:hover {
-            border-color: #10b981;
-            transform: translateY(-5px);
-        }
-
-        .about-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--blue-main), var(--blue-bright)) !important;
-            border-radius: 12px;
-            margin: 0 auto 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* Services */
-        .services {
-            padding: 5rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: var(--accent-blue);
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .service-card {
-            background: var(--light-blue);
-            border: 1px solid #334155;
-            border-radius: 12px;
-            padding: 2rem;
-            transition: all 0.3s;
-        }
-
-        .service-card:hover {
-            border-color: #10b981;
-            transform: translateY(-2px);
-        }
-
-        .service-icon {
-            width: 48px;
-            height: 48px;
-            background: linear-gradient(135deg, #10b981, #059669);
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .service-card h3 {
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-            color: var(--accent-blue);
-        }
-
-        .service-card p {
-            color: var(--text-secondary) !important;
-            margin-bottom: 1rem;
-        }
-
-        .service-features {
-            list-style: none;
-        }
-
-        .service-features li {
-            color: #64748b;
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-            padding-left: 1rem;
-            position: relative;
-        }
-
-        .service-features li::before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: var(--blue-bright);
-        }
-
-        /* Technologies */
-        .technologies {
-            padding: 5rem 2rem;
-            background: var(--light-blue);
-        }
-
-        .tech-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .tech-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1rem;
-            margin-bottom: 3rem;
-        }
-
-        .tech-item {
-            background: #0f172a;
-            border: 1px solid #334155;
-            border-radius: 8px;
-            padding: 1.5rem;
-            text-align: center;
-            transition: all 0.3s;
-        }
-
-        .tech-item:hover {
-            border-color: #10b981;
-            transform: translateY(-2px);
-        }
-
-        .tech-item h4 {
-            color: #10b981;
-            font-weight: 600;
-        }
-
-        /* Projects */
-        .projects {
-            padding: 5rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .project-card {
-            background: var(--light-blue);
-            border: 1px solid #334155;
-            border-radius: 12px;
-            overflow: hidden;
-            transition: all 0.3s;
-        }
-
-        .project-card:hover {
-            border-color: #10b981;
-            transform: translateY(-2px);
-        }
-
-        .project-image {
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(135deg, #334155, #1e293b);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #64748b;
-        }
-
-        .project-content {
-            padding: 1.5rem;
-        }
-
-        .project-domain {
-            color: var(--accent-blue);
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
-
-        .project-title {
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-            color: #ffffff;
-        }
-
-        .project-description {
-            color: var(--text-secondary) !important;
-            font-size: 0.9rem;
-        }
-
-        /* Partners */
-        .partners {
-            padding: 5rem 2rem;
-            background: var(--light-blue);
-            text-align: center;
-        }
-
-        .partners-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .partners-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .partner-card {
-            background: #0f172a;
-            border: 1px solid #334155;
-            border-radius: 8px;
-            padding: 2rem;
-            transition: all 0.3s;
-        }
-
-        .partner-card:hover {
-            border-color: #10b981;
-        }
-
-        .partner-logo {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #10b981, #059669);
-            border-radius: 8px;
-            margin: 0 auto 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* Testimonials */
-        .testimonials {
-            padding: 5rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 2rem;
-        }
-
-        .testimonial-card {
-            background: var(--light-blue);
-            border: 1px solid #334155;
-            border-radius: 12px;
-            padding: 2rem;
-        }
-
-        .testimonial-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-
-        .testimonial-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: #334155;
-            margin-right: 1rem;
-        }
-
-        .testimonial-info h4 {
-            margin-bottom: 0.25rem;
-            color: #ffffff;
-        }
-
-        .testimonial-info p {
-            color: var(--text-secondary) !important;
-            font-size: 0.9rem;
-        }
-
-        .testimonial-text {
-            color: #cbd5e1;
-            font-style: italic;
-        }
-
-        /* Pricing */
-        .pricing {
-            padding: 5rem 2rem;
-            background: var(--light-blue);
-        }
-
-        .pricing-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .pricing-card {
-            background: #0f172a;
-            border: 1px solid #334155;
-            border-radius: 12px;
-            padding: 2rem;
-            position: relative;
-        }
-
-        .pricing-card.featured {
-            border-color: #10b981;
-        }
-
-        .pricing-badge {
-            position: absolute;
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #10b981;
-            color: #0f172a;
-            padding: 0.25rem 1rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        .pricing-price {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: var(--accent-blue);
-        }
-
-        .pricing-period {
-            color: var(--text-secondary) !important;
-            margin-bottom: 1.5rem;
-        }
-
-        .pricing-features {
-            list-style: none;
-            margin-bottom: 2rem;
-        }
-
-        .pricing-features li {
-            margin-bottom: 0.75rem;
-            padding-left: 1.5rem;
-            position: relative;
-            color: #cbd5e1;
-        }
-
-        .pricing-features li::before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: #10b981;
-        }
-
-        /* Contact Form */
-        .contact {
-            padding: 5rem 2rem;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .contact-form-full {
-            background: var(--light-blue);
-            border: 1px solid #334155;
-            border-radius: 12px;
-            padding: 2rem;
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #cbd5e1;
-        }
-
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.75rem;
-            background: var(--dark-blue);
-            border: 1px solid var(--light-blue);
-            border-radius: 6px;
-            color: var(--text-primary);
-            font-size: 1rem;
-            font-family: inherit;
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--accent-blue);
-            box-shadow: 0 0 0 2px rgba(59, 105, 148, 0.2);
-        }
-
-        /* Footer */
-        .footer {
-            background: var(--light-blue);
-            border-top: 1px solid #334155;
-            padding: 3rem 2rem 2rem;
-        }
-
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-section h3 {
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-            color: var(--accent-blue);
-        }
-
-        .footer-section p,
-        .footer-section a {
-            color: var(--text-secondary) !important;
-            text-decoration: none;
-            margin-bottom: 0.5rem;
-            display: block;
-        }
-
-        .footer-section a:hover {
-            color: #10b981;
-        }
-
-        .footer-bottom {
-            border-top: 1px solid #334155;
-            padding-top: 2rem;
-            text-align: center;
-            color: #64748b;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin-top: 1rem;
-        }
-
-        .social-links a {
-            width: 40px;
-            height: 40px;
-            background: #334155;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #94a3b8;
-            transition: all 0.3s;
-        }
-
-        .social-links a:hover {
-            background: #10b981;
-            color: #0f172a;
-        }
-
-        /* Mobile Menu */
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: #ffffff;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .mobile-menu-btn {
-                display: block;
-            }
-
-            .form-row {
-                flex-direction: column;
-            }
-
-            .testimonials-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .fade-in {
-            animation: fadeInUp 0.6s ease-out;
-        }
-
-        /* Icons */
-        .icon {
-            width: 24px;
-            height: 24px;
-            fill: currentColor;
-        }
-
-        .icon-sm {
-            width: 16px;
-            height: 16px;
-        }
-
-        .icon-lg {
-            width: 32px;
-            height: 32px;
-        }
-
-        /* WhatsApp Float Button */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--blue-main), var(--blue-bright));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
-            z-index: 1000;
-            transition: all 0.3s;
-        }
-
-        .whatsapp-float:hover {
-            transform: scale(1.1);
-        }
-        .whatsapp-float i[data-feather] {
-            color: #fff !important;
-            width: 32px;
-            height: 32px;
-        }
-        @media (max-width: 1200px) {
-            .hero-content {
-                max-width: 95vw;
-            }
-        }
-        @media (max-width: 900px) {
-            .hero {
-                flex-direction: column;
-                justify-content: flex-start;
-                align-items: center;
-                text-align: center;
-                min-height: unset;
-                padding: 0 2vw 32px 2vw;
-                padding-top: 60px; /* Espacio para header fijo en tablet */
-            }
-            .hero-content {
-                max-width: 98vw;
-                padding: 0;
-            }
-        }
-        @media (max-width: 600px) {
-            .hero {
-                padding: 0 1vw 24px 1vw;
-                padding-top: 48px; /* Espacio para header fijo en móvil */
-            }
-            .hero-content {
-                max-width: 100vw;
-                padding: 0;
-            }
-            .hero h1 {
-                font-size: 2rem;
-            }
-            .hero p {
-                font-size: 1rem;
-            }
-        }
-        @media (max-width: 900px) {
-            .nav {
-                padding: 0 1rem;
-            }
-            .logo {
-                font-size: 1.1rem;
-                max-width: 60vw;
-            }
-            .nav-links {
-                display: none;
-            }
-            .nav-buttons {
-                display: none;
-            }
-            .mobile-menu-btn {
-                display: block;
-            }
-        }
-        @media (max-width: 600px) {
-            .header {
-                padding: 0.5rem 0;
-            }
-            .nav {
-                padding: 0 0.5rem;
-                min-height: 44px;
-            }
-            .logo {
-                font-size: 1rem;
-                max-width: 50vw;
-            }
-            .mobile-menu-btn {
-                font-size: 2rem;
-            }
-        }
-    </style
-</head>
-<body>
-    <style>
-    * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+        /* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    background: linear-gradient(135deg, #1a1f36 0%, #2d3561 100%);
-    color: white;
-    min-height: 100vh;
-    overflow-x: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #0f172a;
+  color: white;
+  line-height: 1.6;
+  overflow-x: hidden;
 }
 
-/* Navigation Styles */
+/* Navigation */
 .navbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background: rgba(26, 31, 54, 0.95);
-    backdrop-filter: blur(10px);
-    z-index: 1000;
-    padding: 1rem 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: linear-gradient(to right, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.95));
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  padding: 1rem 0;
+  border-bottom: 1px solid #334155;
+  transition: background 0.3s ease;
 }
 
 .nav-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .nav-logo {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 1.25rem;
-    font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: bold;
 }
 
 .logo-icon {
-    color: #4f9cf9;
-    font-size: 1.5rem;
+  color: #60a5fa;
+  font-size: 1.5rem;
+}
+
+.logo-text {
+  color: white;
 }
 
 .nav-menu {
-    display: flex;
-    list-style: none;
-    gap: 2rem;
+  display: flex;
+  list-style: none;
+  gap: 2rem;
 }
 
 .nav-link {
-    color: rgba(255, 255, 255, 0.8);
-    text-decoration: none;
-    transition: color 0.3s ease;
-    font-weight: 500;
+  color: #cbd5e1;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-weight: 500;
 }
 
 .nav-link:hover {
-    color: #4f9cf9;
+  color: #60a5fa;
 }
 
 .nav-buttons {
-    display: flex;
-    gap: 1rem;
+  display: flex;
+  gap: 1rem;
 }
 
 .btn-secondary {
-    background: transparent;
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-weight: 500;
+  background: transparent;
+  color: white;
+  border: 1px solid #475569;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-secondary:hover {
-    border-color: #4f9cf9;
-    color: #4f9cf9;
+  border-color: #60a5fa;
+  color: #60a5fa;
 }
 
 .btn-primary {
-    background: #4f9cf9;
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-    font-weight: 500;
+  background: #3b82f6;
+  color: #0f172a;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  font-weight: 500;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-primary:hover {
-    background: #3b82f6;
+  background: #60a5fa;
 }
 
 /* Hamburger Menu */
 .hamburger {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-    gap: 4px;
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 4px;
+  background: none;
+  border: none;
+  padding: 0;
 }
 
 .bar {
-    width: 25px;
-    height: 3px;
-    background: white;
-    transition: 0.3s;
-    border-radius: 2px;
+  width: 25px;
+  height: 3px;
+  background: white;
+  transition: 0.3s;
+  border-radius: 2px;
 }
 
 .hamburger.active .bar:nth-child(1) {
-    transform: rotate(-45deg) translate(-5px, 6px);
+  transform: rotate(-45deg) translate(-5px, 6px);
 }
 
 .hamburger.active .bar:nth-child(2) {
-    opacity: 0;
+  opacity: 0;
 }
 
 .hamburger.active .bar:nth-child(3) {
-    transform: rotate(45deg) translate(-5px, -6px);
+  transform: rotate(45deg) translate(-5px, -6px);
 }
 
 /* Sidebar */
 .sidebar-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 1998;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
 }
 
 .sidebar-overlay.active {
-    opacity: 1;
-    visibility: visible;
+  opacity: 1;
+  visibility: visible;
 }
 
 .sidebar {
-    position: fixed;
-    top: 0;
-    right: -300px;
-    width: 300px;
-    height: 100%;
-    background: #1a1f36;
-    z-index: 1999;
-    transition: right 0.3s ease;
-    padding: 2rem;
-    border-left: 1px solid rgba(255, 255, 255, 0.1);
+  position: fixed;
+  top: 0;
+  right: -320px;
+  width: 320px;
+  height: 100%;
+  background: #0f172a;
+  z-index: 999;
+  transition: right 0.3s ease;
+  border-left: 1px solid #334155;
 }
 
 .sidebar.active {
-    right: 0;
+  right: 0;
+}
+
+.sidebar-content {
+  padding: 2rem;
 }
 
 .sidebar-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
 }
 
 .sidebar-logo {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 1.25rem;
-    font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: bold;
 }
 
 .sidebar-close {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 2rem;
-    cursor: pointer;
-    padding: 0;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .sidebar-menu {
-    list-style: none;
-    margin-bottom: 2rem;
+  list-style: none;
+  margin-bottom: 2rem;
 }
 
 .sidebar-menu li {
-    margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 
 .sidebar-link {
-    color: rgba(255, 255, 255, 0.8);
-    text-decoration: none;
-    font-size: 1.1rem;
-    display: block;
-    padding: 0.5rem 0;
-    transition: color 0.3s ease;
+  color: #cbd5e1;
+  text-decoration: none;
+  font-size: 1.1rem;
+  display: block;
+  padding: 0.5rem 0;
+  transition: color 0.3s ease;
 }
 
 .sidebar-link:hover {
-    color: #4f9cf9;
+  color: #60a5fa;
 }
 
 .sidebar-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 /* Main Content */
 .main-content {
-    margin-top: 80px;
-    min-height: calc(100vh - 80px);
-    display: flex;
-    align-items: center;
+  margin-top: 80px;
+  min-height: calc(100vh - 80px);
+  display: flex;
+  align-items: center;
 }
 
+/* Hero Section */
 .hero {
-    width: 100%;
-    padding: 4rem 0;
+  width: 100%;
+  padding: 4rem 0;
 }
 
 .hero-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-    text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  text-align: center;
 }
 
 .hero-title {
-    font-size: 3.5rem;
-    font-weight: 700;
-    line-height: 1.2;
-    margin-bottom: 1.5rem;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
 }
 
 .hero-highlight {
-    color: #4f9cf9;
+  color: #60a5fa;
 }
 
 .hero-description {
-    font-size: 1.2rem;
-    color: rgba(255, 255, 255, 0.8);
-    max-width: 600px;
-    margin: 0 auto 3rem;
-    line-height: 1.6;
+  font-size: 1.2rem;
+  color: #cbd5e1;
+  max-width: 600px;
+  margin: 0 auto 3rem;
+  line-height: 1.6;
 }
 
 /* Contact Form */
 .contact-form {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    width: 300px;
-    margin: 0 auto;
-    backdrop-filter: blur(10px);
-    padding: 2rem;
+  background: rgba(30, 41, 59, 0.5);
+  border: 1px solid #334155;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  backdrop-filter: blur(10px);
+  padding: 2rem;
 }
-.contact-form form {
-}
+
 .form-title {
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-    color: rgba(255, 255, 255, 0.9);
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: #f1f5f9;
 }
 
 .form-row {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 1rem;
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
 }
 
 .form-input {
-    flex: 1;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 6px;
-    padding: 0.75rem;
-    color: white;
-    font-size: 1rem;
+  flex: 1;
+  background: rgba(51, 65, 85, 0.5);
+  border: 1px solid #475569;
+  border-radius: 6px;
+  padding: 0.75rem;
+  color: white;
+  font-size: 1rem;
+  width: 100%;
 }
 
 .form-input::placeholder {
-    color: rgba(255, 255, 255, 0.5);
+  color: #94a3b8;
 }
 
 .form-input:focus {
-    outline: none;
-    border-color: #4f9cf9;
-    background: rgba(255, 255, 255, 0.15);
+  outline: none;
+  border-color: #60a5fa;
+  background: rgba(51, 65, 85, 0.7);
 }
 
 .btn-whatsapp {
-    width: 100%;
-    background: #4f9cf9;
-    color: white;
-    border: none;
-    padding: 0.75rem;
-    border-radius: 6px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.3s ease;
+  width: 100%;
+  background: #3b82f6;
+  color: #0f172a;
+  border: none;
+  padding: 0.75rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
 }
 
 .btn-whatsapp:hover {
-    background: #3b82f6;
+  background: #60a5fa;
 }
 
-.chat-button:hover {
-    transform: scale(1.1);
-    box-shadow: 0 6px 25px rgba(79, 156, 249, 0.4);
+/* About Section */
+.about {
+  padding: 5rem 2rem;
+}
+
+.about-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  color: #60a5fa;
+}
+
+.about-description {
+  font-size: 1.2rem;
+  color: #cbd5e1;
+  max-width: 800px;
+  margin: 0 auto 3rem;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.about-card {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+}
+
+.about-card:hover {
+  border-color: #3b82f6;
+  transform: translateY(-8px);
+}
+
+.about-icon {
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  border-radius: 12px;
+  margin: 0 auto 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-card h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #60a5fa;
+}
+
+.about-card p {
+  color: #cbd5e1;
+}
+
+.location-card {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 2rem;
+}
+
+.location-card h3 {
+  color: #60a5fa;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.location-card p {
+  color: #f1f5f9;
+  font-size: 1.1rem;
+}
+
+/* Services Section */
+.services {
+  padding: 5rem 2rem;
+}
+
+.services-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.service-card {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+}
+
+.service-card:hover {
+  border-color: #3b82f6;
+  transform: translateY(-4px);
+}
+
+.service-icon {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.service-card h3 {
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+  color: #60a5fa;
+}
+
+.service-card p {
+  color: #cbd5e1;
+  margin-bottom: 1rem;
+}
+
+.service-features {
+  list-style: none;
+}
+
+.service-features li {
+  color: #94a3b8;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  padding-left: 1rem;
+  position: relative;
+}
+
+.service-features li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #60a5fa;
+}
+
+/* Technologies Section */
+.technologies {
+  padding: 5rem 2rem;
+  background: #1e293b;
+}
+
+.tech-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.tech-description {
+  color: #cbd5e1;
+  margin-bottom: 3rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.tech-item {
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.tech-item:hover {
+  border-color: #3b82f6;
+  transform: translateY(-4px);
+}
+
+.tech-item h4 {
+  color: #60a5fa;
+  font-weight: 600;
+}
+
+/* Projects Section */
+.projects {
+  padding: 5rem 2rem;
+}
+
+.projects-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+.project-card {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.project-card:hover {
+  border-color: #3b82f6;
+  transform: translateY(-4px);
+}
+
+.project-image {
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(135deg, #334155, #1e293b);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+}
+
+.project-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.project-content {
+  padding: 1.5rem;
+}
+
+.project-domain {
+  color: #60a5fa;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.project-title {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.project-description {
+  color: #cbd5e1;
+  font-size: 0.9rem;
+}
+
+/* Partners Section */
+.partners {
+  padding: 5rem 2rem;
+  background: #1e293b;
+  text-align: center;
+}
+
+.partners-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.partners-description {
+  color: #cbd5e1;
+  margin-bottom: 2rem;
+}
+
+.partners-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+}
+
+.partner-card {
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+}
+
+.partner-card:hover {
+  border-color: #3b82f6;
+}
+
+.partner-logo {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  border-radius: 8px;
+  margin: 0 auto 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.partner-card h4 {
+  font-weight: 600;
+  color: white;
+  margin-bottom: 0.5rem;
+}
+
+.partner-card p {
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+
+/* Testimonials Section */
+.testimonials {
+  padding: 5rem 2rem;
+}
+
+.testimonials-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 2rem;
+}
+
+.testimonial-card {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 2rem;
+}
+
+.testimonial-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.testimonial-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #475569;
+  margin-right: 1rem;
+}
+
+.testimonial-info h4 {
+  margin-bottom: 0.25rem;
+  color: white;
+}
+
+.testimonial-info p {
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+
+.testimonial-text {
+  color: #cbd5e1;
+  font-style: italic;
+}
+
+/* Pricing Section */
+.pricing {
+  padding: 5rem 2rem;
+  background: #1e293b;
+}
+
+.pricing-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.pricing-description {
+  color: #cbd5e1;
+  margin-bottom: 3rem;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.pricing-card {
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 2rem;
+  position: relative;
+}
+
+.pricing-card.featured {
+  border-color: #3b82f6;
+}
+
+.pricing-badge {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #3b82f6;
+  color: #0f172a;
+  padding: 0.25rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.pricing-card h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.pricing-price {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #60a5fa;
+}
+
+.pricing-period {
+  color: #94a3b8;
+  margin-bottom: 1.5rem;
+}
+
+.pricing-features {
+  list-style: none;
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.pricing-features li {
+  margin-bottom: 0.75rem;
+  padding-left: 1.5rem;
+  position: relative;
+  color: #f1f5f9;
+}
+
+.pricing-features li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #60a5fa;
+}
+
+.pricing-btn {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+/* Contact Section */
+.contact {
+  padding: 5rem 2rem;
+}
+
+.contact-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.contact-form-full {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 2rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 0.5rem;
+  color: #f1f5f9;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  background: #334155;
+  border: 1px solid #475569;
+  border-radius: 6px;
+  padding: 0.75rem;
+  color: white;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #60a5fa;
+}
+
+.form-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.form-buttons button {
+  flex: 1;
+  padding: 0.75rem;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+/* Footer */
+.footer {
+  background: #1e293b;
+  border-top: 1px solid #334155;
+  padding: 3rem 2rem 2rem;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.footer-section h3 {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  color: #60a5fa;
+}
+
+.footer-section p,
+.footer-section a {
+  color: #cbd5e1;
+  text-decoration: none;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.footer-section a:hover {
+  color: #60a5fa;
+}
+
+.footer-bottom {
+  border-top: 1px solid #334155;
+  padding-top: 2rem;
+  text-align: center;
+  color: #64748b;
+}
+
+.footer-bottom p {
+  margin-bottom: 0.5rem;
+}
+
+.footer-bottom a {
+  color: #64748b;
+  text-decoration: none;
+  margin: 0 1rem;
+}
+
+.footer-bottom a:hover {
+  color: #60a5fa;
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.social-links a {
+  width: 40px;
+  height: 40px;
+  background: #334155;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #94a3b8;
+  transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+  background: #3b82f6;
+  color: #0f172a;
+}
+
+/* WhatsApp Float Button */
+.whatsapp-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+  z-index: 1000;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: white;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.1);
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .nav-menu,
-    .nav-buttons {
-        display: none;
-    }
+  .nav-menu,
+  .nav-buttons {
+    display: none;
+  }
 
-    .hamburger {
-        display: flex;
-    }
+  .hamburger {
+    display: flex;
+  }
 
-    .nav-container {
-        padding: 0 1rem;
-    }
+  .nav-container {
+    padding: 0 1rem;
+  }
 
-    .hero-container {
-        padding: 0 1rem;
-    }
+  .hero-container {
+    padding: 0 1rem;
+  }
 
-    .hero-title {
-        font-size: 2.5rem;
-    }
+  .hero-title {
+    font-size: 2.5rem;
+  }
 
-    .hero-description {
-        font-size: 1.1rem;
-    }
+  .hero-description {
+    font-size: 1.1rem;
+  }
 
-  
+  .form-row {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
 
-    .form-row {
-        flex-direction: column;
-        gap: 0.75rem;
-    }
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
 
-    .chat-button {
-        bottom: 1rem;
-        right: 1rem;
-        width: 50px;
-        height: 50px;
-    }
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-buttons {
+    flex-direction: column;
+  }
+
+  .whatsapp-float {
+    bottom: 1rem;
+    right: 1rem;
+    width: 50px;
+    height: 50px;
+  }
 }
 
 @media (max-width: 480px) {
-    .hero-title {
-        font-size: 2rem;
-    }
+  .hero-title {
+    font-size: 2rem;
+  }
 
-    .hero-description {
-        font-size: 1rem;
-    }
+  .hero-description {
+    font-size: 1rem;
+  }
 
-    .sidebar {
-        width: 280px;
-        right: -280px;
-    }
+  .sidebar {
+    width: 280px;
+    right: -280px;
+  }
+
+  .contact-form {
+    padding: 1.5rem;
+  }
 }
 
 @media (min-width: 1400px) {
-    .hero-title {
-        font-size: 4rem;
-    }
+  .hero-title {
+    font-size: 4rem;
+  }
 
-    .hero-description {
-        font-size: 1.3rem;
-    }
+  .hero-description {
+    font-size: 1.3rem;
+  }
 }
-</style>
-   <!-- Navigation -->
-   <nav class="navbar">
-    <div class="nav-container">
-        <!-- Logo -->
-        <div class="nav-logo">
-            <span class="logo-icon">◆</span>
-            <span class="logo-text">NEOSITIO</span>
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+    </style>
+</head>
+<body>
+    <!-- Canvas de partículas tipo araña -->
+    <canvas id="spider-particles" style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0;pointer-events:none;"></canvas>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <!-- Logo -->
+            <div class="nav-logo">
+                <span class="logo-icon">◆</span>
+                <span class="logo-text">NEOSITIO</span>
+            </div>
+
+            <!-- Desktop Menu -->
+            <ul class="nav-menu">
+                <li><a href="#servicios" class="nav-link">Servicios</a></li>
+                <li><a href="#tecnologias" class="nav-link">Tecnologías</a></li>
+                <li><a href="#proyectos" class="nav-link">Proyectos</a></li>
+                <li><a href="#precios" class="nav-link">Precios</a></li>
+                <li><a href="#contacto" class="nav-link">Contacto</a></li>
+            </ul>
+
+            <!-- Desktop Buttons -->
+            <div class="nav-buttons">
+                <button class="btn-secondary">Iniciar Sesión</button>
+                <button class="btn-primary">Comenzar</button>
+            </div>
+
+            <!-- Mobile Hamburger -->
+            <button class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
         </div>
+    </nav>
 
-        <!-- Desktop Menu -->
-        <ul class="nav-menu">
-            <li class="nav-item">
-                <a href="#servicios" class="nav-link">Servicios</a>
-            </li>
-            <li class="nav-item">
-                <a href="#tecnologias" class="nav-link">Tecnologías</a>
-            </li>
-            <li class="nav-item">
-                <a href="#proyectos" class="nav-link">Proyectos</a>
-            </li>
-            <li class="nav-item">
-                <a href="#precios" class="nav-link">Precios</a>
-            </li>
-            <li class="nav-item">
-                <a href="#contacto" class="nav-link">Contacto</a>
-            </li>
-        </ul>
-
-        <!-- Desktop Buttons -->
-        <div class="nav-buttons">
-            <button class="btn-secondary">Iniciar Sesión</button>
-            <button class="btn-primary">Comenzar</button>
-        </div>
-
-        <!-- Mobile Hamburger -->
-        <div class="hamburger">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
+    <!-- Mobile Sidebar -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-content">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <span class="logo-icon">◆</span>
+                    <span class="logo-text">NEOSITIO</span>
+                </div>
+                <button class="sidebar-close" id="sidebarClose">&times;</button>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="#servicios" class="sidebar-link">Servicios</a></li>
+                <li><a href="#tecnologias" class="sidebar-link">Tecnologías</a></li>
+                <li><a href="#proyectos" class="sidebar-link">Proyectos</a></li>
+                <li><a href="#precios" class="sidebar-link">Precios</a></li>
+                <li><a href="#contacto" class="sidebar-link">Contacto</a></li>
+            </ul>
+            <div class="sidebar-buttons">
+                <button class="btn-secondary">Iniciar Sesión</button>
+                <button class="btn-primary">Comenzar</button>
+            </div>
         </div>
     </div>
-</nav>
 
-<!-- Mobile Sidebar -->
-<div class="sidebar-overlay"></div>
-<div class="sidebar">
-    <div class="sidebar-header">
-        <div class="sidebar-logo">
-            <span class="logo-icon">◆</span>
-            <span class="logo-text">NEOSITIO</span>
-        </div>
-        <button class="sidebar-close">&times;</button>
-    </div>
-    <ul class="sidebar-menu">
-        <li><a href="#servicios" class="sidebar-link">Servicios</a></li>
-        <li><a href="#tecnologias" class="sidebar-link">Tecnologías</a></li>
-        <li><a href="#proyectos" class="sidebar-link">Proyectos</a></li>
-        <li><a href="#precios" class="sidebar-link">Precios</a></li>
-        <li><a href="#contacto" class="sidebar-link">Contacto</a></li>
-    </ul>
-    <div class="sidebar-buttons">
-        <button class="btn-secondary">Iniciar Sesión</button>
-        <button class="btn-primary">Comenzar</button>
-    </div>
-</div>
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-container">
+                <h1 class="hero-title">
+                    Transformamos ideas en <span class="hero-highlight">realidad digital</span>
+                </h1>
+                <p class="hero-description">
+                    NEOSITIO te permite crear experiencias digitales extraordinarias que impulsan el crecimiento de tu negocio. Desde dominios hasta aplicaciones completas.
+                </p>
 
-<!-- Main Content -->
-<main class="main-content">
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-container">
-            <h1 class="hero-title">
-                Transformamos ideas en
-                <span class="hero-highlight">realidad digital</span>
-            </h1>
-            <p class="hero-description">
-                NEOSITIO te permite crear experiencias digitales extraordinarias que
-                impulsan el crecimiento de tu negocio. Desde dominios hasta
-                aplicaciones completas.
+                <!-- Contact Form -->
+                <div class="contact-form">
+                    <h3 class="form-title">Comienza tu proyecto ahora</h3>
+                    <form id="heroForm">
+                        <div class="form-row">
+                            <input type="email" placeholder="tu@email.com" class="form-input" required>
+                            <input type="tel" placeholder="+504 9999 9999" class="form-input" required>
+                        </div>
+                        <button type="submit" class="btn-whatsapp">Contactar por WhatsApp</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- About Section -->
+    <section id="nosotros" class="about">
+        <div class="about-container">
+            <h2 class="section-title">Sobre Nosotros</h2>
+            <p class="about-description">
+                Llegamos para que todo emprendedor tenga una web a nivel de las grandes compañías a un precio accesible. Desde Honduras, conectamos tu negocio con el mundo digital.
             </p>
-
-            <!-- Contact Form -->
-            <div class="contact-form">
-                <h3 class="form-title">Comienza tu proyecto ahora</h3>
-                <form class="form">
-                    <div class="form-row">
-                        <input type="email" placeholder="tu@email.com" class="form-input" required>
-                        <input type="tel" placeholder="+504 9999 9999" class="form-input" required>
+            <div class="about-grid">
+                <div class="about-card">
+                    <div class="about-icon">
+                        <i data-feather="layers"></i>
                     </div>
-                    <button type="submit" class="btn-whatsapp">Contactar por WhatsApp</button>
+                    <h3>Nuestra Misión</h3>
+                    <p>Democratizar el acceso a tecnología de clase mundial, permitiendo que cada emprendedor compita en igualdad de condiciones con las grandes corporaciones.</p>
+                </div>
+                <div class="about-card">
+                    <div class="about-icon">
+                        <i data-feather="layers"></i>
+                    </div>
+                    <h3>Nuestra Visión</h3>
+                    <p>Ser la empresa líder en soluciones digitales de Centroamérica, reconocida por la excelencia técnica y el compromiso con el éxito de nuestros clientes.</p>
+                </div>
+                <div class="about-card">
+                    <div class="about-icon">
+                        <i data-feather="layers"></i>
+                    </div>
+                    <h3>Nuestros Valores</h3>
+                    <p>Innovación constante, transparencia total, calidad sin compromisos y un servicio al cliente que supera expectativas en cada proyecto.</p>
+                </div>
+            </div>
+            <div class="location-card">
+                <h3>📍 Nuestra Ubicación</h3>
+                <p>
+                    <strong>NEOSITIO</strong><br>
+                    Boulevard Morazán, Torre Morazán<br>
+                    Piso 8, Oficina 20817<br>
+                    Tegucigalpa, Honduras
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servicios" class="services">
+        <div class="services-container">
+            <h2 class="section-title">Servicios de Excelencia</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i data-feather="layers"></i>
+                    </div>
+                    <h3>Dominios Premium</h3>
+                    <p>Registro y gestión de dominios con extensiones .com, .hn, .org y más. Protección WHOIS incluida para máxima seguridad.</p>
+                    <ul class="service-features">
+                        <li>Renovación automática</li>
+                        <li>DNS personalizado</li>
+                        <li>Certificados SSL gratuitos</li>
+                        <li>Protección de privacidad</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i data-feather="layers"></i>
+                    </div>
+                    <h3>Correos Corporativos</h3>
+                    <p>Cuentas de email profesionales con tu dominio. Almacenamiento ilimitado y sincronización multiplataforma.</p>
+                    <ul class="service-features">
+                        <li>Filtros antispam avanzados</li>
+                        <li>Respaldo automático</li>
+                        <li>Acceso móvil completo</li>
+                        <li>Integración con calendarios</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i data-feather="layers"></i>
+                    </div>
+                    <h3>Rediseño Web</h3>
+                    <p>Modernización completa de sitios web existentes. UX/UI optimizado para conversiones y experiencia de usuario superior.</p>
+                    <ul class="service-features">
+                        <li>Análisis de usabilidad</li>
+                        <li>Diseño responsive</li>
+                        <li>Optimización SEO</li>
+                        <li>Mejora de velocidad</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i data-feather="layers"></i>
+                    </div>
+                    <h3>Desarrollo Full Stack</h3>
+                    <p>Aplicaciones web completas con tecnologías modernas. Frontend y backend personalizados para tu negocio.</p>
+                    <ul class="service-features">
+                        <li>React/Next.js</li>
+                        <li>Node.js/Python</li>
+                        <li>Bases de datos optimizadas</li>
+                        <li>APIs RESTful</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i data-feather="layers"></i>
+                    </div>
+                    <h3>Hosting Premium</h3>
+                    <p>Servidores de alta disponibilidad con CDN global. Uptime garantizado del 99.9% y soporte técnico 24/7.</p>
+                    <ul class="service-features">
+                        <li>Backups diarios automáticos</li>
+                        <li>Monitoreo 24/7</li>
+                        <li>CDN global incluido</li>
+                        <li>Soporte técnico especializado</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i data-feather="layers"></i>
+                    </div>
+                    <h3>Apps Móviles</h3>
+                    <p>Desarrollo de aplicaciones nativas e híbridas para iOS y Android con tecnologías de vanguardia.</p>
+                    <ul class="service-features">
+                        <li>React Native</li>
+                        <li>Flutter</li>
+                        <li>Progressive Web Apps</li>
+                        <li>Integración con APIs</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technologies Section -->
+    <section id="tecnologias" class="technologies">
+        <div class="tech-container">
+            <h2 class="section-title">Tecnologías Vanguardistas</h2>
+            <p class="tech-description">
+                Utilizamos las herramientas más avanzadas del mercado para crear soluciones robustas, escalables y orientadas al futuro digital.
+            </p>
+            <div class="tech-grid">
+                <div class="tech-item"><h4>React</h4></div>
+                <div class="tech-item"><h4>Next.js</h4></div>
+                <div class="tech-item"><h4>Node.js</h4></div>
+                <div class="tech-item"><h4>Python</h4></div>
+                <div class="tech-item"><h4>TypeScript</h4></div>
+                <div class="tech-item"><h4>MongoDB</h4></div>
+                <div class="tech-item"><h4>PostgreSQL</h4></div>
+                <div class="tech-item"><h4>AWS</h4></div>
+                <div class="tech-item"><h4>Docker</h4></div>
+                <div class="tech-item"><h4>GraphQL</h4></div>
+                <div class="tech-item"><h4>Tailwind</h4></div>
+                <div class="tech-item"><h4>Firebase</h4></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="proyectos" class="projects">
+        <div class="projects-container">
+            <h2 class="section-title">Nuestros Proyectos</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://preview-neositio-clone-kzmn7rco5knfsn9jmxdh.vusercontent.net/placeholder.svg?height=200&width=400&text=Project+Image" alt="Proyecto" />
+                    </div>
+                    <div class="project-content">
+                        <div class="project-domain">techsolutions.hn</div>
+                        <h3 class="project-title">TechSolutions Enterprise</h3>
+                        <p class="project-description">Plataforma empresarial completa para gestión de recursos humanos con integración de nómina, control de asistencia y reportes avanzados.</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://preview-neositio-clone-kzmn7rco5knfsn9jmxdh.vusercontent.net/placeholder.svg?height=200&width=400&text=Project+Image" alt="Proyecto" />
+                    </div>
+                    <div class="project-content">
+                        <div class="project-domain">inmobiliariaelite.com</div>
+                        <h3 class="project-title">Inmobiliaria Elite</h3>
+                        <p class="project-description">Portal inmobiliario con búsqueda avanzada, tours virtuales 360°, sistema de citas y CRM integrado para agentes.</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://preview-neositio-clone-kzmn7rco5knfsn9jmxdh.vusercontent.net/placeholder.svg?height=200&width=400&text=Project+Image" alt="Proyecto" />
+                    </div>
+                    <div class="project-content">
+                        <div class="project-domain">autoservicepro.com</div>
+                        <h3 class="project-title">AutoService Pro</h3>
+                        <p class="project-description">Sistema de gestión para talleres automotrices con control de inventario, citas, facturación y seguimiento de servicios.</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://preview-neositio-clone-kzmn7rco5knfsn9jmxdh.vusercontent.net/placeholder.svg?height=200&width=400&text=Project+Image" alt="Proyecto" />
+                    </div>
+                    <div class="project-content">
+                        <div class="project-domain">mediconnect.hn</div>
+                        <h3 class="project-title">MediConnect</h3>
+                        <p class="project-description">Plataforma de telemedicina con videoconsultas, expedientes digitales, recetas electrónicas y sistema de pagos integrado.</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://preview-neositio-clone-kzmn7rco5knfsn9jmxdh.vusercontent.net/placeholder.svg?height=200&width=400&text=Project+Image" alt="Proyecto" />
+                    </div>
+                    <div class="project-content">
+                        <div class="project-domain">eduplatform.edu.hn</div>
+                        <h3 class="project-title">EduPlatform</h3>
+                        <p class="project-description">Sistema de gestión educativa con aulas virtuales, evaluaciones en línea, seguimiento académico y comunicación padres-escuela.</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://preview-neositio-clone-kzmn7rco5knfsn9jmxdh.vusercontent.net/placeholder.svg?height=200&width=400&text=Project+Image" alt="Proyecto" />
+                    </div>
+                    <div class="project-content">
+                        <div class="project-domain">restaurantepremium.com</div>
+                        <h3 class="project-title">Restaurante Premium</h3>
+                        <p class="project-description">Sitio web gastronómico con reservas en línea, menú digital interactivo, sistema de pedidos y delivery integrado.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section class="partners">
+        <div class="partners-container">
+            <h2 class="section-title">Nuestros Partners</h2>
+            <p class="partners-description">Colaboramos con las mejores empresas tecnológicas del mundo</p>
+            <div class="partners-grid">
+                <div class="partner-card">
+                    <div class="partner-logo">
+                        <i data-feather="layers"></i>
+                    </div>
+                    <h4>AWS</h4>
+                    <p>Amazon Web Services</p>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-logo">
+                        <i data-feather="layers"></i>
+                    </div>
+                    <h4>Google Cloud</h4>
+                    <p>Google Cloud Platform</p>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-logo">
+                        <i data-feather="layers"></i>
+                    </div>
+                    <h4>Microsoft</h4>
+                    <p>Microsoft Azure</p>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-logo">
+                        <i data-feather="layers"></i>
+                    </div>
+                    <h4>Vercel</h4>
+                    <p>Frontend Cloud</p>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-logo">
+                        <i data-feather="layers"></i>
+                    </div>
+                    <h4>Netlify</h4>
+                    <p>Web Development Platform</p>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-logo">
+                        <i data-feather="layers"></i>
+                    </div>
+                    <h4>Cloudflare</h4>
+                    <p>Web Performance & Security</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="testimonials-container">
+            <h2 class="section-title">Nuestros Fundadores</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar"></div>
+                        <div class="testimonial-info">
+                            <h4>Gustavo Zelaya</h4>
+                            <p>Gerente de Ventas • NEOSITIO</p>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">
+                        "Como gerente de ventas, he visto cómo nuestras soluciones transforman negocios. Cada proyecto es una oportunidad de crear valor real para nuestros clientes. La satisfacción del cliente es nuestro mayor activo y motor de innovación."
+                    </p>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar"></div>
+                        <div class="testimonial-info">
+                            <h4>David Maldonado</h4>
+                            <p>Desarrollador Full Stack • NEOSITIO</p>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">
+                        "La excelencia técnica es nuestro ADN. Cada línea de código que escribimos está pensada para crear experiencias excepcionales. Trabajamos con las mejores tecnologías para entregar resultados que superan expectativas."
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="precios" class="pricing">
+        <div class="pricing-container">
+            <h2 class="section-title">Precios Transparentes</h2>
+            <p class="pricing-description">Planes diseñados para cada etapa de tu negocio</p>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Starter</h3>
+                    <div class="pricing-price">L. 12,500</div>
+                    <div class="pricing-period">por proyecto</div>
+                    <ul class="pricing-features">
+                        <li>Sitio web responsive</li>
+                        <li>Dominio .com incluido</li>
+                        <li>3 correos corporativos</li>
+                        <li>Hosting por 1 año</li>
+                        <li>Certificado SSL</li>
+                        <li>Soporte 24/7</li>
+                    </ul>
+                    <button class="btn-secondary pricing-btn">Comenzar</button>
+                </div>
+
+                <div class="pricing-card featured">
+                    <div class="pricing-badge">Más Popular</div>
+                    <h3>Professional</h3>
+                    <div class="pricing-price">L. 25,000</div>
+                    <div class="pricing-period">por proyecto</div>
+                    <ul class="pricing-features">
+                        <li>Aplicación web completa</li>
+                        <li>Dominio premium</li>
+                        <li>10 correos corporativos</li>
+                        <li>Hosting premium por 1 año</li>
+                        <li>Base de datos incluida</li>
+                        <li>SEO optimizado</li>
+                        <li>Panel de administración</li>
+                        <li>Soporte prioritario</li>
+                    </ul>
+                    <button class="btn-primary pricing-btn">Comenzar</button>
+                </div>
+
+                <div class="pricing-card">
+                    <h3>Enterprise</h3>
+                    <div class="pricing-price">L. 50,000</div>
+                    <div class="pricing-period">por proyecto</div>
+                    <ul class="pricing-features">
+                        <li>Desarrollo full-stack</li>
+                        <li>Múltiples dominios</li>
+                        <li>Correos ilimitados</li>
+                        <li>Infraestructura cloud</li>
+                        <li>API personalizada</li>
+                        <li>Integración con terceros</li>
+                        <li>Aplicación móvil</li>
+                        <li>Consultoría estratégica</li>
+                        <li>Soporte dedicado</li>
+                    </ul>
+                    <button class="btn-secondary pricing-btn">Comenzar</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contacto" class="contact">
+        <div class="contact-container">
+            <h2 class="section-title">Hablemos de tu Proyecto</h2>
+            <div class="contact-form-full">
+                <form id="contactForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="name">Nombre Completo</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="phone">Teléfono</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="service">Servicio de Interés</label>
+                            <select id="service" name="service" required>
+                                <option value="">Selecciona un servicio</option>
+                                <option value="web-development">Desarrollo Web</option>
+                                <option value="domain-hosting">Dominio y Hosting</option>
+                                <option value="email-corporate">Correos Corporativos</option>
+                                <option value="redesign">Rediseño Web</option>
+                                <option value="mobile-app">Aplicación Móvil</option>
+                                <option value="consulting">Consultoría</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Mensaje</label>
+                        <textarea id="message" name="message" placeholder="Cuéntanos sobre tu proyecto..." required></textarea>
+                    </div>
+                    <div class="form-buttons">
+                        <button type="submit" class="btn-primary">Enviar por WhatsApp</button>
+                        <button type="button" class="btn-secondary" id="emailBtn">Enviar por Email</button>
+                    </div>
                 </form>
             </div>
         </div>
     </section>
-</main>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-    // Elements
-    const hamburger = document.querySelector('.hamburger');
-    const sidebar = document.querySelector('.sidebar');
-    const sidebarOverlay = document.querySelector('.sidebar-overlay');
-    const sidebarClose = document.querySelector('.sidebar-close');
-    const sidebarLinks = document.querySelectorAll('.sidebar-link');
-    const chatButton = document.querySelector('.chat-button');
-    const contactForm = document.querySelector('.form');
 
-    // Toggle sidebar
-    function toggleSidebar() {
-        hamburger.classList.toggle('active');
-        sidebar.classList.toggle('active');
-        sidebarOverlay.classList.toggle('active');
-        document.body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : '';
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>NEOSITIO</h3>
+                    <p>Transformamos ideas en experiencias digitales extraordinarias. Tu socio tecnológico de confianza para el éxito en el mundo digital desde Honduras.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">
+                            <i data-feather="layers"></i>
+                        </a>
+                        <a href="#" aria-label="Twitter">
+                            <i data-feather="layers"></i>
+                        </a>
+                        <a href="#" aria-label="LinkedIn">
+                            <i data-feather="layers"></i>
+                        </a>
+                        <a href="#" aria-label="Instagram">
+                            <i data-feather="layers"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Servicios</h3>
+                    <a href="#servicios">Desarrollo Web</a>
+                    <a href="#servicios">Dominios Premium</a>
+                    <a href="#servicios">Correos Corporativos</a>
+                    <a href="#servicios">Rediseño Web</a>
+                    <a href="#servicios">Aplicaciones Móviles</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Tecnologías</h3>
+                    <a href="#tecnologias">React & Next.js</a>
+                    <a href="#tecnologias">Node.js & Python</a>
+                    <a href="#tecnologias">Bases de Datos</a>
+                    <a href="#tecnologias">Cloud & DevOps</a>
+                    <a href="#tecnologias">Mobile Development</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <p>📧 contacto@neositio.hn</p>
+                    <p>📱 +504 9999-9999</p>
+                    <p>📍 Boulevard Morazán, Torre Morazán</p>
+                    <p>🏢 Piso 8, Oficina 20817</p>
+                    <p>🇭🇳 Tegucigalpa, Honduras</p>
+                    <p>🕒 Lun-Vie: 8:00-17:00</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 NEOSITIO. Todos los derechos reservados.</p>
+                <p>
+                    <a href="#">Términos de Servicio</a>
+                    <a href="#">Política de Privacidad</a>
+                    <a href="#">Cookies</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/50499999999" class="whatsapp-float" target="_blank" aria-label="WhatsApp">
+        <i data-feather="message-circle"></i>
+    </a>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+  // Elements
+  const hamburger = document.getElementById("hamburger")
+  const sidebar = document.getElementById("sidebar")
+  const sidebarOverlay = document.getElementById("sidebarOverlay")
+  const sidebarClose = document.getElementById("sidebarClose")
+  const sidebarLinks = document.querySelectorAll(".sidebar-link")
+  const heroForm = document.getElementById("heroForm")
+  const contactForm = document.getElementById("contactForm")
+  const emailBtn = document.getElementById("emailBtn")
+  const navbar = document.querySelector(".navbar")
+  const feather = window.feather // Declare feather variable
+
+  // Toggle sidebar
+  function toggleSidebar() {
+    hamburger.classList.toggle("active")
+    sidebar.classList.toggle("active")
+    sidebarOverlay.classList.toggle("active")
+    document.body.style.overflow = sidebar.classList.contains("active") ? "hidden" : ""
+  }
+
+  // Close sidebar
+  function closeSidebar() {
+    hamburger.classList.remove("active")
+    sidebar.classList.remove("active")
+    sidebarOverlay.classList.remove("active")
+    document.body.style.overflow = ""
+  }
+
+  // Event listeners for sidebar
+  if (hamburger) hamburger.addEventListener("click", toggleSidebar)
+  if (sidebarClose) sidebarClose.addEventListener("click", closeSidebar)
+  if (sidebarOverlay) sidebarOverlay.addEventListener("click", closeSidebar)
+
+  // Close sidebar when clicking on links
+  sidebarLinks.forEach((link) => {
+    link.addEventListener("click", closeSidebar)
+  })
+
+  // Close sidebar on window resize
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 768) {
+      closeSidebar()
     }
+  })
 
-    // Close sidebar
-    function closeSidebar() {
-        hamburger.classList.remove('active');
-        sidebar.classList.remove('active');
-        sidebarOverlay.classList.remove('active');
-        document.body.style.overflow = '';
+  // Smooth scrolling for navigation links
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      e.preventDefault()
+      const target = document.querySelector(this.getAttribute("href"))
+      if (target) {
+        target.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        })
+      }
+    })
+  })
+
+  // Add scroll effect to navbar with gradient
+  window.addEventListener("scroll", () => {
+    if (navbar) {
+      if (window.scrollY > 50) {
+        navbar.style.background =
+          "linear-gradient(to right, rgba(15, 23, 42, 0.98), rgba(30, 41, 59, 0.98), rgba(15, 23, 42, 0.98))"
+      } else {
+        navbar.style.background =
+          "linear-gradient(to right, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.95))"
+      }
     }
+  })
 
-    // Event listeners
-    hamburger.addEventListener('click', toggleSidebar);
-    sidebarClose.addEventListener('click', closeSidebar);
-    sidebarOverlay.addEventListener('click', closeSidebar);
+  // Hero form submission
+  if (heroForm) {
+    heroForm.addEventListener("submit", function (e) {
+      e.preventDefault()
+      const email = this.querySelector('input[type="email"]').value
+      const phone = this.querySelector('input[type="tel"]').value
 
-    // Close sidebar when clicking on links
-    sidebarLinks.forEach(link => {
-        link.addEventListener('click', closeSidebar);
-    });
+      // Create WhatsApp message
+      const message = `Hola! Me interesa comenzar un proyecto.%0A%0AEmail: ${email}%0ATeléfono: ${phone}`
+      const whatsappUrl = `https://wa.me/50499999999?text=${message}`
 
+      // Open WhatsApp
+      window.open(whatsappUrl, "_blank")
+    })
+  }
 
-    // Close sidebar on window resize
-    window.addEventListener('resize', function() {
-        if (window.innerWidth > 768) {
-            closeSidebar();
+  // Contact form submission
+  if (contactForm) {
+    contactForm.addEventListener("submit", function (e) {
+      e.preventDefault()
+      const formData = new FormData(this)
+
+      // Create WhatsApp message
+      const name = formData.get("name")
+      const email = formData.get("email")
+      const phone = formData.get("phone")
+      const service = formData.get("service")
+      const message = formData.get("message")
+
+      const whatsappMessage = `Hola! Me interesa contactar con ustedes.%0A%0ANombre: ${name}%0AEmail: ${email}%0ATeléfono: ${phone}%0AServicio: ${service}%0AMensaje: ${message}`
+      const whatsappUrl = `https://wa.me/50499999999?text=${whatsappMessage}`
+
+      // Open WhatsApp
+      window.open(whatsappUrl, "_blank")
+    })
+  }
+
+  // Email button functionality
+  if (emailBtn) {
+    emailBtn.addEventListener("click", () => {
+      const formData = new FormData(contactForm)
+
+      // Create email content
+      const name = formData.get("name")
+      const email = formData.get("email")
+      const phone = formData.get("phone")
+      const service = formData.get("service")
+      const message = formData.get("message")
+
+      const subject = `Consulta de ${name} - ${service}`
+      const body = `Nombre: ${name}%0AEmail: ${email}%0ATeléfono: ${phone}%0AServicio: ${service}%0A%0AMensaje:%0A${message}`
+
+      // Open email client
+      window.location.href = `mailto:contacto@neositio.hn?subject=${subject}&body=${body}`
+    })
+  }
+
+  // Fade in animation on scroll
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: "0px 0px -50px 0px",
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("fade-in")
+      }
+    })
+  }, observerOptions)
+
+  // Observe all sections
+  document.querySelectorAll("section").forEach((section) => {
+    observer.observe(section)
+  })
+
+  // Add hover effects to cards
+  const cards = document.querySelectorAll(".service-card, .about-card, .project-card, .partner-card, .tech-item")
+  cards.forEach((card) => {
+    card.addEventListener("mouseenter", function () {
+      this.style.transform = "translateY(-8px)"
+    })
+
+    card.addEventListener("mouseleave", function () {
+      this.style.transform = "translateY(0)"
+    })
+  })
+
+  // Initialize feather icons after DOM is loaded
+  if (feather) {
+    feather.replace()
+  }
+})
+
+    </script>
+    <script>
+    // Partículas tipo araña
+    (function() {
+      const canvas = document.getElementById('spider-particles');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let w = window.innerWidth;
+      let h = window.innerHeight;
+      let particles = [];
+      const numParticles = 60;
+      const maxDist = 120;
+
+      function resize() {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+      }
+
+      function randomColor() {
+        return '#60a5fa';
+      }
+
+      function createParticles() {
+        particles = [];
+        for (let i = 0; i < numParticles; i++) {
+          particles.push({
+            x: Math.random() * w,
+            y: Math.random() * h,
+            r: 2 + Math.random() * 2,
+            dx: (Math.random() - 0.5) * 0.7,
+            dy: (Math.random() - 0.5) * 0.7,
+            color: randomColor()
+          });
         }
-    });
+      }
 
-    // Smooth scrolling for navigation links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+      function draw() {
+        ctx.clearRect(0, 0, w, h);
+        // Draw lines
+        for (let i = 0; i < particles.length; i++) {
+          for (let j = i + 1; j < particles.length; j++) {
+            const a = particles[i];
+            const b = particles[j];
+            const dist = Math.hypot(a.x - b.x, a.y - b.y);
+            if (dist < maxDist) {
+              ctx.save();
+              ctx.globalAlpha = 1 - dist / maxDist;
+              ctx.beginPath();
+              ctx.moveTo(a.x, a.y);
+              ctx.lineTo(b.x, b.y);
+              ctx.strokeStyle = '#60a5fa';
+              ctx.lineWidth = 1;
+              ctx.stroke();
+              ctx.restore();
             }
-        });
-    });
-
-    // Add scroll effect to navbar
-    window.addEventListener('scroll', function() {
-        const navbar = document.querySelector('.navbar');
-        if (window.scrollY > 50) {
-            navbar.style.background = 'rgba(26, 31, 54, 0.98)';
-        } else {
-            navbar.style.background = 'rgba(26, 31, 54, 0.95)';
+          }
         }
-    });
-});
-</script>
+        // Draw particles
+        for (const p of particles) {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, 2 * Math.PI);
+          ctx.fillStyle = p.color;
+          ctx.globalAlpha = 0.7;
+          ctx.fill();
+          ctx.globalAlpha = 1;
+          p.x += p.dx;
+          p.y += p.dy;
+          if (p.x < 0 || p.x > w) p.dx *= -1;
+          if (p.y < 0 || p.y > h) p.dy *= -1;
+        }
+        requestAnimationFrame(draw);
+      }
 
-
-
-
-
-<!-- About Section -->
-<section id="nosotros" class="about">
-    <h2>Sobre Nosotros</h2>
-    <p style="font-size: 1.2rem; color: #94a3b8; max-width: 800px; margin: 0 auto;">
-        Llegamos para que todo emprendedor tenga una web a nivel de las grandes compañías a un precio accesible.
-        Desde Honduras, conectamos tu negocio con el mundo digital.
-    </p>
-
-    <div class="about-content">
-        <div class="about-card">
-            <div class="about-icon">
-                <i data-feather="layers"></i>
-            </div>
-            <h3>Nuestra Misión</h3>
-            <p>Democratizar el acceso a tecnología de clase mundial, permitiendo que cada emprendedor compita en igualdad de condiciones con las grandes corporaciones.</p>
-        </div>
-
-        <div class="about-card">
-            <div class="about-icon">
-                <i data-feather="layers"></i>
-            </div>
-            <h3>Nuestra Visión</h3>
-            <p>Ser la empresa líder en soluciones digitales de Centroamérica, reconocida por la excelencia técnica y el compromiso con el éxito de nuestros clientes.</p>
-        </div>
-
-        <div class="about-card">
-            <div class="about-icon">
-                <i data-feather="layers"></i>
-            </div>
-            <h3>Nuestros Valores</h3>
-            <p>Innovación constante, transparencia total, calidad sin compromisos y un servicio al cliente que supera expectativas en cada proyecto.</p>
-        </div>
-    </div>
-
-    <div style="margin-top: 3rem; padding: 2rem; background: #1e293b; border-radius: 12px; border: 1px solid #334155;">
-        <h3 style="color: #10b981; margin-bottom: 1rem;">📍 Nuestra Ubicación</h3>
-        <p style="color: #cbd5e1; font-size: 1.1rem;">
-            <strong>NEOSITIO</strong><br>
-            Boulevard Morazán, Torre Morazán<br>
-            Piso 8, Oficina 20817<br>
-            Tegucigalpa, Honduras
-        </p>
-    </div>
-</section>
-
-<!-- Services Section -->
-<section id="servicios" class="services">
-    <h2 class="section-title">Servicios de Excelencia</h2>
-    <div class="services-grid">
-        <div class="service-card">
-            <div class="service-icon">
-                <i data-feather="layers"></i>
-            </div>
-            <h3>Dominios Premium</h3>
-            <p>Registro y gestión de dominios con extensiones .com, .hn, .org y más. Protección WHOIS incluida para máxima seguridad.</p>
-            <ul class="service-features">
-                <li>Renovación automática</li>
-                <li>DNS personalizado</li>
-                <li>Certificados SSL gratuitos</li>
-                <li>Protección de privacidad</li>
-            </ul>
-        </div>
-
-        <div class="service-card">
-            <div class="service-icon">
-                <i data-feather="layers"></i>
-            </div>
-            <h3>Correos Corporativos</h3>
-            <p>Cuentas de email profesionales con tu dominio. Almacenamiento ilimitado y sincronización multiplataforma.</p>
-            <ul class="service-features">
-                <li>Filtros antispam avanzados</li>
-                <li>Respaldo automático</li>
-                <li>Acceso móvil completo</li>
-                <li>Integración con calendarios</li>
-            </ul>
-        </div>
-
-        <div class="service-card">
-            <div class="service-icon">
-                <i data-feather="layers"></i>
-            </div>
-            <h3>Rediseño Web</h3>
-            <p>Modernización completa de sitios web existentes. UX/UI optimizado para conversiones y experiencia de usuario superior.</p>
-            <ul class="service-features">
-                <li>Análisis de usabilidad</li>
-                <li>Diseño responsive</li>
-                <li>Optimización SEO</li>
-                <li>Mejora de velocidad</li>
-            </ul>
-        </div>
-
-        <div class="service-card">
-            <div class="service-icon">
-                <i data-feather="layers"></i>
-            </div>
-            <h3>Desarrollo Full Stack</h3>
-            <p>Aplicaciones web completas con tecnologías modernas. Frontend y backend personalizados para tu negocio.</p>
-            <ul class="service-features">
-                <li>React/Next.js</li>
-                <li>Node.js/Python</li>
-                <li>Bases de datos optimizadas</li>
-                <li>APIs RESTful</li>
-            </ul>
-        </div>
-
-        <div class="service-card">
-            <div class="service-icon">
-                <i data-feather="layers"></i>
-            </div>
-            <h3>Hosting Premium</h3>
-            <p>Servidores de alta disponibilidad con CDN global. Uptime garantizado del 99.9% y soporte técnico 24/7.</p>
-            <ul class="service-features">
-                <li>Backups diarios automáticos</li>
-                <li>Monitoreo 24/7</li>
-                <li>CDN global incluido</li>
-                <li>Soporte técnico especializado</li>
-            </ul>
-        </div>
-
-        <div class="service-card">
-            <div class="service-icon">
-                <i data-feather="layers"></i>
-            </div>
-            <h3>Apps Móviles</h3>
-            <p>Desarrollo de aplicaciones nativas e híbridas para iOS y Android con tecnologías de vanguardia.</p>
-            <ul class="service-features">
-                <li>React Native</li>
-                <li>Flutter</li>
-                <li>Progressive Web Apps</li>
-                <li>Integración con APIs</li>
-            </ul>
-        </div>
-    </div>
-</section>
-
-<!-- Technologies Section -->
-<section id="tecnologias" class="technologies">
-    <div class="tech-container">
-        <h2 class="section-title">Tecnologías Vanguardistas</h2>
-        <p style="text-align: center; color: #94a3b8; margin-bottom: 3rem; max-width: 600px; margin-left: auto; margin-right: auto;">
-            Utilizamos las herramientas más avanzadas del mercado para crear soluciones robustas, escalables y orientadas al futuro digital.
-        </p>
-
-        <div class="tech-grid">
-            <div class="tech-item">
-                <h4>React</h4>
-            </div>
-            <div class="tech-item">
-                <h4>Next.js</h4>
-            </div>
-            <div class="tech-item">
-                <h4>Node.js</h4>
-            </div>
-            <div class="tech-item">
-                <h4>Python</h4>
-            </div>
-            <div class="tech-item">
-                <h4>TypeScript</h4>
-            </div>
-            <div class="tech-item">
-                <h4>MongoDB</h4>
-            </div>
-            <div class="tech-item">
-                <h4>PostgreSQL</h4>
-            </div>
-            <div class="tech-item">
-                <h4>AWS</h4>
-            </div>
-            <div class="tech-item">
-                <h4>Docker</h4>
-            </div>
-            <div class="tech-item">
-                <h4>GraphQL</h4>
-            </div>
-            <div class="tech-item">
-                <h4>Tailwind</h4>
-            </div>
-            <div class="tech-item">
-                <h4>Firebase</h4>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Projects Section -->
-<section id="proyectos" class="projects">
-    <h2 class="section-title">Nuestros Proyectos</h2>
-    <div class="projects-grid">
-        <div class="project-card">
-            <div class="project-image">
-                <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600&q=80" alt="Proyecto" style="width:100%;height:200px;object-fit:cover;border-radius:8px;" />
-            </div>
-            <div class="project-content">
-                <div class="project-domain">techsolutions.hn</div>
-                <h3 class="project-title">TechSolutions Enterprise</h3>
-                <p class="project-description">Plataforma empresarial completa para gestión de recursos humanos con integración de nómina, control de asistencia y reportes avanzados.</p>
-            </div>
-        </div>
-
-        <div class="project-card">
-            <div class="project-image">
-                <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600&q=80" alt="Proyecto" style="width:100%;height:200px;object-fit:cover;border-radius:8px;" />
-            </div>
-            <div class="project-content">
-                <div class="project-domain">inmobiliariaelite.com</div>
-                <h3 class="project-title">Inmobiliaria Elite</h3>
-                <p class="project-description">Portal inmobiliario con búsqueda avanzada, tours virtuales 360°, sistema de citas y CRM integrado para agentes.</p>
-            </div>
-        </div>
-
-        <div class="project-card">
-            <div class="project-image">
-                <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600&q=80" alt="Proyecto" style="width:100%;height:200px;object-fit:cover;border-radius:8px;" />
-            </div>
-            <div class="project-content">
-                <div class="project-domain">autoservicepro.com</div>
-                <h3 class="project-title">AutoService Pro</h3>
-                <p class="project-description">Sistema de gestión para talleres automotrices con control de inventario, citas, facturación y seguimiento de servicios.</p>
-            </div>
-        </div>
-
-        <div class="project-card">
-            <div class="project-image">
-                <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600&q=80" alt="Proyecto" style="width:100%;height:200px;object-fit:cover;border-radius:8px;" />
-            </div>
-            <div class="project-content">
-                <div class="project-domain">mediconnect.hn</div>
-                <h3 class="project-title">MediConnect</h3>
-                <p class="project-description">Plataforma de telemedicina con videoconsultas, expedientes digitales, recetas electrónicas y sistema de pagos integrado.</p>
-            </div>
-        </div>
-
-        <div class="project-card">
-            <div class="project-image">
-                <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600&q=80" alt="Proyecto" style="width:100%;height:200px;object-fit:cover;border-radius:8px;" />
-            </div>
-            <div class="project-content">
-                <div class="project-domain">eduplatform.edu.hn</div>
-                <h3 class="project-title">EduPlatform</h3>
-                <p class="project-description">Sistema de gestión educativa con aulas virtuales, evaluaciones en línea, seguimiento académico y comunicación padres-escuela.</p>
-            </div>
-        </div>
-
-        <div class="project-card">
-            <div class="project-image">
-                <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600&q=80" alt="Proyecto" style="width:100%;height:200px;object-fit:cover;border-radius:8px;" />
-            </div>
-            <div class="project-content">
-                <div class="project-domain">restaurantepremium.com</div>
-                <h3 class="project-title">Restaurante Premium</h3>
-                <p class="project-description">Sitio web gastronómico con reservas en línea, menú digital interactivo, sistema de pedidos y delivery integrado.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Partners Section -->
-<section class="partners">
-    <div class="partners-container">
-        <h2 class="section-title">Nuestros Partners</h2>
-        <p style="color: #94a3b8; margin-bottom: 2rem;">Colaboramos con las mejores empresas tecnológicas del mundo</p>
-
-        <div class="partners-grid">
-            <div class="partner-card">
-                <div class="partner-logo">
-                    <i data-feather="layers"></i>
-                </div>
-                <h4>AWS</h4>
-                <p>Amazon Web Services</p>
-            </div>
-
-            <div class="partner-card">
-                <div class="partner-logo">
-                    <i data-feather="layers"></i>
-                </div>
-                <h4>Google Cloud</h4>
-                <p>Google Cloud Platform</p>
-            </div>
-
-            <div class="partner-card">
-                <div class="partner-logo">
-                    <i data-feather="layers"></i>
-                </div>
-                <h4>Microsoft</h4>
-                <p>Microsoft Azure</p>
-            </div>
-
-            <div class="partner-card">
-                <div class="partner-logo">
-                    <i data-feather="layers"></i>
-                </div>
-                <h4>Vercel</h4>
-                <p>Frontend Cloud</p>
-            </div>
-
-            <div class="partner-card">
-                <div class="partner-logo">
-                    <i data-feather="layers"></i>
-                </div>
-                <h4>Netlify</h4>
-                <p>Web Development Platform</p>
-            </div>
-
-            <div class="partner-card">
-                <div class="partner-logo">
-                    <i data-feather="layers"></i>
-                </div>
-                <h4>Cloudflare</h4>
-                <p>Web Performance & Security</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Testimonials Section -->
-<section class="testimonials">
-    <h2 class="section-title">Nuestros Fundadores</h2>
-    <div class="testimonials-grid">
-        <div class="testimonial-card">
-            <div class="testimonial-header">
-                <div class="testimonial-avatar" style="background-image: url('https://images.unsplash.com/photo-1511367461989-f85a21fda167?auto=format&fit=crop&w=100&q=80'); background-size: cover;"></div>
-                <div class="testimonial-info">
-                    <h4>Gustavo Zelaya</h4>
-                    <p>Gerente de Ventas • NEOSITIO</p>
-                </div>
-            </div>
-            <p class="testimonial-text">
-                "Como gerente de ventas, he visto cómo nuestras soluciones transforman negocios. Cada proyecto es una oportunidad de crear valor real para nuestros clientes. La satisfacción del cliente es nuestro mayor activo y motor de innovación."
-            </p>
-        </div>
-
-        <div class="testimonial-card">
-            <div class="testimonial-header">
-                <div class="testimonial-avatar" style="background-image: url('https://images.unsplash.com/photo-1511367461989-f85a21fda167?auto=format&fit=crop&w=100&q=80'); background-size: cover;"></div>
-                <div class="testimonial-info">
-                    <h4>David Maldonado</h4>
-                    <p>Desarrollador Full Stack • NEOSITIO</p>
-                </div>
-            </div>
-            <p class="testimonial-text">
-                "La excelencia técnica es nuestro ADN. Cada línea de código que escribimos está pensada para crear experiencias excepcionales. Trabajamos con las mejores tecnologías para entregar resultados que superan expectativas."
-            </p>
-        </div>
-    </div>
-</section>
-
-<!-- Pricing Section -->
-<section id="precios" class="pricing">
-    <div class="pricing-container">
-        <h2 class="section-title">Precios Transparentes</h2>
-        <p style="text-align: center; color: #94a3b8; margin-bottom: 3rem;">Planes diseñados para cada etapa de tu negocio</p>
-
-        <div class="pricing-grid">
-            <div class="pricing-card">
-                <h3>Starter</h3>
-                <div class="pricing-price">L. 12,500</div>
-                <div class="pricing-period">por proyecto</div>
-                <ul class="pricing-features">
-                    <li>Sitio web responsive</li>
-                    <li>Dominio .com incluido</li>
-                    <li>3 correos corporativos</li>
-                    <li>Hosting por 1 año</li>
-                    <li>Certificado SSL</li>
-                    <li>Soporte 24/7</li>
-                </ul>
-                <button class="btn btn-secondary" style="width: 100%;">Comenzar</button>
-            </div>
-
-            <div class="pricing-card featured">
-                <div class="pricing-badge">Más Popular</div>
-                <h3>Professional</h3>
-                <div class="pricing-price">L. 25,000</div>
-                <div class="pricing-period">por proyecto</div>
-                <ul class="pricing-features">
-                    <li>Aplicación web completa</li>
-                    <li>Dominio premium</li>
-                    <li>10 correos corporativos</li>
-                    <li>Hosting premium por 1 año</li>
-                    <li>Base de datos incluida</li>
-                    <li>SEO optimizado</li>
-                    <li>Panel de administración</li>
-                    <li>Soporte prioritario</li>
-                </ul>
-                <button class="btn btn-primary" style="width: 100%;">Comenzar</button>
-            </div>
-
-            <div class="pricing-card">
-                <h3>Enterprise</h3>
-                <div class="pricing-price">L. 50,000</div>
-                <div class="pricing-period">por proyecto</div>
-                <ul class="pricing-features">
-                    <li>Desarrollo full-stack</li>
-                    <li>Múltiples dominios</li>
-                    <li>Correos ilimitados</li>
-                    <li>Infraestructura cloud</li>
-                    <li>API personalizada</li>
-                    <li>Integración con terceros</li>
-                    <li>Aplicación móvil</li>
-                    <li>Consultoría estratégica</li>
-                    <li>Soporte dedicado</li>
-                </ul>
-                <button class="btn btn-secondary" style="width: 100%;">Comenzar</button>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Contact Section -->
-<section id="contacto" class="contact">
-    <h2 class="section-title">Hablemos de tu Proyecto</h2>
-    <div class="contact-form-full">
-        <form id="contactForm">
-            <div class="form-grid">
-                <div class="form-group">
-                    <label for="name">Nombre Completo</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-            </div>
-
-            <div class="form-grid">
-                <div class="form-group">
-                    <label for="phone">Teléfono</label>
-                    <input type="tel" id="phone" name="phone" required>
-                </div>
-                <div class="form-group">
-                    <label for="service">Servicio de Interés</label>
-                    <select id="service" name="service" required>
-                        <option value="">Selecciona un servicio</option>
-                        <option value="web-development">Desarrollo Web</option>
-                        <option value="domain-hosting">Dominio y Hosting</option>
-                        <option value="email-corporate">Correos Corporativos</option>
-                        <option value="redesign">Rediseño Web</option>
-                        <option value="mobile-app">Aplicación Móvil</option>
-                        <option value="consulting">Consultoría</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="message">Mensaje</label>
-                <textarea id="message" name="message" placeholder="Cuéntanos sobre tu proyecto..." required></textarea>
-            </div>
-
-            <div style="display: flex; gap: 1rem; margin-top: 1rem;">
-                <button type="submit" class="btn btn-primary" style="flex: 1;">
-                    Enviar por WhatsApp
-                </button>
-                <button type="button" class="btn btn-secondary" onclick="sendViaResend()" style="flex: 1;">
-                    Enviar por Email
-                </button>
-            </div>
-        </form>
-    </div>
-</section>
-
-<!-- Footer -->
-<footer class="footer">
-    <div class="footer-container">
-        <div class="footer-grid">
-            <div class="footer-section">
-                <h3>NEOSITIO</h3>
-                <p>Transformamos ideas en experiencias digitales extraordinarias. Tu socio tecnológico de confianza para el éxito en el mundo digital desde Honduras.</p>
-                <div class="social-links">
-                    <a href="#" aria-label="Facebook">
-                        <i data-feather="layers"></i>
-                    </a>
-                    <a href="#" aria-label="Twitter">
-                        <i data-feather="layers"></i>
-                    </a>
-                    <a href="#" aria-label="LinkedIn">
-                        <i data-feather="layers"></i>
-                    </a>
-                    <a href="#" aria-label="Instagram">
-                        <i data-feather="layers"></i>
-                    </a>
-                </div>
-            </div>
-
-            <div class="footer-section">
-                <h3>Servicios</h3>
-                <a href="#servicios">Desarrollo Web</a>
-                <a href="#servicios">Dominios Premium</a>
-                <a href="#servicios">Correos Corporativos</a>
-                <a href="#servicios">Rediseño Web</a>
-                <a href="#servicios">Aplicaciones Móviles</a>
-            </div>
-
-            <div class="footer-section">
-                <h3>Tecnologías</h3>
-                <a href="#tecnologias">React & Next.js</a>
-                <a href="#tecnologias">Node.js & Python</a>
-                <a href="#tecnologias">Bases de Datos</a>
-                <a href="#tecnologias">Cloud & DevOps</a>
-                <a href="#tecnologias">Mobile Development</a>
-            </div>
-
-            <div class="footer-section">
-                <h3>Contacto</h3>
-                <p>📧 contacto@neositio.hn</p>
-                <p>📱 +504 9999-9999</p>
-                <p>📍 Boulevard Morazán, Torre Morazán</p>
-                <p>🏢 Piso 8, Oficina 20817</p>
-                <p>🇭🇳 Tegucigalpa, Honduras</p>
-                <p>🕒 Lun-Vie: 8:00-17:00</p>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <p>&copy; 2024 NEOSITIO. Todos los derechos reservados.</p>
-            <p style="margin-top: 0.5rem;">
-                <a href="#" style="color: #64748b; margin: 0 1rem;">Términos de Servicio</a>
-                <a href="#" style="color: #64748b; margin: 0 1rem;">Política de Privacidad</a>
-                <a href="#" style="color: #64748b; margin: 0 1rem;">Cookies</a>
-            </p>
-        </div>
-    </div>
-</footer>
-
-<!-- WhatsApp Float Button -->
-<a href="https://wa.me/50499999999" class="whatsapp-float" target="_blank" aria-label="WhatsApp">
-    <i data-feather="message-circle"></i>
-</a>
-
-
-<script>
-   
-
-    // Smooth scrolling for navigation links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
-    });
-
-
-
-    // Fade in animation on scroll
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('fade-in');
-            }
-        });
-    }, observerOptions);
-
-    // Observe all sections
-    document.querySelectorAll('section').forEach(section => {
-        observer.observe(section);
-    });
-
-
-
-</script>
-
-
-<script>
-feather.replace();
-</script>
+      window.addEventListener('resize', () => {
+        resize();
+        createParticles();
+      });
+      resize();
+      createParticles();
+      draw();
+    })();
+    </script>
+    <script>feather.replace();</script>
 </body>
 </html>
