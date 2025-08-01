@@ -508,6 +508,67 @@ body {
   color: #60a5fa;
 }
 
+/* Premium Service Styles */
+.premium-service {
+  border: 2px solid #fbbf24;
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  position: relative;
+  overflow: hidden;
+}
+
+.premium-service::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #fbbf24, #f59e0b, #d97706);
+}
+
+.premium-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  color: #1e293b;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.service-pricing {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: rgba(15, 23, 42, 0.5);
+  border-radius: 6px;
+  border: 1px solid rgba(251, 191, 36, 0.3);
+}
+
+.price {
+  color: #fbbf24;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 0.8rem;
+}
+
+.price-features {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.price-features span {
+  color: #cbd5e1;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+}
+
 /* Technologies Section */
 .technologies {
   padding: 5rem 2rem;
@@ -590,12 +651,57 @@ body {
   align-items: center;
   justify-content: center;
   color: #64748b;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.project-image:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
 }
 
 .project-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  opacity: 0.3;
+  transition: opacity 0.3s ease;
+}
+
+.project-image:hover img {
+  opacity: 0.5;
+}
+
+.project-image-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(15, 23, 42, 0.9);
+  backdrop-filter: blur(10px);
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  text-align: center;
+  min-width: 200px;
+  z-index: 2;
+}
+
+.project-image-card h4 {
+  color: #60a5fa;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.project-image-link {
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .project-content {
@@ -1232,6 +1338,24 @@ body {
         <div class="services-container">
             <h2 class="section-title">Servicios de Excelencia</h2>
             <div class="services-grid">
+                <div class="service-card premium-service">
+                    <div class="service-icon">
+                        <i data-feather="smartphone"></i>
+                    </div>
+                    <div class="premium-badge">SERVICIO PREMIUM EN HONDURAS</div>
+                    <h3>Chatbots</h3>
+                    <p>Ideal para emprendedores y pequeñas empresas. Automatiza la gestión de WhatsApp eficientemente y maximiza resultados con múltiples chatbots.</p>
+                    <div class="service-pricing">
+                        <div class="price">$49.99 USD /mes</div>
+                        <div class="price-features">
+                            <span>• Hasta 1 chatbots activos</span>
+                            <span>• Asistentes con inteligencia artificial</span>
+                            <span>• Flujos personalizados</span>
+                            <span>• Funciona con WhatsApp</span>
+                            <span>• Chatbots trabajan 24/7</span>
+                        </div>
+                    </div>
+                </div>
                 <div class="service-card">
                     <div class="service-icon">
                         <i data-feather="layers"></i>
@@ -1297,19 +1421,6 @@ body {
                         <li>Soporte técnico especializado</li>
                     </ul>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i data-feather="layers"></i>
-                    </div>
-                    <h3>Apps Móviles</h3>
-                    <p>Desarrollo de aplicaciones nativas e híbridas para iOS y Android con tecnologías de vanguardia.</p>
-                    <ul class="service-features">
-                        <li>React Native</li>
-                        <li>Flutter</li>
-                        <li>Progressive Web Apps</li>
-                        <li>Integración con APIs</li>
-                    </ul>
-                </div>
             </div>
         </div>
     </section>
@@ -1345,62 +1456,92 @@ body {
             <div class="projects-grid">
                 <div class="project-card">
                     <div class="project-image">
-                        <img src="https://preview-neositio-clone-kzmn7rco5knfsn9jmxdh.vusercontent.net/placeholder.svg?height=200&width=400&text=Project+Image" alt="Proyecto" />
+                        <a href="https://paragonfinancialcorp.com" target="_blank" class="project-image-link">
+                            <img src="https://preview-neositio-clone-kzmn7rco5knfsn9jmxdh.vusercontent.net/placeholder.svg?height=200&width=400&text=Project+Image" alt="Paragon Financial Corp" />
+                            <div class="project-image-card">
+                                <h4>Paragon Financial Corp</h4>
+                            </div>
+                        </a>
                     </div>
                     <div class="project-content">
-                        <div class="project-domain">techsolutions.hn</div>
-                        <h3 class="project-title">TechSolutions Enterprise</h3>
-                        <p class="project-description">Plataforma empresarial completa para gestión de recursos humanos con integración de nómina, control de asistencia y reportes avanzados.</p>
+                        <div class="project-domain">paragonfinancialcorp.com</div>
+                        <h3 class="project-title">Paragon Financial Corp</h3>
+                        <p class="project-description">Agencia de marketing con más de 15 años de experiencia ayudando a bufetes de abogados a atraer clientes y crecer su presencia en línea.</p>
                     </div>
                 </div>
                 <div class="project-card">
                     <div class="project-image">
-                        <img src="https://preview-neositio-clone-kzmn7rco5knfsn9jmxdh.vusercontent.net/placeholder.svg?height=200&width=400&text=Project+Image" alt="Proyecto" />
+                        <a href="https://professionconnect.com" target="_blank" class="project-image-link">
+                            <img src="https://preview-neositio-clone-kzmn7rco5knfsn9jmxdh.vusercontent.net/placeholder.svg?height=200&width=400&text=Project+Image" alt="Profession Connect" />
+                            <div class="project-image-card">
+                                <h4>Profession Connect</h4>
+                            </div>
+                        </a>
                     </div>
                     <div class="project-content">
-                        <div class="project-domain">inmobiliariaelite.com</div>
-                        <h3 class="project-title">Inmobiliaria Elite</h3>
-                        <p class="project-description">Portal inmobiliario con búsqueda avanzada, tours virtuales 360°, sistema de citas y CRM integrado para agentes.</p>
+                        <div class="project-domain">professionconnect.com</div>
+                        <h3 class="project-title">Profession Connect</h3>
+                        <p class="project-description">Plataforma que conecta profesionales de todas las áreas, ofreciendo asesoría en cada etapa de su desarrollo: desde la idea hasta la reinvención.</p>
                     </div>
                 </div>
                 <div class="project-card">
                     <div class="project-image">
-                        <img src="https://preview-neositio-clone-kzmn7rco5knfsn9jmxdh.vusercontent.net/placeholder.svg?height=200&width=400&text=Project+Image" alt="Proyecto" />
+                        <a href="https://jaguarsbs.com" target="_blank" class="project-image-link">
+                            <img src="https://preview-neositio-clone-kzmn7rco5knfsn9jmxdh.vusercontent.net/placeholder.svg?height=200&width=400&text=Project+Image" alt="Jaguars Bilingual School" />
+                            <div class="project-image-card">
+                                <h4>Jaguars Bilingual School</h4>
+                            </div>
+                        </a>
                     </div>
                     <div class="project-content">
-                        <div class="project-domain">autoservicepro.com</div>
-                        <h3 class="project-title">AutoService Pro</h3>
-                        <p class="project-description">Sistema de gestión para talleres automotrices con control de inventario, citas, facturación y seguimiento de servicios.</p>
+                        <div class="project-domain">jaguarsbs.com</div>
+                        <h3 class="project-title">Jaguars Bilingual School</h3>
+                        <p class="project-description">Institución educativa bilingüe en Siguatepeque, Honduras, que ofrece formación desde pre básica hasta 11vo grado, con docentes nacionales y extranjeros.</p>
                     </div>
                 </div>
                 <div class="project-card">
                     <div class="project-image">
-                        <img src="https://preview-neositio-clone-kzmn7rco5knfsn9jmxdh.vusercontent.net/placeholder.svg?height=200&width=400&text=Project+Image" alt="Proyecto" />
+                        <a href="https://ingmaconsultores.com" target="_blank" class="project-image-link">
+                            <img src="https://preview-neositio-clone-kzmn7rco5knfsn9jmxdh.vusercontent.net/placeholder.svg?height=200&width=400&text=Project+Image" alt="Ingma Consultores" />
+                            <div class="project-image-card">
+                                <h4>Ingma Consultores</h4>
+                            </div>
+                        </a>
                     </div>
                     <div class="project-content">
-                        <div class="project-domain">mediconnect.hn</div>
-                        <h3 class="project-title">MediConnect</h3>
-                        <p class="project-description">Plataforma de telemedicina con videoconsultas, expedientes digitales, recetas electrónicas y sistema de pagos integrado.</p>
+                        <div class="project-domain">ingmaconsultores.com</div>
+                        <h3 class="project-title">Ingma Consultores</h3>
+                        <p class="project-description">Empresa especializada en soluciones de ingeniería, minería y medio ambiente, cumpliendo normativas nacionales e internacionales con herramientas modernas.</p>
                     </div>
                 </div>
                 <div class="project-card">
                     <div class="project-image">
-                        <img src="https://preview-neositio-clone-kzmn7rco5knfsn9jmxdh.vusercontent.net/placeholder.svg?height=200&width=400&text=Project+Image" alt="Proyecto" />
+                        <a href="https://findsbusiness.com" target="_blank" class="project-image-link">
+                            <img src="https://preview-neositio-clone-kzmn7rco5knfsn9jmxdh.vusercontent.net/placeholder.svg?height=200&width=400&text=Project+Image" alt="FindsBusiness" />
+                            <div class="project-image-card">
+                                <h4>FindsBusiness</h4>
+                            </div>
+                        </a>
                     </div>
                     <div class="project-content">
-                        <div class="project-domain">eduplatform.edu.hn</div>
-                        <h3 class="project-title">EduPlatform</h3>
-                        <p class="project-description">Sistema de gestión educativa con aulas virtuales, evaluaciones en línea, seguimiento académico y comunicación padres-escuela.</p>
+                        <div class="project-domain">findsbusiness.com</div>
+                        <h3 class="project-title">FindsBusiness</h3>
+                        <p class="project-description">Marketplace tipo Amazon en Honduras que permite comprar y vender millones de productos a través de catálogos de empresas locales.</p>
                     </div>
                 </div>
                 <div class="project-card">
                     <div class="project-image">
-                        <img src="https://preview-neositio-clone-kzmn7rco5knfsn9jmxdh.vusercontent.net/placeholder.svg?height=200&width=400&text=Project+Image" alt="Proyecto" />
+                        <a href="https://noxtbing.com" target="_blank" class="project-image-link">
+                            <img src="https://preview-neositio-clone-kzmn7rco5knfsn9jmxdh.vusercontent.net/placeholder.svg?height=200&width=400&text=Project+Image" alt="Noxtbing" />
+                            <div class="project-image-card">
+                                <h4>Noxtbing</h4>
+                            </div>
+                        </a>
                     </div>
                     <div class="project-content">
-                        <div class="project-domain">restaurantepremium.com</div>
-                        <h3 class="project-title">Restaurante Premium</h3>
-                        <p class="project-description">Sitio web gastronómico con reservas en línea, menú digital interactivo, sistema de pedidos y delivery integrado.</p>
+                        <div class="project-domain">noxtbing.com</div>
+                        <h3 class="project-title">Noxtbing</h3>
+                        <p class="project-description">Plataforma tecnológica que ofrece herramientas de desarrollo de software avanzado, automatización e integración con inteligencia artificial.</p>
                     </div>
                 </div>
             </div>
