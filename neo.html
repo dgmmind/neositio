@@ -1,0 +1,1826 @@
+<style>
+  /* CSS Variables for Color Palette */
+:root {
+  /* Dark Theme Colors (from image) */
+  --bg-primary: #0f1419;
+  --bg-secondary: #1a1f2e;
+  --bg-tertiary: #252a3a;
+  --bg-card: #1e2332;
+  
+  /* Text Colors */
+  --text-primary: #ffffff;
+  --text-secondary: #a0a9c0;
+  --text-muted: #6b7280;
+  
+  /* Accent Colors (from image) */
+  --accent-red: #ff6b6b;
+  --accent-orange: #ffa726;
+  --accent-green: #4ecdc4;
+  --accent-blue: #4fc3f7;
+  --accent-purple: #ab47bc;
+  
+  /* Status Colors */
+  --success: #10b981;
+  --warning: #f59e0b;
+  --error: #ef4444;
+  --info: #3b82f6;
+  
+  /* Border Colors */
+  --border-primary: #374151;
+  --border-secondary: #4b5563;
+  
+  /* Sidebar */
+  --sidebar-width: 280px;
+  --sidebar-collapsed-width: 70px;
+  
+  /* Glass Effect */
+  --glass-bg: rgba(30, 35, 50, 0.8);
+  --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+/* Light Theme */
+[data-theme="light"] {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --bg-tertiary: #f1f5f9;
+  --bg-card: #ffffff;
+  
+  --text-primary: #1f2937;
+  --text-secondary: #4b5563;
+  --text-muted: #9ca3af;
+  
+  --border-primary: #e5e7eb;
+  --border-secondary: #d1d5db;
+  
+  --glass-bg: rgba(255, 255, 255, 0.8);
+  --glass-border: rgba(0, 0, 0, 0.1);
+}
+
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Utility Classes */
+.hidden {
+  display: none !important;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Sidebar Styles */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  border-right: 1px solid var(--glass-border);
+  z-index: 1000;
+  transition: transform 0.3s ease;
+}
+
+.sidebar.collapsed {
+  width: var(--sidebar-collapsed-width);
+}
+
+.sidebar.mobile-hidden {
+  transform: translateX(-100%);
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo-text {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--accent-green);
+}
+
+.sidebar.collapsed .logo-text {
+  display: none;
+}
+
+.sidebar-toggle {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+}
+
+.sidebar-toggle:hover {
+  background-color: var(--bg-tertiary);
+}
+
+.sidebar.collapsed .sidebar-toggle i {
+  transform: rotate(180deg);
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 80px);
+  padding: 1rem 0;
+}
+
+.nav-list {
+  list-style: none;
+  padding: 0 1rem;
+}
+
+.nav-item {
+  margin-bottom: 0.25rem;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+.nav-link.active {
+  background-color: var(--accent-green);
+  color: white;
+}
+
+.nav-link i {
+  width: 20px;
+  margin-right: 0.75rem;
+  text-align: center;
+}
+
+.sidebar.collapsed .nav-text {
+  display: none;
+}
+
+.sidebar-bottom {
+  margin-top: auto;
+}
+
+/* Main Content */
+.main-content {
+  margin-left: var(--sidebar-width);
+  min-height: 100vh;
+  transition: margin-left 0.3s ease;
+}
+
+.sidebar.collapsed + .main-content {
+  margin-left: var(--sidebar-collapsed-width);
+}
+
+/* Top Navigation */
+.top-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-primary);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.mobile-menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.breadcrumb-item.current {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.search-btn, .notification-btn, .theme-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  position: relative;
+}
+
+.search-btn:hover, .notification-btn:hover, .theme-btn:hover {
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+.notification-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: var(--error);
+  color: white;
+  font-size: 0.75rem;
+  padding: 0.125rem 0.375rem;
+  border-radius: 9999px;
+  min-width: 1.25rem;
+  text-align: center;
+}
+
+.user-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.user-btn:hover {
+  background-color: var(--bg-tertiary);
+}
+
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-avatar-small {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Page Content */
+.page-content {
+  padding: 2rem;
+}
+
+.page {
+  display: block;
+}
+
+.page.hidden {
+  display: none;
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.page-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* Cards */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-primary);
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.card-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.card-icon {
+  color: var(--text-muted);
+}
+
+.card-content {
+  padding: 1.5rem;
+}
+
+/* Dashboard Grid */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Metrics */
+.metric-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.metric-label {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+}
+
+/* Account List */
+.account-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.account-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.account-item:last-child {
+  border-bottom: none;
+}
+
+/* Transactions */
+.transaction-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.transaction-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.transaction-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.transaction-name {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.transaction-date {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.transaction-amount {
+  font-weight: 600;
+}
+
+.transaction-amount.positive {
+  color: var(--success);
+}
+
+.transaction-amount.negative {
+  color: var(--error);
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+}
+
+.action-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.action-btn i {
+  font-size: 1.25rem;
+}
+
+.action-btn.primary {
+  background-color: var(--accent-blue);
+  color: white;
+}
+
+.action-btn.success {
+  background-color: var(--success);
+  color: white;
+}
+
+.action-btn.warning {
+  background-color: var(--warning);
+  color: white;
+}
+
+.action-btn.info {
+  background-color: var(--info);
+  color: white;
+}
+
+.action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.btn.primary {
+  background-color: var(--accent-green);
+  color: white;
+}
+
+.btn.primary:hover {
+  background-color: var(--accent-blue);
+}
+
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 0.375rem;
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-icon:hover {
+  background-color: var(--accent-blue);
+  color: white;
+}
+
+/* Tables */
+.table-container {
+  overflow-x: auto;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table th,
+.data-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.data-table th {
+  background-color: var(--bg-tertiary);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.data-table tr:hover {
+  background-color: var(--bg-tertiary);
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.badge.primary {
+  background-color: var(--accent-blue);
+  color: white;
+}
+
+.badge.success {
+  background-color: var(--success);
+  color: white;
+}
+
+.badge.info {
+  background-color: var(--info);
+  color: white;
+}
+
+/* Permissions Grid */
+.permissions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.permission-section h4 {
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.permission-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.permission-item input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--accent-green);
+}
+
+.permission-item label {
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.modal {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 1rem;
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  overflow: hidden;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.modal-header h3 {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+}
+
+.modal-close:hover {
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+.modal-content {
+  padding: 1.5rem;
+}
+
+/* Search Modal */
+.search-input-container {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.search-input {
+  width: 100%;
+  padding: 1rem 1rem 1rem 3rem;
+  border: 1px solid var(--border-primary);
+  border-radius: 0.5rem;
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
+  font-size: 1rem;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--accent-green);
+}
+
+.search-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+}
+
+.search-results {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.search-category h4 {
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.search-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.search-item:hover {
+  background-color: var(--bg-tertiary);
+}
+
+.search-item i {
+  color: var(--text-muted);
+  width: 16px;
+}
+
+/* Sidebar Backdrop */
+.sidebar-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 999;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .sidebar {
+    transform: translateX(-100%);
+  }
+  
+  .sidebar.mobile-open {
+    transform: translateX(0);
+  }
+  
+  .main-content {
+    margin-left: 0;
+  }
+  
+  .mobile-menu-toggle {
+    display: block;
+  }
+  
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-content {
+    padding: 1rem;
+  }
+  
+  .top-nav {
+    padding: 1rem;
+  }
+  
+  .nav-right {
+    gap: 0.5rem;
+  }
+  
+  .user-name {
+    display: none;
+  }
+  
+  .breadcrumb {
+    display: none;
+  }
+  
+  .action-buttons {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .permissions-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal {
+    width: 95%;
+    margin: 1rem;
+  }
+  
+  .action-buttons {
+    grid-template-columns: 1fr;
+  }
+  
+  .data-table {
+    font-size: 0.875rem;
+  }
+  
+  .data-table th,
+  .data-table td {
+    padding: 0.75rem 0.5rem;
+  }
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-secondary);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Focus Styles */
+button:focus,
+input:focus,
+select:focus {
+  outline: 2px solid var(--accent-green);
+  outline-offset: 2px;
+}
+
+/* Animation for theme transition */
+* {
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <span class="logo-text">Flowers&Saints</span>
+            </div>
+            <button class="sidebar-toggle" id="sidebarToggle">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="#dashboard" class="nav-link active" data-page="dashboard">
+                        <i class="fas fa-home"></i>
+                        <span class="nav-text">Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#analytics" class="nav-link" data-page="analytics">
+                        <i class="fas fa-chart-bar"></i>
+                        <span class="nav-text">Analytics</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#organization" class="nav-link" data-page="organization">
+                        <i class="fas fa-building"></i>
+                        <span class="nav-text">Organization</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#users" class="nav-link" data-page="users">
+                        <i class="fas fa-users"></i>
+                        <span class="nav-text">Users</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#profiles" class="nav-link" data-page="profiles">
+                        <i class="fas fa-user-circle"></i>
+                        <span class="nav-text">Profiles</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#modules" class="nav-link" data-page="modules">
+                        <i class="fas fa-cube"></i>
+                        <span class="nav-text">Modules</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#roles" class="nav-link" data-page="roles">
+                        <i class="fas fa-shield-alt"></i>
+                        <span class="nav-text">Roles</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#permissions" class="nav-link" data-page="permissions">
+                        <i class="fas fa-key"></i>
+                        <span class="nav-text">Permissions</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#transactions" class="nav-link" data-page="transactions">
+                        <i class="fas fa-wallet"></i>
+                        <span class="nav-text">Transactions</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#invoices" class="nav-link" data-page="invoices">
+                        <i class="fas fa-receipt"></i>
+                        <span class="nav-text">Invoices</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#payments" class="nav-link" data-page="payments">
+                        <i class="fas fa-credit-card"></i>
+                        <span class="nav-text">Payments</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#chat" class="nav-link" data-page="chat">
+                        <i class="fas fa-comments"></i>
+                        <span class="nav-text">Chat</span>
+                    </a>
+                </li>
+            </ul>
+            
+            <div class="sidebar-bottom">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="#settings" class="nav-link" data-page="settings">
+                            <i class="fas fa-cog"></i>
+                            <span class="nav-text">Settings</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#help" class="nav-link" data-page="help">
+                            <i class="fas fa-question-circle"></i>
+                            <span class="nav-text">Help</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Navigation -->
+        <header class="top-nav">
+            <div class="nav-left">
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="breadcrumb">
+                    <span class="breadcrumb-item">Home</span>
+                    <span class="breadcrumb-separator">/</span>
+                    <span class="breadcrumb-item current">Dashboard</span>
+                </div>
+            </div>
+            
+            <div class="nav-right">
+                <div class="search-container">
+                    <button class="search-btn" id="searchBtn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                
+                <div class="notifications">
+                    <button class="notification-btn">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </button>
+                </div>
+                
+                <div class="theme-toggle">
+                    <button class="theme-btn" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+                
+                <div class="user-menu">
+                    <button class="user-btn" id="userMenuBtn">
+                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/38184074.jpg-M4vCjTSSWVw5RwWvvmrxXBcNVU8MBU.jpeg" alt="User" class="user-avatar">
+                        <span class="user-name">Dollar Singh</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Page Content -->
+        <div class="page-content" id="pageContent">
+            <!-- Dashboard Page -->
+            <div class="page" id="dashboard-page">
+                <div class="page-header">
+                    <h1 class="page-title">Dashboard</h1>
+                </div>
+                
+                <div class="dashboard-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Account Overview</h3>
+                            <i class="fas fa-wallet card-icon"></i>
+                        </div>
+                        <div class="card-content">
+                            <div class="metric-value">$25,880.67</div>
+                            <div class="metric-label">Total Balance</div>
+                            <div class="account-list">
+                                <div class="account-item">
+                                    <span>Checking</span>
+                                    <span>$7,500</span>
+                                </div>
+                                <div class="account-item">
+                                    <span>Savings</span>
+                                    <span>$12,380.67</span>
+                                </div>
+                                <div class="account-item">
+                                    <span>Investment</span>
+                                    <span>$6,000</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Recent Transactions</h3>
+                            <i class="fas fa-exchange-alt card-icon"></i>
+                        </div>
+                        <div class="card-content">
+                            <div class="transaction-list">
+                                <div class="transaction-item">
+                                    <div class="transaction-info">
+                                        <div class="transaction-name">Amazon Purchase</div>
+                                        <div class="transaction-date">2023-07-15</div>
+                                    </div>
+                                    <div class="transaction-amount negative">-$129.99</div>
+                                </div>
+                                <div class="transaction-item">
+                                    <div class="transaction-info">
+                                        <div class="transaction-name">Salary Deposit</div>
+                                        <div class="transaction-date">2023-07-01</div>
+                                    </div>
+                                    <div class="transaction-amount positive">+$3,500.00</div>
+                                </div>
+                                <div class="transaction-item">
+                                    <div class="transaction-info">
+                                        <div class="transaction-name">Grocery Shopping</div>
+                                        <div class="transaction-date">2023-07-10</div>
+                                    </div>
+                                    <div class="transaction-amount negative">-$89.72</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Quick Actions</h3>
+                            <i class="fas fa-bolt card-icon"></i>
+                        </div>
+                        <div class="card-content">
+                            <div class="action-buttons">
+                                <button class="action-btn primary">
+                                    <i class="fas fa-plus"></i>
+                                    Add Funds
+                                </button>
+                                <button class="action-btn success">
+                                    <i class="fas fa-paper-plane"></i>
+                                    Send Money
+                                </button>
+                                <button class="action-btn warning">
+                                    <i class="fas fa-credit-card"></i>
+                                    Pay Bills
+                                </button>
+                                <button class="action-btn info">
+                                    <i class="fas fa-chart-line"></i>
+                                    Invest
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Users Page -->
+            <div class="page hidden" id="users-page">
+                <div class="page-header">
+                    <h1 class="page-title">Users Management</h1>
+                    <button class="btn primary">
+                        <i class="fas fa-plus"></i>
+                        Add User
+                    </button>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Users List</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="table-container">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <input type="checkbox" class="select-all">
+                                        </th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Role</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="checkbox"></td>
+                                        <td>
+                                            <div class="user-info">
+                                                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/375238645_11475210.jpg-lU8bOe6TLt5Rv51hgjg8NT8PsDBmvN.jpeg" alt="User" class="user-avatar-small">
+                                                <span>Alice Johnson</span>
+                                            </div>
+                                        </td>
+                                        <td>alice@example.com</td>
+                                        <td><span class="badge primary">Admin</span></td>
+                                        <td><span class="badge success">Active</span></td>
+                                        <td>
+                                            <div class="action-buttons">
+                                                <button class="btn-icon" title="Edit">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button class="btn-icon" title="Delete">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox"></td>
+                                        <td>
+                                            <div class="user-info">
+                                                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/375238208_11475222.jpg-poEIzVHAGiIfMFQ7EiF8PUG1u0Zkzz.jpeg" alt="User" class="user-avatar-small">
+                                                <span>Bob Smith</span>
+                                            </div>
+                                        </td>
+                                        <td>bob@example.com</td>
+                                        <td><span class="badge info">User</span></td>
+                                        <td><span class="badge success">Active</span></td>
+                                        <td>
+                                            <div class="action-buttons">
+                                                <button class="btn-icon" title="Edit">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button class="btn-icon" title="Delete">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Roles Page -->
+            <div class="page hidden" id="roles-page">
+                <div class="page-header">
+                    <h1 class="page-title">Roles & Permissions</h1>
+                    <button class="btn primary">
+                        <i class="fas fa-plus"></i>
+                        Add Role
+                    </button>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Role Permissions</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="permissions-grid">
+                            <div class="permission-section">
+                                <h4>Dashboard</h4>
+                                <div class="permission-item">
+                                    <input type="checkbox" id="dashboard-view" checked>
+                                    <label for="dashboard-view">View Dashboard</label>
+                                </div>
+                                <div class="permission-item">
+                                    <input type="checkbox" id="dashboard-edit">
+                                    <label for="dashboard-edit">Edit Dashboard</label>
+                                </div>
+                            </div>
+                            
+                            <div class="permission-section">
+                                <h4>Users</h4>
+                                <div class="permission-item">
+                                    <input type="checkbox" id="users-view" checked>
+                                    <label for="users-view">View Users</label>
+                                </div>
+                                <div class="permission-item">
+                                    <input type="checkbox" id="users-create">
+                                    <label for="users-create">Create Users</label>
+                                </div>
+                                <div class="permission-item">
+                                    <input type="checkbox" id="users-edit">
+                                    <label for="users-edit">Edit Users</label>
+                                </div>
+                                <div class="permission-item">
+                                    <input type="checkbox" id="users-delete">
+                                    <label for="users-delete">Delete Users</label>
+                                </div>
+                            </div>
+                            
+                            <div class="permission-section">
+                                <h4>Financial</h4>
+                                <div class="permission-item">
+                                    <input type="checkbox" id="financial-view" checked>
+                                    <label for="financial-view">View Transactions</label>
+                                </div>
+                                <div class="permission-item">
+                                    <input type="checkbox" id="financial-create">
+                                    <label for="financial-create">Create Transactions</label>
+                                </div>
+                                <div class="permission-item">
+                                    <input type="checkbox" id="financial-approve">
+                                    <label for="financial-approve">Approve Payments</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Other pages will be similar structure -->
+            <div class="page hidden" id="profiles-page">
+                <div class="page-header">
+                    <h1 class="page-title">Profiles</h1>
+                </div>
+                <div class="card">
+                    <div class="card-content">
+                        <p>Profiles content goes here...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page hidden" id="modules-page">
+                <div class="page-header">
+                    <h1 class="page-title">Modules</h1>
+                </div>
+                <div class="card">
+                    <div class="card-content">
+                        <p>Modules content goes here...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page hidden" id="permissions-page">
+                <div class="page-header">
+                    <h1 class="page-title">Permissions</h1>
+                </div>
+                <div class="card">
+                    <div class="card-content">
+                        <p>Permissions content goes here...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Search Modal -->
+    <div class="modal-overlay hidden" id="searchModal">
+        <div class="modal search-modal">
+            <div class="modal-header">
+                <h3>Search</h3>
+                <button class="modal-close" id="searchModalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-content">
+                <div class="search-input-container">
+                    <input type="text" class="search-input" placeholder="Search anything..." id="searchInput">
+                    <i class="fas fa-search search-icon"></i>
+                </div>
+                <div class="search-results">
+                    <div class="search-category">
+                        <h4>Recent</h4>
+                        <div class="search-item">
+                            <i class="fas fa-user"></i>
+                            <span>User Management</span>
+                        </div>
+                        <div class="search-item">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>Analytics Dashboard</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar Backdrop -->
+    <div class="sidebar-backdrop hidden" id="sidebarBackdrop"></div>
+
+    <script>
+      // Theme Management
+class ThemeManager {
+    constructor() {
+        this.theme = localStorage.getItem('theme') || 'dark';
+        this.init();
+    }
+
+    init() {
+        this.applyTheme();
+        this.bindEvents();
+    }
+
+    applyTheme() {
+        document.documentElement.setAttribute('data-theme', this.theme);
+        this.updateThemeIcon();
+    }
+
+    updateThemeIcon() {
+        const themeBtn = document.getElementById('themeToggle');
+        const icon = themeBtn.querySelector('i');
+        
+        if (this.theme === 'dark') {
+            icon.className = 'fas fa-sun';
+        } else {
+            icon.className = 'fas fa-moon';
+        }
+    }
+
+    toggle() {
+        this.theme = this.theme === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('theme', this.theme);
+        this.applyTheme();
+    }
+
+    bindEvents() {
+        document.getElementById('themeToggle').addEventListener('click', () => {
+            this.toggle();
+        });
+    }
+}
+
+// Sidebar Management
+class SidebarManager {
+    constructor() {
+        this.sidebar = document.getElementById('sidebar');
+        this.sidebarToggle = document.getElementById('sidebarToggle');
+        this.mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        this.sidebarBackdrop = document.getElementById('sidebarBackdrop');
+        this.isCollapsed = localStorage.getItem('sidebarCollapsed') === 'true';
+        this.isMobile = window.innerWidth <= 1024;
+        
+        this.init();
+    }
+
+    init() {
+        this.applyState();
+        this.bindEvents();
+        this.handleResize();
+    }
+
+    applyState() {
+        if (this.isMobile) {
+            this.sidebar.classList.add('mobile-hidden');
+        } else {
+            this.sidebar.classList.remove('mobile-hidden');
+            if (this.isCollapsed) {
+                this.sidebar.classList.add('collapsed');
+            }
+        }
+    }
+
+    toggle() {
+        if (this.isMobile) {
+            this.toggleMobile();
+        } else {
+            this.toggleDesktop();
+        }
+    }
+
+    toggleDesktop() {
+        this.isCollapsed = !this.isCollapsed;
+        this.sidebar.classList.toggle('collapsed', this.isCollapsed);
+        localStorage.setItem('sidebarCollapsed', this.isCollapsed);
+    }
+
+    toggleMobile() {
+        const isHidden = this.sidebar.classList.contains('mobile-hidden');
+        
+        if (isHidden) {
+            this.sidebar.classList.remove('mobile-hidden');
+            this.sidebar.classList.add('mobile-open');
+            this.sidebarBackdrop.classList.remove('hidden');
+        } else {
+            this.sidebar.classList.add('mobile-hidden');
+            this.sidebar.classList.remove('mobile-open');
+            this.sidebarBackdrop.classList.add('hidden');
+        }
+    }
+
+    closeMobile() {
+        this.sidebar.classList.add('mobile-hidden');
+        this.sidebar.classList.remove('mobile-open');
+        this.sidebarBackdrop.classList.add('hidden');
+    }
+
+    handleResize() {
+        window.addEventListener('resize', () => {
+            const wasMobile = this.isMobile;
+            this.isMobile = window.innerWidth <= 1024;
+            
+            if (wasMobile !== this.isMobile) {
+                if (this.isMobile) {
+                    this.sidebar.classList.remove('collapsed');
+                    this.sidebar.classList.add('mobile-hidden');
+                    this.sidebarBackdrop.classList.add('hidden');
+                } else {
+                    this.sidebar.classList.remove('mobile-hidden', 'mobile-open');
+                    this.sidebarBackdrop.classList.add('hidden');
+                    if (this.isCollapsed) {
+                        this.sidebar.classList.add('collapsed');
+                    }
+                }
+            }
+        });
+    }
+
+    bindEvents() {
+        this.sidebarToggle.addEventListener('click', () => {
+            this.toggle();
+        });
+
+        this.mobileMenuToggle.addEventListener('click', () => {
+            this.toggle();
+        });
+
+        this.sidebarBackdrop.addEventListener('click', () => {
+            this.closeMobile();
+        });
+
+        // Close mobile sidebar when clicking on nav links
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (this.isMobile) {
+                    this.closeMobile();
+                }
+            });
+        });
+    }
+}
+
+// Navigation Management
+class NavigationManager {
+    constructor() {
+        this.currentPage = 'dashboard';
+        this.init();
+    }
+
+    init() {
+        this.bindEvents();
+        this.updateBreadcrumb();
+    }
+
+    showPage(pageId) {
+        // Hide all pages
+        document.querySelectorAll('.page').forEach(page => {
+            page.classList.add('hidden');
+        });
+
+        // Show selected page
+        const targetPage = document.getElementById(`${pageId}-page`);
+        if (targetPage) {
+            targetPage.classList.remove('hidden');
+        }
+
+        // Update active nav link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.classList.remove('active');
+        });
+
+        const activeLink = document.querySelector(`[data-page="${pageId}"]`);
+        if (activeLink) {
+            activeLink.classList.add('active');
+        }
+
+        this.currentPage = pageId;
+        this.updateBreadcrumb();
+    }
+
+    updateBreadcrumb() {
+        const breadcrumbCurrent = document.querySelector('.breadcrumb-item.current');
+        if (breadcrumbCurrent) {
+            breadcrumbCurrent.textContent = this.currentPage.charAt(0).toUpperCase() + this.currentPage.slice(1);
+        }
+    }
+
+    bindEvents() {
+        document.querySelectorAll('[data-page]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const pageId = link.getAttribute('data-page');
+                this.showPage(pageId);
+            });
+        });
+    }
+}
+
+// Search Modal Management
+class SearchManager {
+    constructor() {
+        this.searchModal = document.getElementById('searchModal');
+        this.searchBtn = document.getElementById('searchBtn');
+        this.searchModalClose = document.getElementById('searchModalClose');
+        this.searchInput = document.getElementById('searchInput');
+        
+        this.init();
+    }
+
+    init() {
+        this.bindEvents();
+    }
+
+    open() {
+        this.searchModal.classList.remove('hidden');
+        setTimeout(() => {
+            this.searchInput.focus();
+        }, 100);
+    }
+
+    close() {
+        this.searchModal.classList.add('hidden');
+        this.searchInput.value = '';
+    }
+
+    bindEvents() {
+        this.searchBtn.addEventListener('click', () => {
+            this.open();
+        });
+
+        this.searchModalClose.addEventListener('click', () => {
+            this.close();
+        });
+
+        this.searchModal.addEventListener('click', (e) => {
+            if (e.target === this.searchModal) {
+                this.close();
+            }
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                this.close();
+            }
+            
+            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                e.preventDefault();
+                this.open();
+            }
+        });
+
+        // Search functionality
+        this.searchInput.addEventListener('input', (e) => {
+            this.handleSearch(e.target.value);
+        });
+    }
+
+    handleSearch(query) {
+        // Implement search logic here
+        console.log('Searching for:', query);
+    }
+}
+
+// Table Management
+class TableManager {
+    constructor() {
+        this.init();
+    }
+
+    init() {
+        this.bindEvents();
+    }
+
+    bindEvents() {
+        // Select all checkbox functionality
+        document.querySelectorAll('.select-all').forEach(checkbox => {
+            checkbox.addEventListener('change', (e) => {
+                const table = e.target.closest('table');
+                const checkboxes = table.querySelectorAll('tbody input[type="checkbox"]');
+                
+                checkboxes.forEach(cb => {
+                    cb.checked = e.target.checked;
+                });
+            });
+        });
+
+        // Individual checkbox functionality
+        document.querySelectorAll('tbody input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', () => {
+                const table = checkbox.closest('table');
+                const selectAll = table.querySelector('.select-all');
+                const checkboxes = table.querySelectorAll('tbody input[type="checkbox"]');
+                const checkedBoxes = table.querySelectorAll('tbody input[type="checkbox"]:checked');
+                
+                selectAll.checked = checkboxes.length === checkedBoxes.length;
+                selectAll.indeterminate = checkedBoxes.length > 0 && checkedBoxes.length < checkboxes.length;
+            });
+        });
+    }
+}
+
+// Notification Management
+class NotificationManager {
+    constructor() {
+        this.notifications = [];
+        this.init();
+    }
+
+    init() {
+        this.bindEvents();
+    }
+
+    show(message, type = 'info', duration = 5000) {
+        const notification = {
+            id: Date.now(),
+            message,
+            type,
+            duration
+        };
+
+        this.notifications.push(notification);
+        this.render(notification);
+
+        if (duration > 0) {
+            setTimeout(() => {
+                this.remove(notification.id);
+            }, duration);
+        }
+    }
+
+    render(notification) {
+        const container = this.getContainer();
+        const element = document.createElement('div');
+        element.className = `notification notification-${notification.type}`;
+        element.setAttribute('data-id', notification.id);
+        element.innerHTML = `
+            <span>${notification.message}</span>
+            <button class="notification-close" onclick="notificationManager.remove(${notification.id})">
+                <i class="fas fa-times"></i>
+            </button>
+        `;
+
+        container.appendChild(element);
+    }
+
+    remove(id) {
+        const element = document.querySelector(`[data-id="${id}"]`);
+        if (element) {
+            element.remove();
+        }
+        this.notifications = this.notifications.filter(n => n.id !== id);
+    }
+
+    getContainer() {
+        let container = document.getElementById('notification-container');
+        if (!container) {
+            container = document.createElement('div');
+            container.id = 'notification-container';
+            container.className = 'notification-container';
+            document.body.appendChild(container);
+        }
+        return container;
+    }
+
+    bindEvents() {
+        // Add notification styles
+        const style = document.createElement('style');
+        style.textContent = `
+            .notification-container {
+                position: fixed;
+                top: 1rem;
+                right: 1rem;
+                z-index: 3000;
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .notification {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 1rem;
+                border-radius: 0.5rem;
+                background: var(--glass-bg);
+                backdrop-filter: blur(20px);
+                border: 1px solid var(--glass-border);
+                color: var(--text-primary);
+                min-width: 300px;
+                animation: slideIn 0.3s ease;
+            }
+            
+            .notification-success {
+                border-left: 4px solid var(--success);
+            }
+            
+            .notification-error {
+                border-left: 4px solid var(--error);
+            }
+            
+            .notification-warning {
+                border-left: 4px solid var(--warning);
+            }
+            
+            .notification-info {
+                border-left: 4px solid var(--info);
+            }
+            
+            .notification-close {
+                background: none;
+                border: none;
+                color: var(--text-secondary);
+                cursor: pointer;
+                padding: 0.25rem;
+                border-radius: 0.25rem;
+            }
+            
+            .notification-close:hover {
+                background-color: var(--bg-tertiary);
+                color: var(--text-primary);
+            }
+            
+            @keyframes slideIn {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+}
+
+// Initialize all managers
+document.addEventListener('DOMContentLoaded', () => {
+    window.themeManager = new ThemeManager();
+    window.sidebarManager = new SidebarManager();
+    window.navigationManager = new NavigationManager();
+    window.searchManager = new SearchManager();
+    window.tableManager = new TableManager();
+    window.notificationManager = new NotificationManager();
+
+    // Add some demo functionality
+    document.querySelectorAll('.action-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const action = btn.textContent.trim();
+            notificationManager.show(`${action} clicked!`, 'info');
+        });
+    });
+
+    document.querySelectorAll('.btn-icon').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const action = btn.title || 'Action';
+            notificationManager.show(`${action} performed!`, 'success');
+        });
+    });
+});
+    </script>
+</body>
+</html>

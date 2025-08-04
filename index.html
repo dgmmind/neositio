@@ -9,7 +9,160 @@
     <script src="https://unpkg.com/feather-icons"></script>
 
     <style>
-        /* Reset and Base Styles */
+        /* CSS Variables - Color Palette */
+:root {
+  /* Primary Colors */
+  --color-primary: #3b82f6;
+  /* blue-500 - Electric blue for CTAs and conversion moments */
+  --color-primary-50: #eff6ff;
+  /* blue-50 */
+  --color-primary-100: #dbeafe;
+  /* blue-100 */
+  --color-primary-200: #bfdbfe;
+  /* blue-200 */
+  --color-primary-300: #93c5fd;
+  /* blue-300 */
+  --color-primary-400: #60a5fa;
+  /* blue-400 */
+  --color-primary-500: #3b82f6;
+  /* blue-500 */
+  --color-primary-600: #2563eb;
+  /* blue-600 */
+  --color-primary-700: #1d4ed8;
+  /* blue-700 */
+  --color-primary-800: #1e40af;
+  /* blue-800 */
+  --color-primary-900: #1e3a8a;
+  /* blue-900 */
+  /* Secondary Colors */
+  --color-secondary: #64748b;
+  /* slate-500 - Supporting text and secondary elements */
+  --color-secondary-50: #f8fafc;
+  /* slate-50 */
+  --color-secondary-100: #f1f5f9;
+  /* slate-100 */
+  --color-secondary-200: #e2e8f0;
+  /* slate-200 */
+  --color-secondary-300: #cbd5e1;
+  /* slate-300 */
+  --color-secondary-400: #94a3b8;
+  /* slate-400 */
+  --color-secondary-500: #64748b;
+  /* slate-500 */
+  --color-secondary-600: #475569;
+  /* slate-600 */
+  --color-secondary-700: #334155;
+  /* slate-700 */
+  --color-secondary-800: #1e293b;
+  /* slate-800 */
+  --color-secondary-900: #0f172a;
+  /* slate-900 */
+  /* Accent Colors */
+  --color-accent: #10b981;
+  /* emerald-500 - Success states and positive metrics only */
+  --color-accent-50: #ecfdf5;
+  /* emerald-50 */
+  --color-accent-100: #d1fae5;
+  /* emerald-100 */
+  --color-accent-200: #a7f3d0;
+  /* emerald-200 */
+  --color-accent-300: #6ee7b7;
+  /* emerald-300 */
+  --color-accent-400: #34d399;
+  /* emerald-400 */
+  --color-accent-500: #10b981;
+  /* emerald-500 */
+  --color-accent-600: #059669;
+  /* emerald-600 */
+  --color-accent-700: #047857;
+  /* emerald-700 */
+  --color-accent-800: #065f46;
+  /* emerald-800 */
+  --color-accent-900: #064e3b;
+  /* emerald-900 */
+  /* Background Colors */
+  --color-background: #0f172a;
+  /* slate-900 - Deep navy for developer-friendly dark theme */
+  --color-surface: #1e293b;
+  /* slate-800 - Card backgrounds and section separation */
+  /* Text Colors */
+  --color-text-primary: #f8fafc;
+  /* slate-50 - High contrast white for headlines and body */
+  --color-text-secondary: #cbd5e1;
+  /* slate-300 - Supporting text without distraction */
+  /* Status Colors */
+  --color-success: #22c55e;
+  /* green-500 - Form confirmations and positive indicators */
+  --color-warning: #f59e0b;
+  /* amber-500 - Scarcity timers and urgency elements */
+  --color-error: #ef4444;
+  /* red-500 - Form validation feedback only */
+  /* Success Colors */
+  --color-success-50: #f0fdf4;
+  /* green-50 */
+  --color-success-100: #dcfce7;
+  /* green-100 */
+  --color-success-200: #bbf7d0;
+  /* green-200 */
+  --color-success-300: #86efac;
+  /* green-300 */
+  --color-success-400: #4ade80;
+  /* green-400 */
+  --color-success-500: #22c55e;
+  /* green-500 */
+  --color-success-600: #16a34a;
+  /* green-600 */
+  --color-success-700: #15803d;
+  /* green-700 */
+  --color-success-800: #166534;
+  /* green-800 */
+  --color-success-900: #14532d;
+  /* green-900 */
+  /* Warning Colors */
+  --color-warning-50: #fffbeb;
+  /* amber-50 */
+  --color-warning-100: #fef3c7;
+  /* amber-100 */
+  --color-warning-200: #fde68a;
+  /* amber-200 */
+  --color-warning-300: #fcd34d;
+  /* amber-300 */
+  --color-warning-400: #fbbf24;
+  /* amber-400 */
+  --color-warning-500: #f59e0b;
+  /* amber-500 */
+  --color-warning-600: #d97706;
+  /* amber-600 */
+  --color-warning-700: #b45309;
+  /* amber-700 */
+  --color-warning-800: #92400e;
+  /* amber-800 */
+  --color-warning-900: #78350f;
+  /* amber-900 */
+  /* Error Colors */
+  --color-error-50: #fef2f2;
+  /* red-50 */
+  --color-error-100: #fee2e2;
+  /* red-100 */
+  --color-error-200: #fecaca;
+  /* red-200 */
+  --color-error-300: #fca5a5;
+  /* red-300 */
+  --color-error-400: #f87171;
+  /* red-400 */
+  --color-error-500: #ef4444;
+  /* red-500 */
+  --color-error-600: #dc2626;
+  /* red-600 */
+  --color-error-700: #b91c1c;
+  /* red-700 */
+  --color-error-800: #991b1b;
+  /* red-800 */
+  --color-error-900: #7f1d1d;
+  /* red-900 */
+}
+
+/* Reset and Base Styles */
 * {
   margin: 0;
   padding: 0;
@@ -18,8 +171,8 @@
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  background: #0f172a;
-  color: white;
+  background: var(--color-background);
+  color: var(--color-text-primary);
   line-height: 1.6;
   overflow-x: hidden;
 }
@@ -33,7 +186,7 @@ body {
   backdrop-filter: blur(10px);
   z-index: 1000;
   padding: 1rem 0;
-  border-bottom: 1px solid #334155;
+  border-bottom: 1px solid var(--color-secondary-700);
   transition: background 0.3s ease;
 }
 
@@ -55,12 +208,17 @@ body {
 }
 
 .logo-icon {
-  color: #60a5fa;
+  color: var(--color-primary-400);
   font-size: 1.5rem;
+  text-shadow: 0 0 10px var(--color-primary-300);
 }
 
 .logo-text {
-  color: white;
+  color: var(--color-text-primary);
+  background: linear-gradient(135deg, var(--color-primary-400), var(--color-accent-400));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .nav-menu {
@@ -70,14 +228,30 @@ body {
 }
 
 .nav-link {
-  color: #cbd5e1;
+  color: var(--color-text-secondary);
   text-decoration: none;
   transition: color 0.3s ease;
   font-weight: 500;
+  position: relative;
 }
 
 .nav-link:hover {
-  color: #60a5fa;
+  color: var(--color-primary-400);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-primary-400), var(--color-accent-400));
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
 }
 
 .nav-buttons {
@@ -87,8 +261,8 @@ body {
 
 .btn-secondary {
   background: transparent;
-  color: white;
-  border: 1px solid #475569;
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-secondary-600);
   padding: 0.5rem 1rem;
   border-radius: 6px;
   cursor: pointer;
@@ -98,30 +272,65 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-secondary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, var(--color-primary-100), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-secondary:hover::before {
+  left: 100%;
 }
 
 .btn-secondary:hover {
-  border-color: #60a5fa;
-  color: #60a5fa;
+  border-color: var(--color-primary-400);
+  color: var(--color-primary-400);
 }
 
 .btn-primary {
-  background: #3b82f6;
-  color: #0f172a;
+  background: linear-gradient(135deg, var(--color-primary-500), var(--color-primary-600));
+  color: var(--color-background);
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 6px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
   font-weight: 500;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, var(--color-primary-300), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-primary:hover::before {
+  left: 100%;
 }
 
 .btn-primary:hover {
-  background: #60a5fa;
+  background: linear-gradient(135deg, var(--color-primary-400), var(--color-primary-500));
+  transform: translateY(-2px);
 }
 
 /* Hamburger Menu */
@@ -138,13 +347,18 @@ body {
 .bar {
   width: 25px;
   height: 3px;
-  background: white;
+  background: var(--color-text-primary);
   transition: 0.3s;
   border-radius: 2px;
 }
 
+.hamburger:hover .bar {
+  background: var(--color-primary-400);
+}
+
 .hamburger.active .bar:nth-child(1) {
   transform: rotate(-45deg) translate(-5px, 6px);
+  background: var(--color-accent-400);
 }
 
 .hamburger.active .bar:nth-child(2) {
@@ -153,6 +367,7 @@ body {
 
 .hamburger.active .bar:nth-child(3) {
   transform: rotate(45deg) translate(-5px, -6px);
+  background: var(--color-accent-400);
 }
 
 /* Sidebar */
@@ -180,10 +395,10 @@ body {
   right: -320px;
   width: 320px;
   height: 100%;
-  background: #0f172a;
+  background: var(--color-background);
   z-index: 999;
   transition: right 0.3s ease;
-  border-left: 1px solid #334155;
+  border-left: 1px solid var(--color-secondary-700);
 }
 
 .sidebar.active {
@@ -199,6 +414,8 @@ body {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 2rem;
+  border-bottom: 1px solid var(--color-secondary-600);
+  padding-bottom: 1rem;
 }
 
 .sidebar-logo {
@@ -212,7 +429,7 @@ body {
 .sidebar-close {
   background: none;
   border: none;
-  color: white;
+  color: var(--color-text-primary);
   font-size: 2rem;
   cursor: pointer;
   padding: 0;
@@ -221,6 +438,14 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.sidebar-close:hover {
+  background: var(--color-error-100);
+  color: var(--color-error-600);
+  transform: rotate(90deg);
 }
 
 .sidebar-menu {
@@ -233,16 +458,36 @@ body {
 }
 
 .sidebar-link {
-  color: #cbd5e1;
+  color: var(--color-text-secondary);
   text-decoration: none;
   font-size: 1.1rem;
   display: block;
   padding: 0.5rem 0;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  position: relative;
+}
+
+.sidebar-link::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 3px;
+  background: linear-gradient(180deg, var(--color-primary-400), var(--color-accent-400));
+  transform: scaleY(0);
+  transition: transform 0.3s ease;
 }
 
 .sidebar-link:hover {
-  color: #60a5fa;
+  color: var(--color-primary-400);
+  background: var(--color-secondary-800);
+}
+
+.sidebar-link:hover::before {
+  transform: scaleY(1);
 }
 
 .sidebar-buttons {
@@ -277,15 +522,34 @@ body {
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, var(--color-text-primary), var(--color-primary-300));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .hero-highlight {
-  color: #60a5fa;
+  background: linear-gradient(135deg, var(--color-primary-400), var(--color-accent-400));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+}
+
+.hero-highlight::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-primary-400), var(--color-accent-400));
+  border-radius: 2px;
 }
 
 .hero-description {
   font-size: 1.2rem;
-  color: #cbd5e1;
+  color: var(--color-text-secondary);
   max-width: 600px;
   margin: 0 auto 3rem;
   line-height: 1.6;
@@ -293,20 +557,33 @@ body {
 
 /* Contact Form */
 .contact-form {
-  background: rgba(30, 41, 59, 0.5);
-  border: 1px solid #334155;
+  background: linear-gradient(135deg, var(--color-surface), var(--color-secondary-800));
+  border: 1px solid var(--color-secondary-700);
   border-radius: 12px;
   width: 100%;
   max-width: 480px;
   margin: 0 auto;
   backdrop-filter: blur(10px);
   padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-form::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-primary-400), var(--color-accent-400), var(--color-warning-400));
 }
 
 .form-title {
   font-size: 1.5rem;
   margin-bottom: 1.5rem;
-  color: #f1f5f9;
+  color: var(--color-text-primary);
+  text-align: center;
 }
 
 .form-row {
@@ -317,45 +594,74 @@ body {
 
 .form-input {
   flex: 1;
-  background: rgba(51, 65, 85, 0.5);
-  border: 1px solid #475569;
+  background: var(--color-secondary-800);
+  border: 1px solid var(--color-secondary-600);
   border-radius: 6px;
   padding: 0.75rem;
-  color: white;
+  color: var(--color-text-primary);
   font-size: 1rem;
   width: 100%;
+  transition: all 0.3s ease;
 }
 
 .form-input::placeholder {
-  color: #94a3b8;
+  color: var(--color-secondary-400);
 }
 
 .form-input:focus {
   outline: none;
-  border-color: #60a5fa;
-  background: rgba(51, 65, 85, 0.7);
+  border-color: var(--color-primary-400);
+  background: var(--color-secondary-700);
+}
+
+.form-input:valid {
+  border-color: var(--color-success-400);
+}
+
+.form-input:invalid:not(:placeholder-shown) {
+  border-color: var(--color-secondary-500);
 }
 
 .btn-whatsapp {
   width: 100%;
-  background: #3b82f6;
-  color: #0f172a;
+  background: linear-gradient(135deg, var(--color-success-500), var(--color-success-600));
+  color: var(--color-background);
   border: none;
   padding: 0.75rem;
   border-radius: 6px;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-whatsapp::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, var(--color-success-300), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-whatsapp:hover::before {
+  left: 100%;
 }
 
 .btn-whatsapp:hover {
-  background: #60a5fa;
+  background: linear-gradient(135deg, var(--color-success-400), var(--color-success-500));
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px var(--color-success-300);
 }
 
 /* About Section */
 .about {
   padding: 5rem 2rem;
+  background: linear-gradient(135deg, var(--color-background), var(--color-secondary-900));
 }
 
 .about-container {
@@ -368,12 +674,28 @@ body {
   font-size: 2.5rem;
   font-weight: bold;
   margin-bottom: 2rem;
-  color: #60a5fa;
+  background: linear-gradient(135deg, var(--color-primary-400), var(--color-accent-400));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-primary-400), var(--color-accent-400));
+  border-radius: 2px;
 }
 
 .about-description {
   font-size: 1.2rem;
-  color: #cbd5e1;
+  color: var(--color-text-secondary);
   max-width: 800px;
   margin: 0 auto 3rem;
 }
@@ -386,61 +708,94 @@ body {
 }
 
 .about-card {
-  background: #1e293b;
-  border: 1px solid #334155;
+  background: linear-gradient(135deg, var(--color-surface), var(--color-secondary-800));
+  border: 1px solid var(--color-secondary-700);
   border-radius: 12px;
   padding: 2rem;
   transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-primary-400), var(--color-accent-400));
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.about-card:hover::before {
+  transform: scaleX(1);
 }
 
 .about-card:hover {
-  border-color: #3b82f6;
+  border-color: var(--color-primary-400);
   transform: translateY(-8px);
 }
 
 .about-icon {
   width: 64px;
   height: 64px;
-  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  background: linear-gradient(135deg, var(--color-primary-500), var(--color-accent-500));
   border-radius: 12px;
   margin: 0 auto 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  color: var(--color-background);
+  font-size: 1.5rem;
 }
 
 .about-card h3 {
   font-size: 1.25rem;
   font-weight: 600;
   margin-bottom: 1rem;
-  color: #60a5fa;
+  color: var(--color-primary-400);
 }
 
 .about-card p {
-  color: #cbd5e1;
+  color: var(--color-text-secondary);
 }
 
 .location-card {
-  background: #1e293b;
-  border: 1px solid #334155;
+  background: linear-gradient(135deg, var(--color-surface), var(--color-secondary-800));
+  border: 1px solid var(--color-secondary-700);
   border-radius: 12px;
   padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.location-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-accent-400), var(--color-success-400));
 }
 
 .location-card h3 {
-  color: #60a5fa;
+  color: var(--color-accent-400);
   font-size: 1.25rem;
   margin-bottom: 1rem;
 }
 
 .location-card p {
-  color: #f1f5f9;
+  color: var(--color-text-primary);
   font-size: 1.1rem;
 }
 
 /* Services Section */
 .services {
   padding: 5rem 2rem;
+  background: linear-gradient(135deg, var(--color-background), var(--color-surface));
 }
 
 .services-container {
@@ -455,37 +810,62 @@ body {
 }
 
 .service-card {
-  background: #1e293b;
-  border: 1px solid #334155;
+  background: linear-gradient(135deg, var(--color-surface), var(--color-secondary-800));
+  border: 2px solid var(--color-primary-400);
   border-radius: 12px;
   padding: 2rem;
   transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card.premium-service {
+  border: 2px solid var(--color-warning-400);
+  background: linear-gradient(135deg, var(--color-surface), var(--color-background));
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-primary-400), var(--color-accent-400));
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.service-card:hover::before {
+  transform: scaleX(1);
 }
 
 .service-card:hover {
-  border-color: #3b82f6;
+  border-color: var(--color-primary-400);
   transform: translateY(-4px);
 }
 
 .service-icon {
   width: 48px;
   height: 48px;
-  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  background: linear-gradient(135deg, var(--color-primary-500), var(--color-accent-500));
   border-radius: 8px;
   margin-bottom: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  color: var(--color-background);
+  font-size: 1.2rem;
 }
 
 .service-card h3 {
   margin-bottom: 1rem;
   font-size: 1.3rem;
-  color: #60a5fa;
+  color: var(--color-primary-400);
 }
 
 .service-card p {
-  color: #cbd5e1;
+  color: var(--color-text-secondary);
   margin-bottom: 1rem;
 }
 
@@ -494,7 +874,7 @@ body {
 }
 
 .service-features li {
-  color: #94a3b8;
+  color: var(--color-secondary-400);
   font-size: 0.9rem;
   margin-bottom: 0.5rem;
   padding-left: 1rem;
@@ -505,13 +885,14 @@ body {
   content: "✓";
   position: absolute;
   left: 0;
-  color: #60a5fa;
+  color: var(--color-success-400);
+  font-weight: bold;
 }
 
 /* Premium Service Styles */
 .premium-service {
-  border: 2px solid #fbbf24;
-  background: linear-gradient(135deg, #1e293b, #0f172a);
+  border: 2px solid var(--color-warning-400);
+  background: linear-gradient(135deg, var(--color-surface), var(--color-background));
   position: relative;
   overflow: hidden;
 }
@@ -523,15 +904,15 @@ body {
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, #fbbf24, #f59e0b, #d97706);
+  background: linear-gradient(90deg, var(--color-warning-400), var(--color-warning-500), var(--color-warning-600));
 }
 
 .premium-badge {
   position: absolute;
   top: 1rem;
   right: 1rem;
-  background: linear-gradient(135deg, #fbbf24, #f59e0b);
-  color: #1e293b;
+  background: linear-gradient(135deg, var(--color-warning-400), var(--color-warning-500));
+  color: var(--color-surface);
   font-size: 0.7rem;
   font-weight: 700;
   padding: 0.3rem 0.6rem;
@@ -543,13 +924,13 @@ body {
 .service-pricing {
   margin-top: 1rem;
   padding: 1rem;
-  background: rgba(15, 23, 42, 0.5);
+  background: linear-gradient(135deg, var(--color-background), var(--color-secondary-800));
   border-radius: 6px;
-  border: 1px solid rgba(251, 191, 36, 0.3);
+  border: 1px solid var(--color-warning-300);
 }
 
 .price {
-  color: #fbbf24;
+  color: var(--color-warning-400);
   font-size: 1.2rem;
   font-weight: 700;
   text-align: center;
@@ -563,60 +944,308 @@ body {
 }
 
 .price-features span {
-  color: #cbd5e1;
+  color: var(--color-text-secondary);
   font-size: 0.85rem;
   display: flex;
   align-items: center;
 }
 
-/* Technologies Section */
-.technologies {
-  padding: 5rem 2rem;
-  background: #1e293b;
+.price-features span::before {
+  content: "•";
+  color: var(--color-success-400);
+  margin-right: 0.5rem;
+  font-weight: bold;
 }
 
-.tech-container {
+/* Map Section */
+.map-section {
+  padding: 5rem 2rem;
+  background: linear-gradient(135deg, var(--color-background), var(--color-surface));
+}
+
+.map-container {
   max-width: 1200px;
   margin: 0 auto;
   text-align: center;
 }
 
-.tech-description {
-  color: #cbd5e1;
+.map-description {
+  color: var(--color-text-secondary);
   margin-bottom: 3rem;
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
 }
 
-.tech-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 1rem;
+.map-wrapper {
+  background: linear-gradient(135deg, var(--color-surface), var(--color-secondary-800));
+  border: 1px solid var(--color-secondary-700);
+  border-radius: 12px;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
 }
 
-.tech-item {
-  background: #0f172a;
-  border: 1px solid #334155;
+.map-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-primary-400), var(--color-accent-400));
+}
+
+.map-iframe {
+  width: 100%;
+  height: 400px;
+  border: none;
+  border-radius: 8px;
+  background: var(--color-secondary-800);
+}
+
+.map-info {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.map-info-item {
+  background: linear-gradient(135deg, var(--color-background), var(--color-secondary-900));
+  border: 1px solid var(--color-secondary-700);
   border-radius: 8px;
   padding: 1.5rem;
   text-align: center;
   transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-.tech-item:hover {
-  border-color: #3b82f6;
+.map-info-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-accent-400), var(--color-success-400));
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.map-info-item:hover::before {
+  transform: scaleX(1);
+}
+
+.map-info-item:hover {
+  border-color: var(--color-accent-400);
   transform: translateY(-4px);
 }
 
-.tech-item h4 {
-  color: #60a5fa;
+.map-info-icon {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, var(--color-accent-500), var(--color-success-500));
+  border-radius: 8px;
+  margin: 0 auto 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-background);
+  font-size: 1.2rem;
+}
+
+.map-info-item h4 {
+  color: var(--color-accent-400);
   font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.map-info-item p {
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+}
+
+/* Content & Carousel Section */
+.content-carousel-section {
+  padding: 5rem 2rem;
+  background: linear-gradient(135deg, var(--color-surface), var(--color-background));
+}
+
+.content-carousel-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.content-carousel-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.content-text {
+  padding-right: 2rem;
+}
+
+.content-description {
+  color: var(--color-text-secondary);
+  margin-bottom: 2rem;
+  line-height: 1.7;
+  font-size: 1.1rem;
+}
+
+.content-features {
+  margin-bottom: 2rem;
+}
+
+.content-feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.content-feature-icon {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--color-accent-500), var(--color-success-500));
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-background);
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.content-feature-text h4 {
+  color: var(--color-accent-400);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.content-feature-text p {
+  color: var(--color-text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.carousel-container {
+  position: relative;
+  background: linear-gradient(135deg, var(--color-background), var(--color-secondary-900));
+  border: 1px solid var(--color-secondary-700);
+  border-radius: 12px;
+  padding: 2rem;
+  overflow: hidden;
+}
+
+.carousel-wrapper {
+  position: relative;
+  height: 400px;
+  overflow: hidden;
+}
+
+.carousel-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-slide.active {
+  opacity: 1;
+}
+
+.carousel-content {
+  text-align: center;
+  max-width: 300px;
+}
+
+.carousel-image {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, var(--color-primary-500), var(--color-accent-500));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  color: var(--color-background);
+  font-size: 2rem;
+}
+
+.carousel-content h3 {
+  color: var(--color-accent-400);
+  font-weight: 600;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+
+.carousel-content p {
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.carousel-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.carousel-btn {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--color-secondary-700), var(--color-secondary-800));
+  border: 1px solid var(--color-secondary-600);
+  border-radius: 8px;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.carousel-btn:hover {
+  background: linear-gradient(135deg, var(--color-accent-500), var(--color-success-500));
+  border-color: var(--color-accent-400);
+  transform: translateY(-2px);
+}
+
+.carousel-dots {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  background: var(--color-secondary-600);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dot.active,
+.dot:hover {
+  background: var(--color-accent-500);
 }
 
 /* Projects Section */
 .projects {
   padding: 5rem 2rem;
+  background: linear-gradient(135deg, var(--color-background), var(--color-surface));
 }
 
 .projects-container {
@@ -631,26 +1260,43 @@ body {
 }
 
 .project-card {
-  background: #1e293b;
-  border: 1px solid #334155;
+  background: linear-gradient(135deg, var(--color-surface), var(--color-secondary-800));
+  border: 1px solid var(--color-secondary-700);
   border-radius: 12px;
   overflow: hidden;
   transition: all 0.3s ease;
+  position: relative;
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-primary-400), var(--color-accent-400));
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.project-card:hover::before {
+  transform: scaleX(1);
 }
 
 .project-card:hover {
-  border-color: #3b82f6;
+  border-color: var(--color-primary-400);
   transform: translateY(-4px);
 }
 
 .project-image {
   width: 100%;
   height: 200px;
-  background: linear-gradient(135deg, #334155, #1e293b);
+  background: linear-gradient(135deg, var(--color-secondary-700), var(--color-surface));
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #64748b;
+  color: var(--color-secondary-500);
   position: relative;
   overflow: hidden;
   cursor: pointer;
@@ -659,7 +1305,6 @@ body {
 
 .project-image:hover {
   transform: scale(1.02);
-  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
 }
 
 .project-image img {
@@ -679,18 +1324,18 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: rgba(15, 23, 42, 0.9);
+  background: linear-gradient(135deg, var(--color-background), var(--color-secondary-800));
   backdrop-filter: blur(10px);
   padding: 1rem 1.5rem;
   border-radius: 8px;
-  border: 1px solid rgba(59, 130, 246, 0.3);
+  border: 1px solid var(--color-primary-300);
   text-align: center;
   min-width: 200px;
   z-index: 2;
 }
 
 .project-image-card h4 {
-  color: #60a5fa;
+  color: var(--color-primary-400);
   font-size: 1.1rem;
   font-weight: 600;
   margin: 0;
@@ -709,7 +1354,7 @@ body {
 }
 
 .project-domain {
-  color: #60a5fa;
+  color: var(--color-accent-400);
   font-size: 0.9rem;
   margin-bottom: 0.5rem;
   font-weight: 500;
@@ -718,18 +1363,18 @@ body {
 .project-title {
   font-size: 1.2rem;
   margin-bottom: 1rem;
-  color: white;
+  color: var(--color-text-primary);
 }
 
 .project-description {
-  color: #cbd5e1;
+  color: var(--color-text-secondary);
   font-size: 0.9rem;
 }
 
 /* Partners Section */
 .partners {
   padding: 5rem 2rem;
-  background: #1e293b;
+  background: linear-gradient(135deg, var(--color-surface), var(--color-secondary-800));
   text-align: center;
 }
 
@@ -739,7 +1384,7 @@ body {
 }
 
 .partners-description {
-  color: #cbd5e1;
+  color: var(--color-text-secondary);
   margin-bottom: 2rem;
 }
 
@@ -750,42 +1395,64 @@ body {
 }
 
 .partner-card {
-  background: #0f172a;
-  border: 1px solid #334155;
+  background: linear-gradient(135deg, var(--color-background), var(--color-secondary-900));
+  border: 1px solid var(--color-secondary-700);
   border-radius: 8px;
   padding: 2rem;
   transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.partner-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-success-400), var(--color-accent-400));
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.partner-card:hover::before {
+  transform: scaleX(1);
 }
 
 .partner-card:hover {
-  border-color: #3b82f6;
+  border-color: var(--color-success-400);
+  transform: translateY(-4px);
 }
 
 .partner-logo {
   width: 60px;
   height: 60px;
-  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  background: linear-gradient(135deg, var(--color-success-500), var(--color-accent-500));
   border-radius: 8px;
   margin: 0 auto 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  color: var(--color-background);
+  font-size: 1.5rem;
 }
 
 .partner-card h4 {
   font-weight: 600;
-  color: white;
+  color: var(--color-text-primary);
   margin-bottom: 0.5rem;
 }
 
 .partner-card p {
-  color: #94a3b8;
+  color: var(--color-secondary-400);
   font-size: 0.9rem;
 }
 
 /* Testimonials Section */
 .testimonials {
   padding: 5rem 2rem;
+  background: linear-gradient(135deg, var(--color-background), var(--color-surface));
 }
 
 .testimonials-container {
@@ -800,10 +1467,28 @@ body {
 }
 
 .testimonial-card {
-  background: #1e293b;
-  border: 1px solid #334155;
+  background: linear-gradient(135deg, var(--color-surface), var(--color-secondary-800));
+  border: 1px solid var(--color-secondary-700);
   border-radius: 12px;
   padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.testimonial-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-warning-400), var(--color-accent-400));
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.testimonial-card:hover::before {
+  transform: scaleX(1);
 }
 
 .testimonial-header {
@@ -816,29 +1501,34 @@ body {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background: #475569;
+  background: linear-gradient(135deg, var(--color-primary-500), var(--color-accent-500));
   margin-right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-background);
+  font-weight: bold;
 }
 
 .testimonial-info h4 {
   margin-bottom: 0.25rem;
-  color: white;
+  color: var(--color-text-primary);
 }
 
 .testimonial-info p {
-  color: #94a3b8;
+  color: var(--color-secondary-400);
   font-size: 0.9rem;
 }
 
 .testimonial-text {
-  color: #cbd5e1;
+  color: var(--color-text-secondary);
   font-style: italic;
 }
 
 /* Pricing Section */
 .pricing {
   padding: 5rem 2rem;
-  background: #1e293b;
+  background: linear-gradient(135deg, var(--color-surface), var(--color-secondary-800));
 }
 
 .pricing-container {
@@ -848,7 +1538,7 @@ body {
 }
 
 .pricing-description {
-  color: #cbd5e1;
+  color: var(--color-text-secondary);
   margin-bottom: 3rem;
 }
 
@@ -859,15 +1549,33 @@ body {
 }
 
 .pricing-card {
-  background: #0f172a;
-  border: 1px solid #334155;
+  background: linear-gradient(135deg, var(--color-background), var(--color-secondary-900));
+  border: 1px solid var(--color-secondary-700);
   border-radius: 12px;
   padding: 2rem;
   position: relative;
+  overflow: hidden;
+}
+
+.pricing-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-primary-400), var(--color-accent-400));
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.pricing-card:hover::before {
+  transform: scaleX(1);
 }
 
 .pricing-card.featured {
-  border-color: #3b82f6;
+  border-color: var(--color-primary-400);
+  transform: scale(1.05);
 }
 
 .pricing-badge {
@@ -875,30 +1583,37 @@ body {
   top: -10px;
   left: 50%;
   transform: translateX(-50%);
-  background: #3b82f6;
-  color: #0f172a;
+  background: linear-gradient(135deg, var(--color-primary-500), var(--color-accent-500));
+  color: var(--color-background);
   padding: 0.25rem 1rem;
   border-radius: 20px;
   font-size: 0.8rem;
   font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+  width: max-content;
+  min-width: 120px;
 }
 
 .pricing-card h3 {
   font-size: 1.25rem;
   font-weight: 600;
   margin-bottom: 1rem;
-  color: white;
+  color: var(--color-text-primary);
 }
 
 .pricing-price {
   font-size: 2rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
-  color: #60a5fa;
+  background: linear-gradient(135deg, var(--color-primary-400), var(--color-accent-400));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .pricing-period {
-  color: #94a3b8;
+  color: var(--color-secondary-400);
   margin-bottom: 1.5rem;
 }
 
@@ -912,14 +1627,15 @@ body {
   margin-bottom: 0.75rem;
   padding-left: 1.5rem;
   position: relative;
-  color: #f1f5f9;
+  color: var(--color-text-primary);
 }
 
 .pricing-features li::before {
   content: "✓";
   position: absolute;
   left: 0;
-  color: #60a5fa;
+  color: var(--color-success-400);
+  font-weight: bold;
 }
 
 .pricing-btn {
@@ -927,11 +1643,17 @@ body {
   padding: 0.75rem;
   border-radius: 6px;
   font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.pricing-btn:hover {
+  transform: translateY(-2px);
 }
 
 /* Contact Section */
 .contact {
   padding: 5rem 2rem;
+  background: linear-gradient(135deg, var(--color-background), var(--color-surface));
 }
 
 .contact-container {
@@ -940,10 +1662,22 @@ body {
 }
 
 .contact-form-full {
-  background: #1e293b;
-  border: 1px solid #334155;
+  background: linear-gradient(135deg, var(--color-surface), var(--color-secondary-800));
+  border: 1px solid var(--color-secondary-700);
   border-radius: 12px;
   padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-form-full::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-primary-400), var(--color-accent-400), var(--color-success-400));
 }
 
 .form-grid {
@@ -960,31 +1694,45 @@ body {
 
 .form-group label {
   margin-bottom: 0.5rem;
-  color: #f1f5f9;
+  color: var(--color-text-primary);
+  font-weight: 500;
 }
 
 .form-group input,
 .form-group select,
 .form-group textarea {
-  background: #334155;
-  border: 1px solid #475569;
+  background: var(--color-secondary-800);
+  border: 1px solid var(--color-secondary-600);
   border-radius: 6px;
   padding: 0.75rem;
-  color: white;
+  color: var(--color-text-primary);
   font-size: 1rem;
   font-family: inherit;
-}
-
-.form-group textarea {
-  resize: vertical;
-  min-height: 100px;
+  transition: all 0.3s ease;
 }
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: #60a5fa;
+  border-color: var(--color-primary-400);
+}
+
+.form-group input:valid,
+.form-group select:valid,
+.form-group textarea:valid {
+  border-color: var(--color-success-400);
+}
+
+.form-group input:invalid:not(:placeholder-shown),
+.form-group select:invalid:not(:placeholder-shown),
+.form-group textarea:invalid:not(:placeholder-shown) {
+  border-color: var(--color-secondary-500);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
 }
 
 .form-buttons {
@@ -998,12 +1746,17 @@ body {
   padding: 0.75rem;
   border-radius: 6px;
   font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.form-buttons button:hover {
+  transform: translateY(-2px);
 }
 
 /* Footer */
 .footer {
-  background: #1e293b;
-  border-top: 1px solid #334155;
+  background: linear-gradient(135deg, var(--color-surface), var(--color-secondary-800));
+  border-top: 1px solid var(--color-secondary-700);
   padding: 3rem 2rem 2rem;
 }
 
@@ -1022,26 +1775,39 @@ body {
 .footer-section h3 {
   margin-bottom: 1rem;
   font-size: 1.1rem;
-  color: #60a5fa;
+  color: var(--color-primary-400);
+  position: relative;
+}
+
+.footer-section h3::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 30px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-primary-400), var(--color-accent-400));
+  border-radius: 1px;
 }
 
 .footer-section p,
 .footer-section a {
-  color: #cbd5e1;
+  color: var(--color-text-secondary);
   text-decoration: none;
   margin-bottom: 0.5rem;
   display: block;
+  transition: color 0.3s ease;
 }
 
 .footer-section a:hover {
-  color: #60a5fa;
+  color: var(--color-primary-400);
 }
 
 .footer-bottom {
-  border-top: 1px solid #334155;
+  border-top: 1px solid var(--color-secondary-700);
   padding-top: 2rem;
   text-align: center;
-  color: #64748b;
+  color: var(--color-secondary-500);
 }
 
 .footer-bottom p {
@@ -1049,13 +1815,14 @@ body {
 }
 
 .footer-bottom a {
-  color: #64748b;
+  color: var(--color-secondary-500);
   text-decoration: none;
   margin: 0 1rem;
+  transition: color 0.3s ease;
 }
 
 .footer-bottom a:hover {
-  color: #60a5fa;
+  color: var(--color-primary-400);
 }
 
 .social-links {
@@ -1067,41 +1834,137 @@ body {
 .social-links a {
   width: 40px;
   height: 40px;
-  background: #334155;
+  background: linear-gradient(135deg, var(--color-secondary-700), var(--color-secondary-800));
   border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #94a3b8;
+  color: var(--color-secondary-400);
   transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.social-links a::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, var(--color-primary-300), transparent);
+  transition: left 0.5s ease;
+}
+
+.social-links a:hover::before {
+  left: 100%;
 }
 
 .social-links a:hover {
-  background: #3b82f6;
-  color: #0f172a;
+  background: linear-gradient(135deg, var(--color-primary-500), var(--color-accent-500));
+  color: var(--color-background);
+  transform: translateY(-2px);
 }
 
 /* WhatsApp Float Button */
 .whatsapp-float {
   position: fixed;
   bottom: 20px;
-  right: 20px;
+  left: 20px;
   width: 60px;
   height: 60px;
-  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  background: linear-gradient(135deg, var(--color-success-500), var(--color-success-600));
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
   z-index: 1000;
   transition: all 0.3s ease;
   text-decoration: none;
-  color: white;
+  color: var(--color-background);
+  position: relative;
+  overflow: hidden;
+  border: 2px solid var(--color-success-400);
+}
+
+.whatsapp-float::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, var(--color-success-300), transparent);
+  transition: left 0.5s ease;
+}
+
+.whatsapp-float:hover::before {
+  left: 100%;
 }
 
 .whatsapp-float:hover {
   transform: scale(1.1);
+  background: linear-gradient(135deg, var(--color-success-400), var(--color-success-500));
+}
+
+.whatsapp-float i {
+  font-size: 1.5rem;
+  z-index: 2;
+}
+
+/* Botón Subir Arriba */
+.scroll-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, var(--color-primary-500), var(--color-primary-600));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: var(--color-background);
+  position: relative;
+  overflow: hidden;
+  border: 2px solid var(--color-primary-400);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+}
+
+.scroll-to-top.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.scroll-to-top::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, var(--color-primary-300), transparent);
+  transition: left 0.5s ease;
+}
+
+.scroll-to-top:hover::before {
+  left: 100%;
+}
+
+.scroll-to-top:hover {
+  transform: translateY(-3px);
+  background: linear-gradient(135deg, var(--color-primary-400), var(--color-primary-500));
+}
+
+.scroll-to-top i {
+  font-size: 1.2rem;
+  z-index: 2;
 }
 
 /* Responsive Design */
@@ -1150,9 +2013,27 @@ body {
 
   .whatsapp-float {
     bottom: 1rem;
-    right: 1rem;
+    left: 1rem;
     width: 50px;
     height: 50px;
+  }
+
+  .content-carousel-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .content-text {
+    padding-right: 0;
+    text-align: center;
+  }
+
+  .carousel-container {
+    padding: 1.5rem;
+  }
+
+  .carousel-wrapper {
+    height: 350px;
   }
 }
 
@@ -1172,6 +2053,22 @@ body {
 
   .contact-form {
     padding: 1.5rem;
+  }
+
+  .content-carousel-section {
+    padding: 3rem 1rem;
+  }
+
+  .carousel-wrapper {
+    height: 300px;
+  }
+
+  .carousel-content h3 {
+    font-size: 1.1rem;
+  }
+
+  .carousel-content p {
+    font-size: 0.9rem;
   }
 }
 
@@ -1218,7 +2115,6 @@ body {
             <!-- Desktop Menu -->
             <ul class="nav-menu">
                 <li><a href="#servicios" class="nav-link">Servicios</a></li>
-                <li><a href="#tecnologias" class="nav-link">Tecnologías</a></li>
                 <li><a href="#proyectos" class="nav-link">Proyectos</a></li>
                 <li><a href="#precios" class="nav-link">Precios</a></li>
                 <li><a href="#contacto" class="nav-link">Contacto</a></li>
@@ -1252,7 +2148,6 @@ body {
             </div>
             <ul class="sidebar-menu">
                 <li><a href="#servicios" class="sidebar-link">Servicios</a></li>
-                <li><a href="#tecnologias" class="sidebar-link">Tecnologías</a></li>
                 <li><a href="#proyectos" class="sidebar-link">Proyectos</a></li>
                 <li><a href="#precios" class="sidebar-link">Precios</a></li>
                 <li><a href="#contacto" class="sidebar-link">Contacto</a></li>
@@ -1291,48 +2186,6 @@ body {
         </section>
     </main>
 
-    <!-- About Section -->
-    <section id="nosotros" class="about">
-        <div class="about-container">
-            <h2 class="section-title">Sobre Nosotros</h2>
-            <p class="about-description">
-                Llegamos para que todo emprendedor tenga una web a nivel de las grandes compañías a un precio accesible. Desde Honduras, conectamos tu negocio con el mundo digital.
-            </p>
-            <div class="about-grid">
-                <div class="about-card">
-                    <div class="about-icon">
-                        <i data-feather="layers"></i>
-                    </div>
-                    <h3>Nuestra Misión</h3>
-                    <p>Democratizar el acceso a tecnología de clase mundial, permitiendo que cada emprendedor compita en igualdad de condiciones con las grandes corporaciones.</p>
-                </div>
-                <div class="about-card">
-                    <div class="about-icon">
-                        <i data-feather="layers"></i>
-                    </div>
-                    <h3>Nuestra Visión</h3>
-                    <p>Ser la empresa líder en soluciones digitales de Centroamérica, reconocida por la excelencia técnica y el compromiso con el éxito de nuestros clientes.</p>
-                </div>
-                <div class="about-card">
-                    <div class="about-icon">
-                        <i data-feather="layers"></i>
-                    </div>
-                    <h3>Nuestros Valores</h3>
-                    <p>Innovación constante, transparencia total, calidad sin compromisos y un servicio al cliente que supera expectativas en cada proyecto.</p>
-                </div>
-            </div>
-            <div class="location-card">
-                <h3>📍 Nuestra Ubicación</h3>
-                <p>
-                    <strong>NEOSITIO</strong><br>
-                    Boulevard Morazán, Torre Morazán<br>
-                    Piso 8, Oficina 20817<br>
-                    Tegucigalpa, Honduras
-                </p>
-            </div>
-        </div>
-    </section>
-
     <!-- Services Section -->
     <section id="servicios" class="services">
         <div class="services-container">
@@ -1355,10 +2208,11 @@ body {
                             <span>• Chatbots trabajan 24/7</span>
                         </div>
                     </div>
+                                               <a href="https://wa.me/50499999999?text=Hola! Me interesa el servicio de Chatbots. ¿Podrían darme más información?" class="btn-primary" style="width: 100%; margin-top: 1rem; text-align: center; text-decoration: none; display: inline-block;" target="_blank">Adquiere ahora</a>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">
-                        <i data-feather="layers"></i>
+                        <i data-feather="globe"></i>
                     </div>
                     <h3>Dominios Premium</h3>
                     <p>Registro y gestión de dominios con extensiones .com, .hn, .org y más. Protección WHOIS incluida para máxima seguridad.</p>
@@ -1368,10 +2222,11 @@ body {
                         <li>Certificados SSL gratuitos</li>
                         <li>Protección de privacidad</li>
                     </ul>
+                                               <a href="https://wa.me/50499999999?text=Hola! Me interesa el servicio de Dominios Premium. ¿Podrían darme más información?" class="btn-primary" style="width: 100%; margin-top: 1rem; text-align: center; text-decoration: none; display: inline-block;" target="_blank">Adquiere ahora</a>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">
-                        <i data-feather="layers"></i>
+                        <i data-feather="mail"></i>
                     </div>
                     <h3>Correos Corporativos</h3>
                     <p>Cuentas de email profesionales con tu dominio. Almacenamiento ilimitado y sincronización multiplataforma.</p>
@@ -1381,10 +2236,11 @@ body {
                         <li>Acceso móvil completo</li>
                         <li>Integración con calendarios</li>
                     </ul>
+                                               <a href="https://wa.me/50499999999?text=Hola! Me interesa el servicio de Correos Corporativos. ¿Podrían darme más información?" class="btn-primary" style="width: 100%; margin-top: 1rem; text-align: center; text-decoration: none; display: inline-block;" target="_blank">Adquiere ahora</a>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">
-                        <i data-feather="layers"></i>
+                        <i data-feather="refresh-cw"></i>
                     </div>
                     <h3>Rediseño Web</h3>
                     <p>Modernización completa de sitios web existentes. UX/UI optimizado para conversiones y experiencia de usuario superior.</p>
@@ -1394,10 +2250,11 @@ body {
                         <li>Optimización SEO</li>
                         <li>Mejora de velocidad</li>
                     </ul>
+                                               <a href="https://wa.me/50499999999?text=Hola! Me interesa el servicio de Rediseño Web. ¿Podrían darme más información?" class="btn-primary" style="width: 100%; margin-top: 1rem; text-align: center; text-decoration: none; display: inline-block;" target="_blank">Adquiere ahora</a>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">
-                        <i data-feather="layers"></i>
+                        <i data-feather="code"></i>
                     </div>
                     <h3>Desarrollo Full Stack</h3>
                     <p>Aplicaciones web completas con tecnologías modernas. Frontend y backend personalizados para tu negocio.</p>
@@ -1407,10 +2264,11 @@ body {
                         <li>Bases de datos optimizadas</li>
                         <li>APIs RESTful</li>
                     </ul>
+                                               <a href="https://wa.me/50499999999?text=Hola! Me interesa el servicio de Desarrollo Full Stack. ¿Podrían darme más información?" class="btn-primary" style="width: 100%; margin-top: 1rem; text-align: center; text-decoration: none; display: inline-block;" target="_blank">Adquiere ahora</a>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">
-                        <i data-feather="layers"></i>
+                        <i data-feather="server"></i>
                     </div>
                     <h3>Hosting Premium</h3>
                     <p>Servidores de alta disponibilidad con CDN global. Uptime garantizado del 99.9% y soporte técnico 24/7.</p>
@@ -1420,31 +2278,148 @@ body {
                         <li>CDN global incluido</li>
                         <li>Soporte técnico especializado</li>
                     </ul>
+                                               <a href="https://wa.me/50499999999?text=Hola! Me interesa el servicio de Hosting Premium. ¿Podrían darme más información?" class="btn-primary" style="width: 100%; margin-top: 1rem; text-align: center; text-decoration: none; display: inline-block;" target="_blank">Adquiere ahora</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Technologies Section -->
-    <section id="tecnologias" class="technologies">
-        <div class="tech-container">
-            <h2 class="section-title">Tecnologías Vanguardistas</h2>
-            <p class="tech-description">
-                Utilizamos las herramientas más avanzadas del mercado para crear soluciones robustas, escalables y orientadas al futuro digital.
+    <!-- Content & Carousel Section -->
+    <section id="contenido-carousel" class="content-carousel-section">
+        <div class="content-carousel-container">
+            <div class="content-carousel-grid">
+                <div class="content-text">
+                    <h2 class="section-title">Transformamos Ideas en Experiencias Digitales</h2>
+                    <p class="content-description">
+                        En NEOSITIO, creemos que cada empresa merece una presencia digital excepcional. Nuestro equipo de expertos combina creatividad, tecnología y estrategia para crear soluciones que no solo se ven bien, sino que generan resultados reales.
+                    </p>
+                    <div class="content-features">
+                        <div class="content-feature">
+                            <div class="content-feature-icon">
+                                <i data-feather="check-circle"></i>
+                            </div>
+                            <div class="content-feature-text">
+                                <h4>Diseño Personalizado</h4>
+                                <p>Cada proyecto es único, adaptado a tu marca y objetivos específicos</p>
+                            </div>
+                        </div>
+                        <div class="content-feature">
+                            <div class="content-feature-icon">
+                                <i data-feather="check-circle"></i>
+                            </div>
+                            <div class="content-feature-text">
+                                <h4>Tecnología Moderna</h4>
+                                <p>Utilizamos las últimas tecnologías para garantizar velocidad y seguridad</p>
+                            </div>
+                        </div>
+                        <div class="content-feature">
+                            <div class="content-feature-icon">
+                                <i data-feather="check-circle"></i>
+                            </div>
+                            <div class="content-feature-text">
+                                <h4>Soporte Continuo</h4>
+                                <p>Estamos contigo en cada paso, desde la concepción hasta el mantenimiento</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#contacto" class="btn-primary">Comienza tu Proyecto</a>
+                </div>
+                <div class="carousel-container">
+                    <div class="carousel-wrapper">
+                        <div class="carousel-slide active">
+                            <div class="carousel-content">
+                                <div class="carousel-image">
+                                    <i data-feather="monitor"></i>
+                                </div>
+                                <h3>Diseño Web Profesional</h3>
+                                <p>Sitios web modernos y responsivos que convierten visitantes en clientes</p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <div class="carousel-content">
+                                <div class="carousel-image">
+                                    <i data-feather="smartphone"></i>
+                                </div>
+                                <h3>Desarrollo Móvil</h3>
+                                <p>Aplicaciones nativas e híbridas para iOS y Android</p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <div class="carousel-content">
+                                <div class="carousel-image">
+                                    <i data-feather="message-circle"></i>
+                                </div>
+                                <h3>Chatbots Inteligentes</h3>
+                                <p>Automatización de atención al cliente con IA avanzada</p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <div class="carousel-content">
+                                <div class="carousel-image">
+                                    <i data-feather="trending-up"></i>
+                                </div>
+                                <h3>Marketing Digital</h3>
+                                <p>Estrategias integrales para aumentar tu presencia en línea</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-controls">
+                        <button class="carousel-btn prev" onclick="changeSlide(-1)">
+                            <i data-feather="chevron-left"></i>
+                        </button>
+                        <div class="carousel-dots">
+                            <span class="dot active" onclick="goToSlide(1)"></span>
+                            <span class="dot" onclick="goToSlide(2)"></span>
+                            <span class="dot" onclick="goToSlide(3)"></span>
+                            <span class="dot" onclick="goToSlide(4)"></span>
+                        </div>
+                        <button class="carousel-btn next" onclick="changeSlide(1)">
+                            <i data-feather="chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section id="mapa" class="map-section">
+        <div class="map-container">
+            <h2 class="section-title">Nuestra Ubicación</h2>
+            <p class="map-description">
+                Visítanos en nuestro centro de operaciones en el corazón de Tegucigalpa, donde la innovación se encuentra con la excelencia.
             </p>
-            <div class="tech-grid">
-                <div class="tech-item"><h4>React</h4></div>
-                <div class="tech-item"><h4>Next.js</h4></div>
-                <div class="tech-item"><h4>Node.js</h4></div>
-                <div class="tech-item"><h4>Python</h4></div>
-                <div class="tech-item"><h4>TypeScript</h4></div>
-                <div class="tech-item"><h4>MongoDB</h4></div>
-                <div class="tech-item"><h4>PostgreSQL</h4></div>
-                <div class="tech-item"><h4>AWS</h4></div>
-                <div class="tech-item"><h4>Docker</h4></div>
-                <div class="tech-item"><h4>GraphQL</h4></div>
-                <div class="tech-item"><h4>Tailwind</h4></div>
-                <div class="tech-item"><h4>Firebase</h4></div>
+            <div class="map-wrapper">
+                <iframe 
+                    class="map-iframe"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.5!2d-87.2!3d14.1!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTTCsDA2JzAwLjAiTiA4N8KwMTInMDAuMCJX!5e0!3m2!1ses!2shn!4v1234567890"
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+            <div class="map-info">
+                <div class="map-info-item">
+                    <div class="map-info-icon">
+                        <i data-feather="map-pin"></i>
+                    </div>
+                    <h4>Dirección</h4>
+                    <p>Boulevard Morazán, Torre Morazán<br>Piso 8, Oficina 20817<br>Tegucigalpa, Honduras</p>
+                </div>
+                <div class="map-info-item">
+                    <div class="map-info-icon">
+                        <i data-feather="clock"></i>
+                    </div>
+                    <h4>Horarios</h4>
+                    <p>Lunes - Viernes: 8:00 AM - 5:00 PM<br>Sábados: 9:00 AM - 1:00 PM<br>Domingos: Cerrado</p>
+                </div>
+                <div class="map-info-item">
+                    <div class="map-info-icon">
+                        <i data-feather="phone"></i>
+                    </div>
+                    <h4>Contacto</h4>
+                    <p>📱 +504 9999-9999<br>📧 contacto@neositio.hn<br>💬 WhatsApp disponible 24/7</p>
+                </div>
             </div>
         </div>
     </section>
@@ -1556,42 +2531,42 @@ body {
             <div class="partners-grid">
                 <div class="partner-card">
                     <div class="partner-logo">
-                        <i data-feather="layers"></i>
+                        <i data-feather="cloud"></i>
                     </div>
                     <h4>AWS</h4>
                     <p>Amazon Web Services</p>
                 </div>
                 <div class="partner-card">
                     <div class="partner-logo">
-                        <i data-feather="layers"></i>
+                        <i data-feather="cloud"></i>
                     </div>
                     <h4>Google Cloud</h4>
                     <p>Google Cloud Platform</p>
                 </div>
                 <div class="partner-card">
                     <div class="partner-logo">
-                        <i data-feather="layers"></i>
+                        <i data-feather="cloud"></i>
                     </div>
                     <h4>Microsoft</h4>
                     <p>Microsoft Azure</p>
                 </div>
                 <div class="partner-card">
                     <div class="partner-logo">
-                        <i data-feather="layers"></i>
+                        <i data-feather="zap"></i>
                     </div>
                     <h4>Vercel</h4>
                     <p>Frontend Cloud</p>
                 </div>
                 <div class="partner-card">
                     <div class="partner-logo">
-                        <i data-feather="layers"></i>
+                        <i data-feather="zap"></i>
                     </div>
                     <h4>Netlify</h4>
                     <p>Web Development Platform</p>
                 </div>
                 <div class="partner-card">
                     <div class="partner-logo">
-                        <i data-feather="layers"></i>
+                        <i data-feather="shield"></i>
                     </div>
                     <h4>Cloudflare</h4>
                     <p>Web Performance & Security</p>
@@ -1683,7 +2658,7 @@ body {
                         <li>Infraestructura cloud</li>
                         <li>API personalizada</li>
                         <li>Integración con terceros</li>
-                        <li>Aplicación móvil</li>
+
                         <li>Consultoría estratégica</li>
                         <li>Soporte dedicado</li>
                     </ul>
@@ -1722,7 +2697,7 @@ body {
                                 <option value="domain-hosting">Dominio y Hosting</option>
                                 <option value="email-corporate">Correos Corporativos</option>
                                 <option value="redesign">Rediseño Web</option>
-                                <option value="mobile-app">Aplicación Móvil</option>
+
                                 <option value="consulting">Consultoría</option>
                             </select>
                         </div>
@@ -1749,16 +2724,16 @@ body {
                     <p>Transformamos ideas en experiencias digitales extraordinarias. Tu socio tecnológico de confianza para el éxito en el mundo digital desde Honduras.</p>
                     <div class="social-links">
                         <a href="#" aria-label="Facebook">
-                            <i data-feather="layers"></i>
+                            <i data-feather="facebook"></i>
                         </a>
                         <a href="#" aria-label="Twitter">
-                            <i data-feather="layers"></i>
+                            <i data-feather="twitter"></i>
                         </a>
                         <a href="#" aria-label="LinkedIn">
-                            <i data-feather="layers"></i>
+                            <i data-feather="linkedin"></i>
                         </a>
                         <a href="#" aria-label="Instagram">
-                            <i data-feather="layers"></i>
+                            <i data-feather="instagram"></i>
                         </a>
                     </div>
                 </div>
@@ -1768,15 +2743,10 @@ body {
                     <a href="#servicios">Dominios Premium</a>
                     <a href="#servicios">Correos Corporativos</a>
                     <a href="#servicios">Rediseño Web</a>
-                    <a href="#servicios">Aplicaciones Móviles</a>
+
                 </div>
                 <div class="footer-section">
-                    <h3>Tecnologías</h3>
-                    <a href="#tecnologias">React & Next.js</a>
-                    <a href="#tecnologias">Node.js & Python</a>
-                    <a href="#tecnologias">Bases de Datos</a>
-                    <a href="#tecnologias">Cloud & DevOps</a>
-                    <a href="#tecnologias">Mobile Development</a>
+
                 </div>
                 <div class="footer-section">
                     <h3>Contacto</h3>
@@ -1803,6 +2773,11 @@ body {
     <a href="https://wa.me/50499999999" class="whatsapp-float" target="_blank" aria-label="WhatsApp">
         <i data-feather="message-circle"></i>
     </a>
+
+    <!-- Botón Subir Arriba -->
+    <button class="scroll-to-top" id="scrollToTop" aria-label="Subir arriba">
+        <i data-feather="chevron-up"></i>
+    </button>
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
@@ -1970,7 +2945,68 @@ body {
   if (feather) {
     feather.replace()
   }
+
+  // Scroll to top functionality
+  const scrollToTopBtn = document.getElementById("scrollToTop")
+  
+  window.addEventListener("scroll", () => {
+    if (window.pageYOffset > 300) {
+      scrollToTopBtn.classList.add("show")
+    } else {
+      scrollToTopBtn.classList.remove("show")
+    }
+  })
+  
+  scrollToTopBtn.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    })
+  })
+
 })
+
+// Carousel functionality - Global functions
+let currentSlideIndex = 0;
+let slides = [];
+let dots = [];
+let totalSlides = 0;
+
+function showSlide(n) {
+  // Hide all slides
+  slides.forEach(slide => slide.classList.remove('active'));
+  dots.forEach(dot => dot.classList.remove('active'));
+  
+  // Show current slide
+  currentSlideIndex = (n + totalSlides) % totalSlides;
+  slides[currentSlideIndex].classList.add('active');
+  dots[currentSlideIndex].classList.add('active');
+}
+
+function changeSlide(direction) {
+  showSlide(currentSlideIndex + direction);
+}
+
+function goToSlide(n) {
+  showSlide(n - 1);
+}
+
+// Initialize carousel when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+  slides = document.querySelectorAll('.carousel-slide');
+  dots = document.querySelectorAll('.dot');
+  totalSlides = slides.length;
+
+  // Auto-advance carousel every 4 seconds
+  setInterval(() => {
+    changeSlide(1);
+  }, 4000);
+
+  // Initialize carousel
+  if (slides.length > 0) {
+    showSlide(0);
+  }
+});
 
     </script>
     <script>
@@ -1991,7 +3027,7 @@ body {
       }
 
       function randomColor() {
-        return '#60a5fa';
+        return getComputedStyle(document.documentElement).getPropertyValue('--color-primary-400').trim();
       }
 
       function createParticles() {
@@ -2022,7 +3058,7 @@ body {
               ctx.beginPath();
               ctx.moveTo(a.x, a.y);
               ctx.lineTo(b.x, b.y);
-              ctx.strokeStyle = '#60a5fa';
+              ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--color-primary-400').trim();
               ctx.lineWidth = 1;
               ctx.stroke();
               ctx.restore();
