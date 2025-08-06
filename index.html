@@ -1311,12 +1311,12 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.3;
+  opacity: 0.7;
   transition: opacity 0.3s ease;
 }
 
 .project-image:hover img {
-  opacity: 0.5;
+  opacity: 0.7;
 }
 
 .project-image-card {
@@ -1867,105 +1867,6 @@ body {
 }
 
 /* WhatsApp Float Button */
-.whatsapp-float {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  width: 60px;
-  height: 60px;
-  background: linear-gradient(135deg, var(--color-success-500), var(--color-success-600));
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  color: var(--color-background);
-  position: relative;
-  overflow: hidden;
-  border: 2px solid var(--color-success-400);
-}
-
-.whatsapp-float::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, var(--color-success-300), transparent);
-  transition: left 0.5s ease;
-}
-
-.whatsapp-float:hover::before {
-  left: 100%;
-}
-
-.whatsapp-float:hover {
-  transform: scale(1.1);
-  background: linear-gradient(135deg, var(--color-success-400), var(--color-success-500));
-}
-
-.whatsapp-float i {
-  font-size: 1.5rem;
-  z-index: 2;
-}
-
-/* Botón Subir Arriba */
-.scroll-to-top {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 50px;
-  height: 50px;
-  background: linear-gradient(135deg, var(--color-primary-500), var(--color-primary-600));
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  color: var(--color-background);
-  position: relative;
-  overflow: hidden;
-  border: 2px solid var(--color-primary-400);
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(20px);
-}
-
-.scroll-to-top.show {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-.scroll-to-top::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, var(--color-primary-300), transparent);
-  transition: left 0.5s ease;
-}
-
-.scroll-to-top:hover::before {
-  left: 100%;
-}
-
-.scroll-to-top:hover {
-  transform: translateY(-3px);
-  background: linear-gradient(135deg, var(--color-primary-400), var(--color-primary-500));
-}
-
-.scroll-to-top i {
-  font-size: 1.2rem;
-  z-index: 2;
-}
 
 /* Responsive Design */
 @media (max-width: 768px) {
@@ -2327,59 +2228,26 @@ body {
                 <div class="carousel-container">
                     <div class="carousel-wrapper">
                         <div class="carousel-slide active">
-                            <div class="carousel-content">
-                                <div class="carousel-image">
-                                    <i data-feather="monitor"></i>
-                                </div>
-                                <h3>Diseño Web Profesional</h3>
-                                <p>Sitios web modernos y responsivos que convierten visitantes en clientes</p>
-                            </div>
+                            <img src="paragonfinancialcorp.png" alt="Paragon Financial Corp" style="width:100%;height:100%;object-fit:cover;display:block;" />
                         </div>
                         <div class="carousel-slide">
-                            <div class="carousel-content">
-                                <div class="carousel-image">
-                                    <i data-feather="smartphone"></i>
-                                </div>
-                                <h3>Desarrollo Móvil</h3>
-                                <p>Aplicaciones nativas e híbridas para iOS y Android</p>
-                            </div>
+                            <img src="professionconnect.png" alt="Profession Connect" style="width:100%;height:100%;object-fit:cover;display:block;" />
                         </div>
                         <div class="carousel-slide">
-                            <div class="carousel-content">
-                                <div class="carousel-image">
-                                    <i data-feather="message-circle"></i>
-                                </div>
-                                <h3>Chatbots Inteligentes</h3>
-                                <p>Automatización de atención al cliente con IA avanzada</p>
-                            </div>
+                            <img src="jaguarsbs.png" alt="Jaguars Bilingual School" style="width:100%;height:100%;object-fit:cover;display:block;" />
                         </div>
                         <div class="carousel-slide">
-                            <div class="carousel-content">
-                                <div class="carousel-image">
-                                    <i data-feather="trending-up"></i>
-                                </div>
-                                <h3>Marketing Digital</h3>
-                                <p>Estrategias integrales para aumentar tu presencia en línea</p>
-                            </div>
+                            <img src="ingmaconsultores.png" alt="Ingma Consultores" style="width:100%;height:100%;object-fit:cover;display:block;" />
                         </div>
-                    </div>
-                    <div class="carousel-controls">
-                        <button class="carousel-btn prev" onclick="changeSlide(-1)">
-                            <i data-feather="chevron-left"></i>
-                        </button>
-                        <div class="carousel-dots">
-                            <span class="dot active" onclick="goToSlide(1)"></span>
-                            <span class="dot" onclick="goToSlide(2)"></span>
-                            <span class="dot" onclick="goToSlide(3)"></span>
-                            <span class="dot" onclick="goToSlide(4)"></span>
+                        <div class="carousel-slide">
+                            <img src="findsbusiness.png" alt="FindsBusiness" style="width:100%;height:100%;object-fit:cover;display:block;" />
                         </div>
-                        <button class="carousel-btn next" onclick="changeSlide(1)">
-                            <i data-feather="chevron-right"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
+                        <div class="carousel-slide">
+                            <img src="neptunohn.png" alt="Neptuno" style="width:100%;height:100%;object-fit:cover;display:block;" />
+                        </div>
+            <!-- Controles eliminados para que el carousel sea solo visual y automático -->
+        </div> <!-- cierra carousel-wrapper -->
+    </div> <!-- cierra carousel-container -->
     </section>
 
     <!-- Map Section -->
@@ -2411,14 +2279,17 @@ body {
                         <i data-feather="clock"></i>
                     </div>
                     <h4>Horarios</h4>
-                    <p>Lunes - Viernes: 8:00 AM - 5:00 PM<br>Sábados: 9:00 AM - 1:00 PM<br>Domingos: Cerrado</p>
+                    <p>Lunes - Domingos: 8:00 AM - 5:00 PM</p>
                 </div>
                 <div class="map-info-item">
                     <div class="map-info-icon">
                         <i data-feather="phone"></i>
                     </div>
                     <h4>Contacto</h4>
-                    <p>📱 +504 9999-9999<br>📧 contacto@neositio.hn<br>💬 WhatsApp disponible 24/7</p>
+                    <p>
+                        <i data-feather="phone"></i> +504 9569-8991<br>
+                        <i data-feather="message-circle"></i> +504 3315-8947 (8 a 9 PM)
+                    </p>
                 </div>
             </div>
         </div>
@@ -2432,10 +2303,7 @@ body {
                 <div class="project-card">
                     <div class="project-image">
                         <a href="https://paragonfinancialcorp.com" target="_blank" class="project-image-link">
-                            <img src="https://preview-neositio-clone-kzmn7rco5knfsn9jmxdh.vusercontent.net/placeholder.svg?height=200&width=400&text=Project+Image" alt="Paragon Financial Corp" />
-                            <div class="project-image-card">
-                                <h4>Paragon Financial Corp</h4>
-                            </div>
+                            <img src="paragonfinancialcorp.png" alt="Paragon Financial Corp" />
                         </a>
                     </div>
                     <div class="project-content">
@@ -2447,10 +2315,7 @@ body {
                 <div class="project-card">
                     <div class="project-image">
                         <a href="https://professionconnect.com" target="_blank" class="project-image-link">
-                            <img src="https://preview-neositio-clone-kzmn7rco5knfsn9jmxdh.vusercontent.net/placeholder.svg?height=200&width=400&text=Project+Image" alt="Profession Connect" />
-                            <div class="project-image-card">
-                                <h4>Profession Connect</h4>
-                            </div>
+                            <img src="professionconnect.png" alt="Profession Connect" />
                         </a>
                     </div>
                     <div class="project-content">
@@ -2462,10 +2327,7 @@ body {
                 <div class="project-card">
                     <div class="project-image">
                         <a href="https://jaguarsbs.com" target="_blank" class="project-image-link">
-                            <img src="https://preview-neositio-clone-kzmn7rco5knfsn9jmxdh.vusercontent.net/placeholder.svg?height=200&width=400&text=Project+Image" alt="Jaguars Bilingual School" />
-                            <div class="project-image-card">
-                                <h4>Jaguars Bilingual School</h4>
-                            </div>
+                            <img src="jaguarsbs.png" alt="Jaguars Bilingual School" />
                         </a>
                     </div>
                     <div class="project-content">
@@ -2477,10 +2339,7 @@ body {
                 <div class="project-card">
                     <div class="project-image">
                         <a href="https://ingmaconsultores.com" target="_blank" class="project-image-link">
-                            <img src="https://preview-neositio-clone-kzmn7rco5knfsn9jmxdh.vusercontent.net/placeholder.svg?height=200&width=400&text=Project+Image" alt="Ingma Consultores" />
-                            <div class="project-image-card">
-                                <h4>Ingma Consultores</h4>
-                            </div>
+                            <img src="ingmaconsultores.png" alt="Ingma Consultores" />
                         </a>
                     </div>
                     <div class="project-content">
@@ -2492,31 +2351,25 @@ body {
                 <div class="project-card">
                     <div class="project-image">
                         <a href="https://findsbusiness.com" target="_blank" class="project-image-link">
-                            <img src="https://preview-neositio-clone-kzmn7rco5knfsn9jmxdh.vusercontent.net/placeholder.svg?height=200&width=400&text=Project+Image" alt="FindsBusiness" />
-                            <div class="project-image-card">
-                                <h4>FindsBusiness</h4>
-                            </div>
+                            <img src="findsbusiness.png" alt="FindsBusiness" />
                         </a>
                     </div>
                     <div class="project-content">
                         <div class="project-domain">findsbusiness.com</div>
                         <h3 class="project-title">FindsBusiness</h3>
-                        <p class="project-description">Marketplace tipo Amazon en Honduras que permite comprar y vender millones de productos a través de catálogos de empresas locales.</p>
+                        <p class="project-description">FindsBusiness es una plataforma de monitoreo en tiempo real para empleados que permite controlar pausas, generar reportes a gran escala y optimizar la gestión del personal en empresas modernas.</p>
                     </div>
                 </div>
                 <div class="project-card">
                     <div class="project-image">
-                        <a href="https://noxtbing.com" target="_blank" class="project-image-link">
-                            <img src="https://preview-neositio-clone-kzmn7rco5knfsn9jmxdh.vusercontent.net/placeholder.svg?height=200&width=400&text=Project+Image" alt="Noxtbing" />
-                            <div class="project-image-card">
-                                <h4>Noxtbing</h4>
-                            </div>
+                        <a href="https://neptunohn.com" target="_blank" class="project-image-link">
+                            <img src="neptunohn.png" alt="Neptuno" />
                         </a>
                     </div>
                     <div class="project-content">
-                        <div class="project-domain">noxtbing.com</div>
-                        <h3 class="project-title">Noxtbing</h3>
-                        <p class="project-description">Plataforma tecnológica que ofrece herramientas de desarrollo de software avanzado, automatización e integración con inteligencia artificial.</p>
+                        <div class="project-domain">neptunohn.com</div>
+                        <h3 class="project-title">Neptuno</h3>
+                        <p class="project-description">Neptuno Buzos & Contratistas Maritímos nació de la pasión por el mar y la necesidad de brindar soluciones de alta calidad en el sector marítimo.</p>
                     </div>
                 </div>
             </div>
@@ -2750,35 +2603,19 @@ body {
                 </div>
                 <div class="footer-section">
                     <h3>Contacto</h3>
-                    <p>📧 contacto@neositio.hn</p>
-                    <p>📱 +504 9999-9999</p>
-                    <p>📍 Boulevard Morazán, Torre Morazán</p>
-                    <p>🏢 Piso 8, Oficina 20817</p>
-                    <p>🇭🇳 Tegucigalpa, Honduras</p>
-                    <p>🕒 Lun-Vie: 8:00-17:00</p>
+                    <p><i data-feather="phone"></i> +504 9569-8991</p>
+                    <p><i data-feather="message-circle"></i> +504 3315-8947 (8 a 9 PM)</p>
+                    <p>🕒 Lunes - Domingos: 8:00 AM - 5:00 PM</p>
                 </div>
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2024 NEOSITIO. Todos los derechos reservados.</p>
-                <p>
-                    <a href="#">Términos de Servicio</a>
-                    <a href="#">Política de Privacidad</a>
-                    <a href="#">Cookies</a>
-                </p>
+                
             </div>
         </div>
     </footer>
 
-    <!-- WhatsApp Float Button -->
-    <a href="https://wa.me/50499999999" class="whatsapp-float" target="_blank" aria-label="WhatsApp">
-        <i data-feather="message-circle"></i>
-    </a>
-
-    <!-- Botón Subir Arriba -->
-    <button class="scroll-to-top" id="scrollToTop" aria-label="Subir arriba">
-        <i data-feather="chevron-up"></i>
-    </button>
-
+ 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
   // Elements
@@ -2946,69 +2783,52 @@ body {
     feather.replace()
   }
 
-  // Scroll to top functionality
-  const scrollToTopBtn = document.getElementById("scrollToTop")
-  
-  window.addEventListener("scroll", () => {
-    if (window.pageYOffset > 300) {
-      scrollToTopBtn.classList.add("show")
-    } else {
-      scrollToTopBtn.classList.remove("show")
-    }
-  })
-  
-  scrollToTopBtn.addEventListener("click", () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    })
-  })
+  // Carousel auto-slide logic
+  const carouselSlides = document.querySelectorAll('.carousel-slide');
+  let currentSlide = 0;
+  function showSlide(index) {
+    carouselSlides.forEach((slide, i) => {
+      slide.classList.toggle('active', i === index);
+    });
+  }
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % carouselSlides.length;
+    showSlide(currentSlide);
+  }
+  if (carouselSlides.length > 1) {
+    setInterval(nextSlide, 5000);
+  }
 
-})
 
-// Carousel functionality - Global functions
+
+// Carousel solo imágenes, automático, 5 segundos
 let currentSlideIndex = 0;
 let slides = [];
-let dots = [];
-let totalSlides = 0;
 
 function showSlide(n) {
-  // Hide all slides
-  slides.forEach(slide => slide.classList.remove('active'));
-  dots.forEach(dot => dot.classList.remove('active'));
-  
-  // Show current slide
-  currentSlideIndex = (n + totalSlides) % totalSlides;
-  slides[currentSlideIndex].classList.add('active');
-  dots[currentSlideIndex].classList.add('active');
+  slides.forEach((slide, i) => {
+    slide.classList.toggle('active', i === n);
+  });
+  currentSlideIndex = n;
 }
 
-function changeSlide(direction) {
-  showSlide(currentSlideIndex + direction);
-}
-
-function goToSlide(n) {
-  showSlide(n - 1);
-}
-
-// Initialize carousel when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
   slides = document.querySelectorAll('.carousel-slide');
-  dots = document.querySelectorAll('.dot');
-  totalSlides = slides.length;
-
-  // Auto-advance carousel every 4 seconds
-  setInterval(() => {
-    changeSlide(1);
-  }, 4000);
-
-  // Initialize carousel
   if (slides.length > 0) {
     showSlide(0);
+    setInterval(() => {
+      let next = (currentSlideIndex + 1) % slides.length;
+      showSlide(next);
+    }, 5000);
   }
 });
 
-    </script>
+
+
+
+
+</script>
+
     <script>
     // Partículas tipo araña
     (function() {
